@@ -4,23 +4,24 @@
   <meta charset="UTF-8" />
   <title>शिवचरण उज्जैनकर फाऊंडेशन</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="शिवचरण उज्जैनकर फाऊंडेशन – शैक्षणिक, साहित्यिक, सांस्कृतिक व सामाजिक उपक्रमांसाठी कार्यरत संस्थान – ता. मुक्ताईनगर, जि. जळगाव." />
+  <meta name="description" content="शिवचरण उज्जैनकर फाऊंडेशन – शैक्षणिक, सामाजिक, साहित्यिक व कला क्षेत्रात कार्यरत संस्था. ता. मुक्ताईनगर, जि. जळगाव, महाराष्ट्र." />
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Serif:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
+      --bg: #020617;
+      --bg-soft: #0b1220;
       --primary: #2563eb;
-      --primary-soft: #dbeafe;
+      --primary-soft: #1d4ed8;
       --accent: #f97316;
-      --bg: #0f172a;
-      --card-bg: rgba(15, 23, 42, 0.9);
       --text-main: #e5e7eb;
       --text-muted: #9ca3af;
-      --border-soft: rgba(148, 163, 184, 0.4);
-      --radius-xl: 22px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.55);
-      --max-width: 1100px;
+      --border-soft: rgba(148,163,184,0.4);
+      --radius-lg: 20px;
+      --shadow-soft: 0 20px 50px rgba(15,23,42,0.7);
+      --max-width: 1120px;
     }
 
     * {
@@ -30,267 +31,581 @@
     }
 
     body {
-      min-height: 100vh;
-      font-family: "Poppins", sans-serif;
-      background: radial-gradient(circle at top left, #1d4ed8, #0f172a 45%, #020617 90%);
+      font-family: "Noto Sans Devanagari", system-ui, sans-serif;
+      background: radial-gradient(circle at top left, #1d4ed8, #020617 40%, #020617 100%);
       color: var(--text-main);
-      display: flex;
-      align-items: stretch;
-      justify-content: center;
-      padding: 32px 16px;
+      min-height: 100vh;
     }
 
-    .shell {
-      width: 100%;
+    a { color: inherit; text-decoration: none; }
+
+    /* Layout shell */
+    .page {
       max-width: var(--max-width);
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(15, 23, 42, 0.96));
-      border-radius: 28px;
-      padding: 26px;
-      border: 1px solid rgba(148, 163, 184, 0.45);
-      box-shadow: var(--shadow-soft);
-      position: relative;
-      overflow: hidden;
-      isolation: isolate;
+      margin: 0 auto;
+      padding: 16px 16px 40px;
     }
 
-    .blur-circle {
-      position: absolute;
+    /* Header + navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(16px);
+      background: linear-gradient(to right, rgba(15,23,42,0.96), rgba(15,23,42,0.92));
       border-radius: 999px;
-      filter: blur(60px);
-      opacity: 0.55;
-      pointer-events: none;
-      z-index: -1;
-    }
-    .blur-1 { width: 260px; height: 260px; background: rgba(59,130,246,0.6); top:-80px; left:-60px; }
-    .blur-2 { width: 280px; height: 280px; background: rgba(248,113,113,0.5); bottom:-120px; right:-100px; }
-
-    header {
+      border: 1px solid rgba(148,163,184,0.6);
+      box-shadow: 0 12px 40px rgba(15,23,42,0.8);
+      padding: 6px 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 26px;
+      margin-bottom: 22px;
+      margin-top: 6px;
+      position: sticky;
     }
 
-    .brand-left {
+    .nav-left {
       display: flex;
       align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 2px solid rgba(248,250,252,0.7);
+      background: #020617;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .brand-text-main {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .brand-text-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .nav-link {
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      transition: 0.15s ease;
+      white-space: nowrap;
+    }
+    .nav-link:hover {
+      color: #bfdbfe;
+      border-color: rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.7);
+    }
+
+    /* Hero section */
+    #home {
+      margin-top: 22px;
+      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.2fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .hero-left {
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.35), rgba(15,23,42,0.98));
+      border-radius: 24px;
+      padding: 20px 22px 24px;
+      border: 1px solid rgba(148,163,184,0.5);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.7);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 26px;
+      line-height: 1.4;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .hero-title span { color: #fbbf24; }
+
+    .hero-sub {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .hero-location {
+      font-size: 12px;
+      margin-bottom: 18px;
+      color: #e5e7eb;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .tag {
+      font-size: 11px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-main);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg,#2563eb,#4f46e5);
+      color: #eff6ff;
+      font-size: 13px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 16px 40px rgba(37,99,235,0.7);
+    }
+
+    .btn-secondary {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hero-photo {
+      border-radius: 22px;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: #020617;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 40px;
+    }
+
+    .section-card {
+      background: radial-gradient(circle at top, rgba(15,23,42,0.96), rgba(15,23,42,0.98));
+      border-radius: var(--radius-lg);
+      padding: 20px 20px 22px;
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 14px 40px rgba(15,23,42,0.7);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      gap: 10px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .section-sub {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 2fr);
+      gap: 22px;
+    }
+
+    p { font-size: 13px; line-height: 1.6; }
+
+    ul {
+      margin-top: 6px;
+      padding-left: 18px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* Gallery */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
       gap: 14px;
     }
 
-    .logo-circle {
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      background: radial-gradient(circle, #f97316, #e11d48);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #fefce8;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      border: 2px solid rgba(248, 250, 252, 0.4);
+    .gallery-item {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: #020617;
+    }
+    .gallery-item img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+    .gallery-caption {
+      padding: 6px 8px 8px;
+      font-size: 11px;
+      color: var(--text-muted);
     }
 
-    .brand-title { font-size: 20px; font-weight: 600; }
-    .brand-subtitle { font-size: 12px; color: var(--text-muted); }
-
-    .chip {
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
-      color: var(--text-muted);
+    /* Books */
+    .chip-row {
       display: flex;
-      align-items: center;
+      flex-wrap: wrap;
       gap: 8px;
     }
-    .chip-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: #22c55e;
-      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
-    }
-
-    main {
-      display: grid;
-      grid-template-columns: 3fr 2.4fr;
-      gap: 26px;
-    }
-
-    .hero { padding-right: 12px; }
-
-    .badge {
+    .chip {
       font-size: 12px;
       padding: 6px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.5);
-      margin-bottom: 14px;
-      display: inline-block;
-      background: rgba(37,99,235,0.12);
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.9);
+    }
+
+    /* Contact */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.8fr) minmax(0, 2.2fr);
+      gap: 20px;
+    }
+
+    .contact-label {
+      font-size: 12px;
       color: var(--text-muted);
     }
-
-    .title-main {
-      font-family: "Noto Serif", serif;
-      font-size: 32px;
-      margin-bottom: 10px;
-      line-height: 1.3;
-    }
-    .title-main span { color: #fbbf24; }
-
-    .title-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
-
-    .location-line { font-size: 12px; color: var(--text-main); margin-bottom: 18px; }
-
-    .highlights {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-
-    .highlight-card {
-      padding: 12px;
-      border-radius: 16px;
-      background: rgba(37,99,235,0.2);
-      border: 1px solid rgba(148,163,184,0.5);
-    }
-    .highlight-label { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
-    .highlight-value { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
-
-    .btn-primary {
-      padding: 10px 18px;
-      background: linear-gradient(135deg,#2563eb,#4f46e5);
-      border-radius: 999px;
-      color: #eff6ff;
+    .contact-value {
       font-size: 13px;
-      text-decoration: none;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      box-shadow: 0 12px 32px rgba(37,99,235,0.5);
     }
-
-    .side-card {
-      padding: 20px;
-      border-radius: 20px;
-      background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.5);
-    }
-
-    .section-heading { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-    .section-text { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; }
-
-    .points-list { font-size: 12px; margin-bottom: 14px; }
-    .points-list li { margin-bottom: 6px; }
+    .contact-value a { color: #bfdbfe; }
 
     footer {
-      margin-top: 20px;
+      margin-top: 26px;
       padding-top: 14px;
       border-top: 1px dashed rgba(148,163,184,0.5);
-      display: flex;
-      justify-content: space-between;
       font-size: 11px;
       color: var(--text-muted);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      #home {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-left { order: 2; }
+      .hero-right { order: 1; }
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .nav-menu {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .two-col, .contact-grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+      .hero-left {
+        padding: 16px;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="shell">
-    <div class="blur-circle blur-1"></div>
-    <div class="blur-circle blur-2"></div>
-
-    <header>
-      <div class="brand-left">
-        <div class="logo-circle">शु</div>
+  <div class="page">
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="nav-left">
+        <div class="logo">
+          <img src="https://shivcharanujjainkar.wordpress.com/wp-content/uploads/2017/12/shivacharan-foundation-finel-logo.jpg?w=400" alt="शिवचरण उज्जैनकर फाऊंडेशन लोगो">
+        </div>
         <div>
-          <div class="brand-title">शिवचरण उज्जैनकर फाऊंडेशन</div>
-          <div class="brand-subtitle">ता. मुक्ताईनगर, जि. जळगाव, महाराष्ट्र</div>
+          <div class="brand-text-main">शिवचरण उज्जैनकर फाऊंडेशन</div>
+          <div class="brand-text-sub">ता. मुक्ताईनगर, जि. जळगाव, महाराष्ट्र</div>
         </div>
       </div>
-      <div class="chip">
-        <span class="chip-dot"></span>
-        <span>सामाजिक व साहित्यिक उपक्रम सुरू आहेत</span>
+      <div class="nav-menu">
+        <a href="#home" class="nav-link">मुख्य पान</a>
+        <a href="#about" class="nav-link">फाऊंडेशन विषयी</a>
+        <a href="#work" class="nav-link">फाऊंडेशनचे कार्य</a>
+        <a href="#photos" class="nav-link">फोटो</a>
+        <a href="#books" class="nav-link">वाचनीय पुस्तके</a>
+        <a href="#contact" class="nav-link">संपर्क</a>
       </div>
-    </header>
+    </nav>
 
-    <main>
-      <section class="hero">
-        <div class="badge">साहित्य • शिक्षण • संस्कृती • समाजकार्य</div>
+    <!-- HERO -->
+    <section id="home">
+      <div class="hero-left">
+        <div class="hero-badge">साहित्य • शिक्षण • संस्कृती • समाजकार्य</div>
 
-        <h1 class="title-main">
-          समाजाला बळ देणाऱ्या  
-          <span>विचारांची प्रेरणा</span>.
+        <h1 class="hero-title">
+          समाजाभिमुख विचारांची <span>उजळलेली दिशा</span> –
+          मुक्ताईनगरहून संपूर्ण महाराष्ट्रासाठी.
         </h1>
 
-        <p class="title-sub">
-          शिक्षण, साहित्य, कला, संस्कृती आणि सामाजिक जाणिवांसाठी कार्य करणारे
-          शिवचरण उज्जैनकर फाऊंडेशन – ग्रामीण व शहरातील तरुणांना दिशा देण्यासाठी
-          कटिबद्ध.
+        <p class="hero-sub">
+          शिवचरण उज्जैनकर फाऊंडेशन हे शैक्षणिक, सामाजिक, साहित्यिक व कला क्षेत्रात
+          सातत्याने उपक्रम राबवणारे व्यासपीठ आहे. विद्यार्थी, शिक्षक, लेखक, कलाकार
+          आणि समाजभावनेने काम करणाऱ्या प्रत्येकासाठी ही एक उभी राहिलेली प्रेरणा.
         </p>
 
-        <p class="location-line">
-          मुख्य कार्यालय: मुक्ताईनगर, जि. जळगाव, महाराष्ट्र
+        <p class="hero-location">
+          ता. मुक्ताईनगर, जि. जळगाव, महाराष्ट्र, भारत.
         </p>
 
-        <div class="highlights">
-          <div class="highlight-card">
-            <div class="highlight-label">क्षेत्र</div>
-            <div class="highlight-value">शैक्षणिक मार्गदर्शन</div>
-            <div class="highlight-note">विद्यार्थी आणि तरुणांसाठी प्रेरणा.</div>
-          </div>
-          <div class="highlight-card">
-            <div class="highlight-label">संस्कृती</div>
-            <div class="highlight-value">साहित्य & कला</div>
-            <div class="highlight-note">कवी संमेलन, वाचन आणि संवाद.</div>
-          </div>
-          <div class="highlight-card">
-            <div class="highlight-label">समाजकार्य</div>
-            <div class="highlight-value">सामाजिक उपक्रम</div>
-            <div class="highlight-note">जागृती, सहकार्य आणि लोकसहभाग.</div>
-          </div>
+        <div class="hero-tags">
+          <span class="tag">फेसबुक लाईव्ह व्याख्यानमाला</span>
+          <span class="tag">तापी–पूर्णा राज्यस्तरीय पुरस्कार वितरण</span>
+          <span class="tag">विद्यार्थी व समाजोन्मुख उपक्रम</span>
         </div>
 
-        <a href="mailto:info@ujjainkarfoundation.in" class="btn-primary">
-          ✉️ संपर्क करा
-        </a>
-      </section>
+        <div class="cta-row">
+          <a href="#contact" class="btn-primary">
+            <span>✉️ संपर्क / सहकार्य</span>
+          </a>
+          <div class="btn-secondary">
+            लवकरच – सर्व उपक्रमांची सविस्तर माहिती या वेबसाइटवर उपलब्ध होईल.
+          </div>
+        </div>
+      </div>
 
-      <aside class="side-card">
-        <div class="section-heading">शिवचरण उज्जैनकर फाऊंडेशन विषयी</div>
-        <p class="section-text">
-          साहित्य, शिक्षण, संस्कृती आणि समाजातील सकारात्मक बदलासाठी कार्य करणारी संस्था.
-          विद्यार्थ्यांना, लेखकांना, कलाकारांना व समाजातील सर्व घटकांना जोडणारा उपक्रम.
+      <div class="hero-right">
+        <div class="hero-photo">
+          <img src="https://shivcharanujjainkar.wordpress.com/wp-content/uploads/2020/10/photo_2020-10-11_19-08-11.jpg?w=713" alt="शिवचरण उज्जैनकर फाऊंडेशन कार्यक्रम">
+        </div>
+        <div class="hero-note">
+          * निवडक कार्यक्रमाचे छायाचित्र. आणखी फोटो खाली फोटो विभागात.
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">फाऊंडेशन विषयी</div>
+          <div class="section-sub">दृष्टी, ध्येय व कार्याचा संक्षिप्त परिचय</div>
+        </div>
+
+        <div class="two-col">
+          <div>
+            <p>
+              शिवचरण उज्जैनकर फाऊंडेशन हे शिक्षण, साहित्य, समाजकार्य आणि कलाविष्कार
+              यांच्या माध्यमातून सकारात्मक बदल घडविण्याचे उद्दिष्ट ठेवून कार्य करते.
+              ग्रामीण भागातील विद्यार्थ्यांसाठी मार्गदर्शन, गुणवंत विद्यार्थी सत्कार,
+              व्याख्यानमाला, साहित्य संमेलने, आरोग्य शिबिरे असे विविध उपक्रम नियमित
+              राबवले जातात.
+            </p>
+            <p style="margin-top:8px;">
+              या फाऊंडेशनच्या माध्यमातून तापी–पूर्णा राज्यस्तरीय पुरस्कार वितरण
+              सोहळा, बालकवी संमेलन, शिक्षक गौरव सोहळे, तसेच सामाजिक जाणीवा
+              वाढवणारे अनेक कार्यक्रम आखले गेले आहेत आणि पुढेही नवनवीन उपक्रम
+              राबवण्याचा संकल्प आहे.
+            </p>
+          </div>
+          <div>
+            <ul>
+              <li>शैक्षणिक, सामाजिक, साहित्यिक व कला क्षेत्रातील कार्यकर्त्यांचा गौरव.</li>
+              <li>विद्यार्थ्यांसाठी प्रेरणादायी व्याख्याने व मार्गदर्शन सत्रे.</li>
+              <li>कोरोना काळात विविध क्षेत्रातील कोरोना योद्ध्यांचा सन्मान सोहळा.</li>
+              <li>समाजाला प्रेरक दिशा देणाऱ्या विचारांची मांडणी व प्रसार.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section id="work">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">फाऊंडेशनचे प्रमुख कार्य</div>
+          <div class="section-sub">घडलेले आणि सुरू असलेले काही निवडक उपक्रम</div>
+        </div>
+
+        <ul>
+          <li>
+            फेसबुक लाईव्ह व्याख्यानमाला – विविध राज्यांतील नामवंत व्याख्यात्यांसह
+            शंभरी गाठणारी सतत चालू राहिलेली व्याख्यानशृंखला.
+          </li>
+          <li>
+            तापी–पूर्णा राज्यस्तरीय साहित्य व समाजसेवा पुरस्कार – अनेक क्षेत्रातील
+            मान्यवरांचा राज्यस्तरीय गौरव.
+          </li>
+          <li>
+            उत्कृष्ट कार्य करणाऱ्या शिक्षकांचा शिक्षक दिनानिमित्त विशेष सन्मान.
+          </li>
+          <li>
+            कोरोना काळात डॉक्टर्स, नर्सेस, पत्रकार, कलाकार, समाजसेवक आदी
+            कोरोना योद्ध्यांचा ऑनलाईन प्रमाणपत्राद्वारे सन्मान.
+          </li>
+          <li>
+            विद्यार्थी, पालक व समाजाला प्रेरणा देणारी व्याख्याने आणि चर्चासत्रे.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PHOTOS -->
+    <section id="photos">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">फोटो</div>
+          <div class="section-sub">फाऊंडेशनच्या निवडक उपक्रमांची झलक</div>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="https://shivcharanujjainkar.wordpress.com/wp-content/uploads/2017/12/shivacharan-foundation-finel-logo.jpg?w=400" alt="फाऊंडेशन लोगो">
+            <div class="gallery-caption">शिवचरण उज्जैनकर फाऊंडेशन – अधिकृत लोगो</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://shivcharanujjainkar.wordpress.com/wp-content/uploads/2020/10/photo_2020-10-11_19-08-11.jpg?w=713" alt="कार्यक्रम छायाचित्र">
+            <div class="gallery-caption">व्याख्यान किंवा सन्मान सोहळ्याचे छायाचित्र</div>
+          </div>
+          <!-- भविष्यात इथे आणखी फोटो सहज वाढवू शकता -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOKS -->
+    <section id="books">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">वाचनीय पुस्तके</div>
+          <div class="section-sub">वाचनासाठी प्रेरणा देणारी निवडक पुस्तके</div>
+        </div>
+
+        <p style="margin-bottom:10px;">
+          फाऊंडेशनच्या उपक्रमांतून विद्यार्थ्यांना व नागरिकांना वाचनाची आवड
+          निर्माण होण्यासाठी विविध पुस्तकांचा संदर्भ दिला जातो. खालील काही
+          लोकप्रिय वाचनीय पुस्तकांची नावे –
         </p>
 
-        <ul class="points-list">
-          <li>वाचन, लेखन व साहित्यिक उपक्रमांना प्रवाह.</li>
-          <li>तरुणांसाठी मार्गदर्शन व प्रेरणादायी संवाद.</li>
-          <li>सामाजिक जागृती, कार्यक्रम व उपक्रमांचे आयोजन.</li>
-          <li>सांस्कृतिक आणि कलात्मक मंच उपलब्ध.</li>
-        </ul>
+        <div class="chip-row">
+          <span class="chip">अग्निपंख</span>
+          <span class="chip">रिच डॅड पूअर डॅड (मराठी)</span>
+          <span class="chip">इकीगाई (मराठी)</span>
+          <span class="chip">समंतर</span>
+          <span class="chip">भगवद्गीता ऍज इट इज</span>
+        </div>
 
-        <div class="section-heading">लवकरच या वेबसाइटवर</div>
-        <ul class="points-list">
-          <li>उपक्रमांची विस्तृत माहिती.</li>
-          <li>कार्यक्रमांच्या छायाचित्रांची गॅलरी.</li>
-          <li>आगामी सत्रे, कार्यशाळा व उपक्रम.</li>
-          <li>संपर्क आणि सहकार्याचे तपशील.</li>
-        </ul>
-
-        <div class="section-heading">संपर्क</div>
-        <p class="section-text">
-          ईमेल: <a href="mailto:info@ujjainkarfoundation.in" style="color:#93c5fd;">info@ujjainkarfoundation.in</a><br>
-          ठिकाण: मुक्ताईनगर, जि. जळगाव, महाराष्ट्र
+        <p style="margin-top:12px; font-size:12px; color:var(--text-muted);">
+          * लवकरच – पुस्तके, समीक्षा आणि खरेदी दुवे या विभागात अद्ययावत करण्यात येतील.
         </p>
-      </aside>
-    </main>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="section-card">
+        <div class="section-header">
+          <div class="section-title">संपर्क</div>
+          <div class="section-sub">सहकार्य, कार्यक्रम अथवा अधिक माहितीसाठी</div>
+        </div>
+
+        <div class="contact-grid">
+          <div>
+            <p>
+              फाऊंडेशनच्या उपक्रमांबद्दल माहिती हवी असल्यास, सहकार्याची इच्छा असल्यास
+              किंवा कार्यक्रमासाठी संपर्क साधायचा असल्यास खालील माध्यमांचा वापर करू शकता.
+            </p>
+            <p style="margin-top:8px;">
+              शाळा, महाविद्यालय, सांस्कृतिक संस्था, वाचनालय, सामाजिक संघटना यांच्यासाठी
+              विशेष व्याख्यानमाला व कार्यक्रम आखता येऊ शकतात.
+            </p>
+          </div>
+          <div>
+            <p class="contact-label">ईमेल:</p>
+            <p class="contact-value">
+              <a href="mailto:info@ujjainkarfoundation.in">info@ujjainkarfoundation.in</a>
+            </p>
+
+            <p class="contact-label" style="margin-top:8px;">स्थळ:</p>
+            <p class="contact-value">
+              शिवचरण उज्जैनकर फाऊंडेशन,<br>
+              ता. मुक्ताईनगर, जि. जळगाव, महाराष्ट्र, भारत.
+            </p>
+
+            <p class="contact-label" style="margin-top:8px;">सोशल मीडियाचे दुवे (लवकरच):</p>
+            <p class="contact-value">
+              फेसबुक / यूट्यूब / इतर प्लॅटफॉर्मचे अधिकृत दुवे येथे जोडले जातील.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <footer>
-      <div>© <span id="year"></span> शिवचरण उज्जैनकर फाऊंडेशन</div>
+      <div>© <span id="year"></span> शिवचरण उज्जैनकर फाऊंडेशन. सर्व हक्क राखीव.</div>
       <div>साहित्य • शिक्षण • संस्कृती • समाजकार्य</div>
     </footer>
   </div>
