@@ -1,0 +1,38 @@
+<%# Sticky, subtle border, no shadow, no shrink animation on scroll. %>
+<header class="sticky top-0 z-40 border-b border-line bg-paper" data-controller="mobile-nav">
+  <div class="container mx-auto flex items-center justify-between gap-6 px-5 py-4">
+    <%# Wordmark-only placeholder -- see prompts/phase-03-layout-shell.md.
+        The full emblem doesn't survive at nav size and the simplified
+        horizontal lockup doesn't exist yet. %>
+    <%= link_to locale_root_path, class: "font-display text-h3 text-brand-700" do %>
+      <%= brand_wordmark %>
+    <% end %>
+
+    <nav class="hidden items-center gap-6 md:flex" aria-label="Primary">
+      <% nav_items.each do |name| %>
+        <%= link_to t("navigation.#{name}"), nav_path(name), class: "text-body font-semibold text-ink transition-colors duration-150 ease-out hover:text-brand-700" %>
+      <% end %>
+    </nav>
+
+    <div class="hidden items-center gap-4 md:flex">
+      <%= render "components/lang_switch", current: I18n.locale,
+            links: { mr: alternate_locale_url(:mr, only_path: true), en: alternate_locale_url(:en, only_path: true) } %>
+      <%= render "components/button", label: t("common.donate_cta"), variant: :cta, href: nav_path(:donate) %>
+    </div>
+
+    <button
+      type="button"
+      class="inline-flex size-11 items-center justify-center rounded-card text-ink md:hidden"
+      data-mobile-nav-target="trigger"
+      data-action="mobile-nav#open"
+      aria-label="<%= t('common.open_menu') %>"
+      aria-expanded="false"
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </div>
+
+  <%= render "layouts/mobile_nav" %>
+</header>

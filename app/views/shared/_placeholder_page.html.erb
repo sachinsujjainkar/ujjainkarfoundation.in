@@ -1,0 +1,6 @@
+<%# Locals: title_key -- an i18n key under navigation.* %>
+<% title = t(title_key) %>
+<% content_for :title, title %>
+<%= render "components/page_header", title: title,
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [title, request.path]] %>
+<%= render "shared/coming_soon" %>

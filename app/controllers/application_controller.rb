@@ -7,6 +7,18 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
+  # Every footer value (and eventually most contact-ish content) reads from
+  # here, never hardcoded -- see docs/00-project-brief.md, "Nothing
+  # invented ships." Falls back to an unsaved, all-blank instance if the DB
+  # itself is the problem -- the 500 page renders this same layout, and a
+  # database outage is a plausible reason to be on it. It must not cascade
+  # into a second error.
+  helper_method def site_setting
+    @site_setting ||= SiteSetting.instance
+  rescue StandardError
+    SiteSetting.new
+  end
+
   private
 
   # Every public route is scoped under /:locale (config/routes.rb), so

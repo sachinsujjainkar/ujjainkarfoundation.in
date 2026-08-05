@@ -2,17 +2,31 @@
   Locals: type (:success | :warn | :danger), message
   Status colour is used only for the left border + icon; message text stays
   --ink — warn only clears 3:1 against paper, not the 4.5:1 body-text floor.
+
+  role="status" carries an implicit aria-live="polite" + aria-atomic="true"
+  -- screen readers announce it whether it was there on page load or
+  inserted later (e.g. by a Turbo Stream). Dismissible via flash_controller.js.
 %>
 <%
   type = type.to_sym
   variant_class = { success: "flash-success", warn: "flash-warn", danger: "flash-danger" }.fetch(type)
   icon_color = { success: "text-success", warn: "text-warn", danger: "text-danger" }.fetch(type)
 %>
-<div class="<%= class_names("flash", variant_class) %>" role="status">
+<div class="<%= class_names("flash", variant_class) %>" role="status" data-controller="flash">
   <svg class="<%= class_names("shrink-0", icon_color) %>" viewBox="0 0 20 20" width="20" height="20" fill="currentColor" aria-hidden="true">
     <circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.5" />
     <path d="M10 6v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
     <circle cx="10" cy="13.5" r="1" />
   </svg>
-  <p><%= message %></p>
+  <p class="grow"><%= message %></p>
+  <button
+    type="button"
+    class="inline-flex size-11 shrink-0 -my-3 -mr-2 items-center justify-center rounded-card text-ink-muted hover:text-ink"
+    data-action="flash#dismiss"
+    aria-label="<%= t('common.dismiss') %>"
+  >
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+  </button>
 </div>

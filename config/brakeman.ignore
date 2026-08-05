@@ -1,0 +1,23 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 22,
+      "fingerprint": "32cb1400a2cce3368fd89d5114ee605167c7c67ffa85efd3b19f368d1ca47e53",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/helpers/application_helper.rb",
+      "line": 73,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [77],
+      "note": "Reviewed 2026-08-05. `locale` is validated against I18n.available_locales and `page` against LocalizedPages::SEGMENTS.keys (both raise ArgumentError otherwise) immediately before this send -- see app/helpers/application_helper.rb#alternate_locale_url. Brakeman's static check flags the shape (dynamic method name from a method parameter) and can't see the runtime guard. The alternative -- an explicit 44-branch case statement (2 locales x 11 pages x path/url) -- is worse code for the same safety."
+    }
+  ],
+  "updated": "2026-08-05 14:00:00 +0000",
+  "brakeman_version": "8.0.5"
+}

@@ -49,3 +49,41 @@
      sprawls in Marathi). */
   max-width: 66ch;
 }
+
+@layer components {
+  /* Off-screen until focused, then a real, visible first tab stop. */
+  .skip-link {
+    @apply fixed left-4 top-4 z-50 -translate-y-24 rounded-card bg-brand-700 px-4 py-3
+      text-body font-semibold text-paper transition-transform duration-150 ease-out
+      focus-visible:translate-y-0;
+  }
+}
+
+/*
+ * Turbo 8 page morphing + native View Transitions between pages (see
+ * turbo_refreshes_with in the layout). Same 150ms ease-out as every other
+ * transition in this system -- nothing else animates.
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 150ms;
+  animation-timing-function: ease-out;
+}
+
+/* Nothing animates for anyone who's said they don't want it -- every
+   transition in this system (hover/focus states, the skip-link, flash
+   dismiss, view transitions above), in one place. */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}

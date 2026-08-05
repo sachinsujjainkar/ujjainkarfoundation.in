@@ -1,0 +1,8 @@
+<%# Locals: title_key, body_key -- i18n keys under errors.* %>
+<% title = t(title_key) %>
+<% content_for :title, title %>
+<%= render "components/page_header", title: title %>
+<div class="container mx-auto flex flex-col items-start gap-6 px-5 py-16">
+  <p class="measure text-body-lg text-ink-muted"><%= t(body_key) %></p>
+  <%= render "components/button", label: t("errors.back_to_home"), variant: :primary, href: locale_root_path %>
+</div>

@@ -1,9 +1,25 @@
 <%#
   Locals:
-    title:       String
-    breadcrumbs: Array of [label, url] pairs; last entry is the current page
+    title:              String
+    breadcrumbs:        Array of [label, url] pairs; last entry is the current page. Optional.
+    background_image_url: String, optional — section-landing variant. A dark
+      scrim keeps the title/breadcrumb readable over any photo; no AI-generated
+      or stock imagery goes here when a real one arrives (docs/02-design-system.md).
 %>
-<div class="page-header">
-  <%= render "components/breadcrumb", items: breadcrumbs %>
-  <h1 class="mt-4 text-h1 font-display"><%= title %></h1>
+<% has_image = local_assigns[:background_image_url].present? %>
+<div
+  class="page-header relative bg-cover bg-center"
+  <%= "style=\"background-image: url('#{background_image_url}')\"".html_safe if has_image %>
+>
+  <% if has_image %>
+    <div class="absolute inset-0 bg-brand-900/70"></div>
+  <% end %>
+  <div class="relative">
+    <% if local_assigns[:breadcrumbs].present? %>
+      <%= render "components/breadcrumb", items: breadcrumbs %>
+      <h1 class="mt-4 text-h1 font-display"><%= title %></h1>
+    <% else %>
+      <h1 class="text-h1 font-display"><%= title %></h1>
+    <% end %>
+  </div>
 </div>

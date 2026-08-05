@@ -1,3 +1,7 @@
 en:
   errors:
     not_found: "Page not found"
+    not_found_body: "The page you're looking for doesn't exist or has moved."
+    server_error: "Something went wrong"
+    server_error_body: "Something broke on our end. Please try again in a little while."
+    back_to_home: "Back to home"

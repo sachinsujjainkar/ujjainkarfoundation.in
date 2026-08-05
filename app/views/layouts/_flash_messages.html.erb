@@ -1,0 +1,8 @@
+<%# Each individual flash (components/_flash) already carries role="status"
+    (implicit aria-live="polite"). This wrapper just stacks them and gives
+    Turbo Stream-appended flashes (later phases) somewhere to land. %>
+<div class="container mx-auto flex flex-col gap-3 px-5 pt-4" id="flash-messages">
+  <% flash.each do |key, message| %>
+    <%= render "components/flash", type: flash_type(key), message: message %>
+  <% end %>
+</div>

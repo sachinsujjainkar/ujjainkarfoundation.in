@@ -1,13 +1,46 @@
+<%
+  # SEO scaffolding: every page gets a title/description/canonical/OG/
+  # Twitter set from these defaults; a page overrides by calling
+  # content_for(:title | :meta_description | :canonical | :og_type) with
+  # ONLY its own segment -- this partial does the composition, so pages
+  # never have to repeat the site name or re-derive the canonical URL.
+  page_title = content_for(:title)
+  full_title = [ page_title, site_name ].compact_blank.join(" — ")
+  meta_description = content_for(:meta_description).presence || t("common.registered_trust_description")
+  canonical_url = content_for(:canonical).presence || request.original_url
+%>
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
-    <title><%= content_for(:title) || "उज्जैनकर फाउंडेशन" %></title>
+    <title><%= full_title %></title>
+    <meta name="description" content="<%= meta_description %>">
+    <link rel="canonical" href="<%= canonical_url %>">
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="Ujjainkarfoundation">
+    <meta name="application-name" content="Shivcharan Ujjainkar Foundation">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%# Open Graph + Twitter card. No og:image yet -- the default social
+        card (assets-source/brand/og-image/) doesn't exist yet; omitted
+        rather than pointing at a broken or invented placeholder. %>
+    <meta property="og:site_name" content="<%= site_name %>">
+    <meta property="og:title" content="<%= page_title.presence || site_name %>">
+    <meta property="og:description" content="<%= meta_description %>">
+    <meta property="og:type" content="<%= content_for(:og_type).presence || "website" %>">
+    <meta property="og:url" content="<%= canonical_url %>">
+    <meta property="og:locale" content="<%= I18n.locale == :mr ? "mr_IN" : "en_IN" %>">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="<%= page_title.presence || site_name %>">
+    <meta name="twitter:description" content="<%= meta_description %>">
+
+    <%# Turbo 8 page morphing (preserves scroll + focus + form state across
+        navigation) and native View Transitions between pages. Honours
+        prefers-reduced-motion in app/assets/tailwind/base.css. %>
+    <%= turbo_refreshes_with method: :morph, scroll: :preserve %>
+    <meta name="view-transition" content="same-origin">
 
     <%# Preload only the two body weights — the first-paint-critical fonts.
         Display/headline and heavier weights lazy-load via @font-face. %>
@@ -36,16 +69,15 @@
   </head>
 
   <body>
-    <%# Provisional header — the real header/nav/footer shell lands in Phase 03.
-        The switcher itself is real: it maps to the same record by ID, per
-        docs/04-routes.md, not just a locale-swapped homepage link. %>
-    <div class="container mx-auto flex justify-end px-5 pt-4">
-      <%= render "components/lang_switch", current: I18n.locale,
-            links: { mr: alternate_locale_url(:mr, only_path: true), en: alternate_locale_url(:en, only_path: true) } %>
-    </div>
+    <a href="#main-content" class="skip-link"><%= t("common.skip_to_content") %></a>
 
-    <main class="container mx-auto mt-8 px-5 flex">
+    <%= render "layouts/header" %>
+    <%= render "layouts/flash_messages" %>
+
+    <main id="main-content">
       <%= yield %>
     </main>
+
+    <%= render "layouts/footer" %>
   </body>
 </html>

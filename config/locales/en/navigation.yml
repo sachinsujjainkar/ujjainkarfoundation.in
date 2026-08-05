@@ -1,3 +1,14 @@
 en:
   navigation:
     home: "Home"
+    about: "About"
+    activities: "Focus areas"
+    events: "Events"
+    articles: "News"
+    gallery: "Gallery"
+    contact: "Contact"
+    volunteer: "Volunteer"
+    donate: "Donate"
+    transparency: "Transparency"
+    privacy: "Privacy policy"
+    terms: "Terms and conditions"

@@ -1,0 +1,38 @@
+<%# Full-screen overlay, not a cramped dropdown -- see
+    prompts/phase-03-layout-shell.md. Hidden by default; mobile_nav_controller.js
+    toggles it, traps focus, and returns focus to the trigger on close. %>
+<div
+  class="fixed inset-0 z-50 hidden bg-paper"
+  data-mobile-nav-target="panel"
+  data-action="click->mobile-nav#closeOnBackdrop"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Primary"
+>
+  <div class="flex items-center justify-between border-b border-line px-5 py-4">
+    <span class="font-display text-h3 text-brand-700"><%= brand_wordmark %></span>
+    <button
+      type="button"
+      class="inline-flex size-11 items-center justify-center rounded-card text-ink"
+      data-action="mobile-nav#close"
+      aria-label="<%= t('common.close_menu') %>"
+    >
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <nav class="flex flex-col gap-1 p-5" aria-label="Primary">
+    <% nav_items.each do |name| %>
+      <%= link_to t("navigation.#{name}"), nav_path(name),
+            class: "rounded-card px-4 py-3 text-body-lg font-semibold text-ink hover:bg-brand-100" %>
+    <% end %>
+  </nav>
+
+  <div class="flex flex-col gap-4 border-t border-line p-5">
+    <%= render "components/lang_switch", current: I18n.locale,
+          links: { mr: alternate_locale_url(:mr, only_path: true), en: alternate_locale_url(:en, only_path: true) } %>
+    <%= render "components/button", label: t("common.donate_cta"), variant: :cta, href: nav_path(:donate) %>
+  </div>
+</div>

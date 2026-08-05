@@ -1,0 +1,73 @@
+<% social_links = {
+     facebook: site_setting.facebook_url,
+     instagram: site_setting.instagram_url,
+     youtube: site_setting.youtube_url,
+     twitter: site_setting.twitter_url
+   }.select { |_platform, url| url.present? } %>
+
+<% address_lines = [
+     site_setting.address_line1, site_setting.address_line2, site_setting.city,
+     [ site_setting.district, site_setting.state ].compact_blank.join(", "),
+     site_setting.pincode
+   ].select(&:present?) %>
+
+<footer class="border-t border-line bg-brand-900 text-brand-100">
+  <div class="container mx-auto grid grid-cols-1 gap-8 px-5 py-16 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="flex flex-col gap-3">
+      <span class="font-display text-h3 text-paper"><%= brand_wordmark %></span>
+      <p class="text-small"><%= t("common.registered_trust_description") %></p>
+      <% if social_links.any? %>
+        <div class="flex gap-3">
+          <% social_links.each do |platform, url| %>
+            <%= link_to url, class: "text-brand-100 hover:text-paper", target: "_blank", rel: "noopener", "aria-label": platform.to_s do %>
+              <%= render "layouts/social_icon", platform: platform %>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h2 class="text-small font-semibold text-paper"><%= t("common.important_links") %></h2>
+      <% %i[about activities articles transparency].each do |name| %>
+        <%= link_to t("navigation.#{name}"), nav_path(name), class: "text-small hover:text-paper" %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h2 class="text-small font-semibold text-paper"><%= t("common.get_involved") %></h2>
+      <% %i[volunteer donate contact].each do |name| %>
+        <%= link_to t("navigation.#{name}"), nav_path(name), class: "text-small hover:text-paper" %>
+      <% end %>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <h2 class="text-small font-semibold text-paper"><%= t("common.contact_info") %></h2>
+      <% if address_lines.any? %>
+        <address class="text-small not-italic"><%= safe_join(address_lines, tag.br) %></address>
+      <% end %>
+      <% if site_setting.phone_primary.present? %>
+        <%= link_to site_setting.phone_primary, "tel:#{site_setting.phone_primary}", class: "text-small hover:text-paper" %>
+      <% end %>
+      <% if site_setting.email_public.present? %>
+        <%= link_to site_setting.email_public, "mailto:#{site_setting.email_public}", class: "text-small hover:text-paper" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="border-t border-brand-800">
+    <div class="container mx-auto flex flex-col gap-2 px-5 py-4 text-small sm:flex-row sm:items-center sm:justify-between">
+      <p>
+        &copy; <%= Date.current.year %> <%= site_name %>.
+        <%= t("common.all_rights_reserved") %>.
+        <% if site_setting.registration_number.present? %>
+          <%= t("common.registration_no_label") %> <%= site_setting.registration_number %>.
+        <% end %>
+      </p>
+      <div class="flex gap-4">
+        <%= link_to t("navigation.privacy"), nav_path(:privacy), class: "hover:text-paper" %>
+        <%= link_to t("navigation.terms"), nav_path(:terms), class: "hover:text-paper" %>
+      </div>
+    </div>
+  </div>
+</footer>

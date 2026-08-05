@@ -1,5 +1,15 @@
-# Nav-specific chrome — see docs/01-glossary.md. Full menu labels land in
-# Phase 03 (layout shell); this is what exists so far.
+# Nav-specific chrome — see docs/01-glossary.md.
 mr:
   navigation:
     home: "मुख्यपृष्ठ"
+    about: "आमच्याविषयी"
+    activities: "कार्यक्षेत्रे"
+    events: "कार्यक्रम"
+    articles: "बातम्या"
+    gallery: "गॅलरी"
+    contact: "संपर्क"
+    volunteer: "स्वयंसेवक"
+    donate: "देणगी"
+    transparency: "पारदर्शकता"
+    privacy: "गोपनीयता धोरण"
+    terms: "अटी व शर्ती"

@@ -28,5 +28,12 @@ module Ujjainkarfoundation
     # Marathi is the source of record; the mr locale is the application default.
     config.i18n.available_locales = [ :mr, :en ]
     config.i18n.default_locale = :mr
+
+    # Bilingual, styled 404/500 (ErrorsController) instead of Rails' static
+    # public/404.html and public/500.html -- see
+    # docs/prompts/phase-03-layout-shell.md. The static files stay in place
+    # as the last-resort fallback for failures that happen before routing
+    # even works (e.g. the app failing to boot).
+    config.exceptions_app = routes
   end
 end

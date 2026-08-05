@@ -1,0 +1,13 @@
+# A singleton: exactly one row. See app/models/site_setting.rb.
+current:
+  registration_number: "एफ-११४७३ (जळगांव)"
+  registration_type: "Public Trust"
+  registration_date: 2010-05-12
+  iso_certification: "ISO 9001:2015"
+  address_line2: "ता. मुक्ताईनगर"
+  city: "मुक्ताईनगर"
+  district: "जळगाव"
+  state: "महाराष्ट्र"
+  pincode: "425306"
+  has_12a: false
+  has_80g: false

@@ -10,3 +10,19 @@
     <% end %>
   <% end %>
 </nav>
+
+<%# BreadcrumbList structured data — see docs/04-routes.md, "SEO requirements per page". %>
+<script type="application/ld+json">
+  <%= json_escape({
+    "@context" => "https://schema.org",
+    "@type" => "BreadcrumbList",
+    "itemListElement" => items.each_with_index.map do |(label, url), index|
+      {
+        "@type" => "ListItem",
+        "position" => index + 1,
+        "name" => label,
+        "item" => url.to_s.start_with?("http") ? url : "#{request.base_url}#{url}"
+      }
+    end
+  }.to_json).html_safe %>
+</script>

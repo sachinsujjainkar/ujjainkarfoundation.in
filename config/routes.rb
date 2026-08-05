@@ -14,6 +14,14 @@ Rails.application.routes.draw do
   # a developer tool, not a public page.
   get "styleguide", to: "styleguide#index" if Rails.env.development?
 
+  # Rails' exceptions_app (config/application.rb) dispatches unhandled
+  # exceptions to these exact paths. Unprefixed on purpose -- the failure
+  # that got us here may be the locale scoping itself, so ErrorsController
+  # figures out the locale from the original request instead of a route
+  # param. See docs/prompts/phase-03-layout-shell.md.
+  match "/404", to: "errors#not_found", via: :all
+  match "/500", to: "errors#internal_server_error", via: :all
+
   # "/" is never served directly -- ambiguity here breaks caching, hreflang,
   # and sharing. Redirect to the visitor's best-fit locale (cookie, then
   # Accept-Language, default :mr) and let every real page live under
@@ -22,5 +30,17 @@ Rails.application.routes.draw do
 
   scope ":locale", locale: /mr|en/ do
     root to: "home#index", as: :locale_root
+  end
+
+  # Static/section pages, one scope per locale because the path segments
+  # themselves are different translated words (not just a swapped :locale
+  # prefix) -- see LocalizedPages and docs/04-routes.md.
+  LocalizedPages::SEGMENTS.each do |name, segments|
+    %i[mr en].each do |locale|
+      scope "/#{locale}", locale: locale.to_s, as: locale do
+        get segments.fetch(locale), to: LocalizedPages::TARGETS.fetch(name), as: name,
+          defaults: { locale_page: name }
+      end
+    end
   end
 end

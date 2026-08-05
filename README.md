@@ -1,4 +1,4 @@
-# उज्जैनकर फाउंडेशन — Build Pack
+# शिवचरण उज्जैनकर फाउंडेशन — Build Pack
 
 Everything needed to build ujjainkarfoundation.in with Claude Code, one phase at a time.
 
