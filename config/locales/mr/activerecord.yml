@@ -1,0 +1,39 @@
+# Rails' reserved activerecord i18n namespace (validation error messages).
+# Written to read naturally, not as literal translations of the English
+# defaults -- see prompts/phase-05-static-pages.md: "कृपया आपले नाव लिहा,
+# not नाव आवश्यक आहे फील्ड."
+mr:
+  errors:
+    messages:
+      # Generic fallback for any model/attribute without a specific
+      # override below -- still reads naturally combined with a humanized
+      # attribute name ("नाव आवश्यक आहे"), just not as tailored as a
+      # dedicated message.
+      blank: "आवश्यक आहे."
+  activerecord:
+    errors:
+      models:
+        person:
+          attributes:
+            name_mr:
+              blank: "कृपया व्यक्तीचे नाव लिहा."
+        volunteer:
+          attributes:
+            name:
+              blank: "कृपया आपले नाव लिहा."
+            phone:
+              blank: "कृपया आपला मोबाईल क्रमांक लिहा."
+              invalid: "कृपया योग्य १० अंकी मोबाईल क्रमांक लिहा."
+            email:
+              invalid: "कृपया योग्य ईमेल पत्ता लिहा."
+            status:
+              inclusion: "कृपया योग्य स्थिती निवडा."
+        contact_message:
+          attributes:
+            name:
+              blank: "कृपया आपले नाव लिहा."
+            email:
+              blank: "कृपया आपला ईमेल पत्ता लिहा."
+              invalid: "कृपया योग्य ईमेल पत्ता लिहा."
+            message:
+              blank: "कृपया आपला संदेश लिहा."

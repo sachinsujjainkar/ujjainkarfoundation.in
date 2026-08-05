@@ -1,0 +1,38 @@
+<% content_for :title, t("navigation.committee") %>
+<%= render "components/page_header", title: t("navigation.committee"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.committee"), request.path]] %>
+
+<div class="container mx-auto px-5 py-16">
+  <% if @committees.any? %>
+    <div class="flex flex-col gap-4">
+      <% @committees.each do |committee| %>
+        <%# Native <details>/<summary> -- accessible, keyboard-operable
+            accordion with no JS needed. %>
+        <details class="card group open:pb-2">
+          <summary class="accordion-summary list-none">
+            <%= committee.name %>
+            <svg class="shrink-0 transition-transform duration-150 ease-out group-open:rotate-180" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+            </svg>
+          </summary>
+
+          <ul class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <% committee.memberships.each do |membership| %>
+              <li class="flex flex-col">
+                <span class="text-body font-semibold text-ink">
+                  <%= [ membership.person.honorific, membership.person.name ].compact_blank.join(" ") %>
+                </span>
+                <span class="text-small text-brand-700"><%= membership.role_title %></span>
+                <% if membership.person.city.present? %>
+                  <span class="text-small text-ink-muted"><%= membership.person.city %></span>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </details>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render "components/empty_state", message: t("common.no_members_yet") %>
+  <% end %>
+</div>

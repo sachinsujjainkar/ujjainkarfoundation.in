@@ -43,4 +43,15 @@ Rails.application.routes.draw do
       end
     end
   end
+
+  # Form submissions POST to the same path their GET page lives at
+  # (contact_messages#new / volunteers#new above) -- no separate named
+  # route needed, forms just target nav_path(:contact) / nav_path(:volunteer)
+  # with method: :post.
+  %i[mr en].each do |locale|
+    scope "/#{locale}", locale: locale.to_s do
+      post LocalizedPages::SEGMENTS.dig(:contact, locale), to: "contact_messages#create"
+      post LocalizedPages::SEGMENTS.dig(:volunteer, locale), to: "volunteers#create"
+    end
+  end
 end

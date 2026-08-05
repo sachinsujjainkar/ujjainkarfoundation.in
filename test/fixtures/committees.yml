@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# name is Mobility-translated (committee_translations table), not a plain
+# column -- no fixture value for it here.
+
+one:
+  position: 1
+
+two:
+  position: 2

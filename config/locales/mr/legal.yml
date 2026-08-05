@@ -1,0 +1,22 @@
+# Privacy policy + terms. Generic, standard boilerplate matched to what
+# this site actually does today (contact/volunteer forms, a locale
+# preference cookie, no analytics/ads yet) -- not invented specifics.
+# Update if that scope changes (analytics, payment gateway, etc.).
+mr:
+  legal:
+    privacy_heading: "गोपनीयता धोरण"
+    privacy_intro: "ही वेबसाईट शिवचरण उज्जैनकर फाउंडेशन द्वारे चालवली जाते. आपल्या माहितीच्या गोपनीयतेला आम्ही महत्त्व देतो."
+    privacy_collect_heading: "आम्ही कोणती माहिती गोळा करतो"
+    privacy_collect_body: "संपर्क फॉर्म किंवा स्वयंसेवक नोंदणी फॉर्म भरताना आपण दिलेली माहिती (नाव, मोबाईल क्रमांक, ईमेल, तालुका, संदेश) आम्ही साठवतो. वेबसाईटवरील भाषा निवड लक्षात ठेवण्यासाठी एक कुकी वापरली जाते."
+    privacy_use_heading: "माहितीचा वापर"
+    privacy_use_body: "गोळा केलेली माहिती केवळ आपल्याशी संपर्क साधण्यासाठी आणि आपल्या चौकशी किंवा नोंदणीला प्रतिसाद देण्यासाठी वापरली जाते. ही माहिती कोणत्याही तिसऱ्या पक्षाला विकली किंवा भाड्याने दिली जात नाही."
+    privacy_contact_heading: "संपर्क"
+    privacy_contact_body: "या धोरणाबाबत प्रश्न असल्यास कृपया आमच्याशी संपर्क साधा."
+    terms_heading: "अटी व शर्ती"
+    terms_intro: "ही वेबसाईट वापरण्यापूर्वी कृपया खालील अटी व शर्ती वाचा."
+    terms_use_heading: "वेबसाईटचा वापर"
+    terms_use_body: "या वेबसाईटवरील मजकूर केवळ माहितीच्या उद्देशाने आहे. मजकूर अचूक ठेवण्याचा प्रयत्न केला जातो, तरीही त्रुटी शक्य आहेत."
+    terms_content_heading: "मजकुराचे हक्क"
+    terms_content_body: "या वेबसाईटवरील मजकूर, छायाचित्रे व लोगो शिवचरण उज्जैनकर फाउंडेशनच्या मालकीचे आहेत, अन्यथा नमूद केल्याशिवाय."
+    terms_changes_heading: "बदल"
+    terms_changes_body: "या अटी वेळोवेळी अद्ययावत केल्या जाऊ शकतात. महत्त्वाचे बदल असल्यास ही तारीख अद्ययावत केली जाईल."

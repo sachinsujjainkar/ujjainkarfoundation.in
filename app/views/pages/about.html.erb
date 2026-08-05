@@ -1,1 +1,31 @@
-<%= render "shared/placeholder_page", title_key: "navigation.about" %>
+<% content_for :title, t("navigation.about") %>
+<%= render "components/page_header", title: t("navigation.about"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.about"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-16 px-5 py-16">
+  <section class="measure flex flex-col gap-4">
+    <h2 class="text-h2 font-display"><%= t("about.history_heading") %></h2>
+    <p class="text-body-lg text-ink"><%= t("about.history_body") %></p>
+  </section>
+
+  <section class="grid grid-cols-1 gap-8 sm:grid-cols-2">
+    <div class="card flex flex-col gap-2">
+      <h2 class="text-h3 font-display"><%= t("common.our_vision") %></h2>
+      <p class="text-body text-ink"><%= t("about.vision_body") %></p>
+    </div>
+    <div class="card flex flex-col gap-2">
+      <h2 class="text-h3 font-display"><%= t("common.our_mission") %></h2>
+      <p class="text-body text-ink"><%= t("about.mission_body") %></p>
+    </div>
+  </section>
+
+  <section class="flex flex-col items-start gap-6 sm:flex-row">
+    <div class="aspect-square w-40 shrink-0 rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
+      400×400
+    </div>
+    <div class="flex flex-col gap-2">
+      <h2 class="text-h3 font-display"><%= t("common.founder") %></h2>
+      <p class="measure text-body text-ink-muted"><%= t("about.founder_pending") %></p>
+    </div>
+  </section>
+</div>

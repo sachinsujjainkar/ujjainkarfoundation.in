@@ -29,7 +29,7 @@
 
     <div class="flex flex-col gap-3">
       <h2 class="text-small font-semibold text-paper"><%= t("common.important_links") %></h2>
-      <% %i[about activities articles transparency].each do |name| %>
+      <% %i[about committee activities articles transparency].each do |name| %>
         <%= link_to t("navigation.#{name}"), nav_path(name), class: "text-small hover:text-paper" %>
       <% end %>
     </div>

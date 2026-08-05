@@ -1,8 +1,10 @@
-# Static pages. Content and models (Phase 05) still to come -- these are
-# real, linkable routes with an honest "coming soon" body so the header/nav/
-# footer built in Phase 03 has somewhere real to point.
+# Static pages -- not driven by the newsroom. See prompts/phase-05-static-pages.md.
 class PagesController < ApplicationController
   def about
+  end
+
+  def committee
+    @committees = Committee.includes(memberships: :person)
   end
 
   def donate

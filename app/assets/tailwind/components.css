@@ -202,4 +202,14 @@
   .lang-switch [aria-current="true"] {
     @apply text-brand-700;
   }
+
+  /* ---- Accordion (native <details>/<summary>, no JS) ---- */
+  .accordion-summary {
+    @apply flex cursor-pointer items-center justify-between text-h3 font-display text-ink;
+  }
+  /* list-none (Firefox's ::marker) doesn't reach Chrome/Safari's own
+     disclosure triangle -- that one needs its own selector. */
+  .accordion-summary::-webkit-details-marker {
+    display: none;
+  }
 }

@@ -1,0 +1,11 @@
+en:
+  contact:
+    heading: "Get in touch"
+    hours_label: "Office hours"
+    hours_pending: "To be announced soon"
+    form_heading: "Send an inquiry"
+    name_label: "Name"
+    email_label: "Email"
+    subject_label: "Subject"
+    message_label: "Message"
+    success: "Your message was sent successfully. We'll get back to you soon."

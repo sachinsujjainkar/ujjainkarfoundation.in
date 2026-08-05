@@ -1,0 +1,9 @@
+en:
+  donate:
+    heading: "Donate"
+    intro: "Your donation helps us carry forward our literary, honours, and social work."
+    bank_heading: "Bank details"
+    bank_pending: "Bank and UPI details will be available here soon."
+    tax_heading: "Tax benefit"
+    tax_80g_available: "Tax exemption is available on donations under 80G."
+    tax_80g_pending: "80G certificate verification is in progress."

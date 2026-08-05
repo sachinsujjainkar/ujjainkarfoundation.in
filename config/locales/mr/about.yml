@@ -1,0 +1,12 @@
+# आमच्याविषयी page. History/lineage text is confirmed fact. Vision/mission
+# body copy is placeholder-length example text (like the homepage hero,
+# Phase 04) pending real copy from the foundation -- not invented claims,
+# just structural placeholder. Founder section has no content yet:
+# docs/content/founder.md doesn't exist in this repo.
+mr:
+  about:
+    history_heading: "इतिहास"
+    history_body: "शिवचरण उज्जैनकर फाउंडेशन हे महर्षी वाल्मिकी मंडळ या मूळ संस्थेपासून सुरू झालेल्या प्रवासाचा पुढचा टप्पा आहे. सन २००९ मध्ये या कार्याने कवी राम कदम फाउंडेशन असे रूप घेतले, आणि सन २०१६ मध्ये शिवचरण उज्जैनकर फाउंडेशन या नावाने संस्थेची पुनर्रचना झाली."
+    vision_body: "साहित्य, सन्मान आणि सामाजिक कार्यातून समाजाच्या सर्वांगीण विकासाला हातभार लावणे."
+    mission_body: "साहित्य संमेलने, पुरस्कार, विद्यार्थी सत्कार, व्याख्यानमाला, प्रकाशन आणि आरोग्य व सामाजिक उपक्रमांद्वारे समाजाच्या विविध स्तरांपर्यंत पोहोचणे."
+    founder_pending: "संस्थापकांची माहिती लवकरच येथे प्रसिद्ध केली जाईल."

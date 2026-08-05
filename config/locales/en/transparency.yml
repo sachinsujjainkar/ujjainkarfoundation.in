@@ -1,0 +1,15 @@
+en:
+  transparency:
+    registration_heading: "Registration information"
+    registration_type_label: "Registration type"
+    registration_number_label: "Registration number"
+    registration_date_label: "Registration date"
+    certification_heading: "Certifications"
+    tax_status_heading: "Tax status"
+    has_12a: "12A registered"
+    no_12a: "12A status still under verification"
+    has_80g: "80G registered"
+    no_80g: "80G status still under verification"
+    documents_heading: "Annual reports and documents"
+    documents_pending: "Documents will be made available here soon."
+    committee_link: "View the office bearers list"

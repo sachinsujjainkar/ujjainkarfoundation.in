@@ -1,1 +1,57 @@
-<%= render "shared/placeholder_page", title_key: "navigation.contact" %>
+<% content_for :title, t("navigation.contact") %>
+<%= render "components/page_header", title: t("navigation.contact"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.contact"), request.path]] %>
+
+<% address_lines = [
+     site_setting.address_line1, site_setting.address_line2, site_setting.city,
+     [ site_setting.district, site_setting.state, site_setting.pincode ].compact_blank.join(", ")
+   ].select(&:present?) %>
+
+<div class="container mx-auto grid grid-cols-1 gap-16 px-5 py-16 lg:grid-cols-2">
+  <section class="flex flex-col gap-6">
+    <h2 class="text-h2 font-display"><%= t("contact.heading") %></h2>
+
+    <% if address_lines.any? %>
+      <address class="not-italic text-body text-ink"><%= safe_join(address_lines, tag.br) %></address>
+    <% end %>
+
+    <% if site_setting.phone_primary.present? %>
+      <%= link_to site_setting.phone_primary, "tel:#{site_setting.phone_primary}", class: "text-body text-brand-700 hover:text-brand-500" %>
+    <% end %>
+
+    <% if site_setting.email_public.present? %>
+      <%= link_to site_setting.email_public, "mailto:#{site_setting.email_public}", class: "text-body text-brand-700 hover:text-brand-500" %>
+    <% end %>
+
+    <div>
+      <p class="text-small font-semibold text-ink"><%= t("contact.hours_label") %></p>
+      <p class="text-small text-ink-muted"><%= t("contact.hours_pending") %></p>
+    </div>
+
+    <% if site_setting.map_embed_url.present? %>
+      <div class="aspect-video w-full overflow-hidden rounded-card border border-line">
+        <iframe src="<%= site_setting.map_embed_url %>" class="h-full w-full" loading="lazy" title="<%= t('contact.heading') %>"></iframe>
+      </div>
+    <% end %>
+  </section>
+
+  <section>
+    <h2 class="mb-6 text-h2 font-display"><%= t("contact.form_heading") %></h2>
+
+    <% if @submitted %>
+      <%= render "components/flash", type: :success, message: t("contact.success") %>
+    <% else %>
+      <%= form_with model: @contact_message, url: nav_path(:contact), method: :post, class: "flex flex-col gap-6" do %>
+        <%= render "components/form_field", name: "contact_message[name]", label: t("contact.name_label"),
+              value: @contact_message.name, error: @contact_message.errors[:name].first %>
+        <%= render "components/form_field", name: "contact_message[email]", label: t("contact.email_label"), type: "email",
+              value: @contact_message.email, error: @contact_message.errors[:email].first %>
+        <%= render "components/form_field", name: "contact_message[subject]", label: t("contact.subject_label"),
+              value: @contact_message.subject %>
+        <%= render "components/textarea", name: "contact_message[message]", label: t("contact.message_label"),
+              value: @contact_message.message, error: @contact_message.errors[:message].first %>
+        <%= render "components/button", label: t("forms.submit"), variant: :primary, type: "submit" %>
+      <% end %>
+    <% end %>
+  </section>
+</div>

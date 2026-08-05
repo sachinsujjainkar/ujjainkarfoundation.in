@@ -1,1 +1,29 @@
-<%= render "shared/placeholder_page", title_key: "navigation.privacy" %>
+<% content_for :title, t("navigation.privacy") %>
+<%= render "components/page_header", title: t("navigation.privacy"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.privacy"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-8 px-5 py-16">
+  <p class="measure text-body-lg text-ink"><%= t("legal.privacy_intro") %></p>
+
+  <section class="measure flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("legal.privacy_collect_heading") %></h2>
+    <p class="text-body text-ink"><%= t("legal.privacy_collect_body") %></p>
+  </section>
+
+  <section class="measure flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("legal.privacy_use_heading") %></h2>
+    <p class="text-body text-ink"><%= t("legal.privacy_use_body") %></p>
+  </section>
+
+  <section class="measure flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("legal.privacy_contact_heading") %></h2>
+    <p class="text-body text-ink">
+      <%= t("legal.privacy_contact_body") %>
+      <% if site_setting.email_public.present? %>
+        <%= link_to site_setting.email_public, "mailto:#{site_setting.email_public}", class: "text-brand-700 hover:text-brand-500" %>
+      <% else %>
+        <%= link_to t("navigation.contact"), nav_path(:contact), class: "text-brand-700 hover:text-brand-500" %>
+      <% end %>
+    </p>
+  </section>
+</div>

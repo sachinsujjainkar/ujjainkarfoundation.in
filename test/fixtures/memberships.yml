@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# role_title is Mobility-translated (membership_translations table), not a
+# plain column -- no fixture value for it here.
+
+one:
+  committee: one
+  person: one
+  position_order: 1
+
+two:
+  committee: two
+  person: two
+  position_order: 1

@@ -1,0 +1,31 @@
+en:
+  errors:
+    messages:
+      blank: "can't be blank"
+  activerecord:
+    errors:
+      models:
+        person:
+          attributes:
+            name_mr:
+              blank: "Please enter the person's name."
+        volunteer:
+          attributes:
+            name:
+              blank: "Please enter your name."
+            phone:
+              blank: "Please enter your mobile number."
+              invalid: "Please enter a valid 10-digit mobile number."
+            email:
+              invalid: "Please enter a valid email address."
+            status:
+              inclusion: "Please choose a valid status."
+        contact_message:
+          attributes:
+            name:
+              blank: "Please enter your name."
+            email:
+              blank: "Please enter your email address."
+              invalid: "Please enter a valid email address."
+            message:
+              blank: "Please enter your message."

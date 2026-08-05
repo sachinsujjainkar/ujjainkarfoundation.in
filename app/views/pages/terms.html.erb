@@ -1,1 +1,22 @@
-<%= render "shared/placeholder_page", title_key: "navigation.terms" %>
+<% content_for :title, t("navigation.terms") %>
+<%= render "components/page_header", title: t("navigation.terms"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.terms"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-8 px-5 py-16">
+  <p class="measure text-body-lg text-ink"><%= t("legal.terms_intro") %></p>
+
+  <section class="measure flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("legal.terms_use_heading") %></h2>
+    <p class="text-body text-ink"><%= t("legal.terms_use_body") %></p>
+  </section>
+
+  <section class="measure flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("legal.terms_content_heading") %></h2>
+    <p class="text-body text-ink"><%= t("legal.terms_content_body") %></p>
+  </section>
+
+  <section class="measure flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("legal.terms_changes_heading") %></h2>
+    <p class="text-body text-ink"><%= t("legal.terms_changes_body") %></p>
+  </section>
+</div>

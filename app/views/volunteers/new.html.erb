@@ -1,1 +1,33 @@
-<%= render "shared/placeholder_page", title_key: "navigation.volunteer" %>
+<% content_for :title, t("navigation.volunteer") %>
+<%= render "components/page_header", title: t("navigation.volunteer"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.volunteer"), request.path]] %>
+
+<div class="container mx-auto px-5 py-16">
+  <div class="mx-auto max-w-2xl">
+    <h2 class="text-h2 font-display"><%= t("volunteer.heading") %></h2>
+    <p class="mt-2 measure text-body-lg text-ink-muted"><%= t("volunteer.intro") %></p>
+
+    <% if @submitted %>
+      <div class="mt-8">
+        <%= render "components/flash", type: :success, message: t("volunteer.success") %>
+      </div>
+    <% else %>
+      <%= form_with model: @volunteer, url: nav_path(:volunteer), method: :post, class: "mt-8 flex flex-col gap-6" do %>
+        <%= render "components/form_field", name: "volunteer[name]", label: t("volunteer.name_label"),
+              value: @volunteer.name, error: @volunteer.errors[:name].first %>
+        <%= render "components/form_field", name: "volunteer[phone]", label: t("volunteer.phone_label"), type: "tel",
+              value: @volunteer.phone, error: @volunteer.errors[:phone].first %>
+        <%= render "components/form_field", name: "volunteer[email]", label: t("volunteer.email_label"), type: "email",
+              value: @volunteer.email, error: @volunteer.errors[:email].first %>
+        <%= render "components/form_field", name: "volunteer[taluka]", label: t("volunteer.taluka_label"),
+              value: @volunteer.taluka %>
+        <%= render "components/select", name: "volunteer[interest_area]", label: t("volunteer.interest_area_label"),
+              options: %i[sahitya_sammelan puraskar vidyarthi_satkar vyakhyanmala prakashan arogya_va_samajik_upakram]
+                .map { |key| [ t("activities.#{key}"), key ] } %>
+        <%= render "components/textarea", name: "volunteer[message]", label: t("volunteer.message_label"),
+              value: @volunteer.message %>
+        <%= render "components/button", label: t("forms.submit"), variant: :primary, type: "submit" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

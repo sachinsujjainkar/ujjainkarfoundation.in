@@ -1,0 +1,12 @@
+# देणगी page. Bank/UPI details come from SiteSetting -- all currently
+# unconfirmed (nil), so the page shows a pending state rather than
+# invented account details. 80G copy is gated behind SiteSetting#has_80g.
+mr:
+  donate:
+    heading: "देणगी द्या"
+    intro: "आपल्या देणगीतून आमचे साहित्य, सन्मान आणि सामाजिक कार्य पुढे नेण्यास मदत होते."
+    bank_heading: "बँक तपशील"
+    bank_pending: "बँक व UPI तपशील लवकरच येथे उपलब्ध केले जातील."
+    tax_heading: "करसवलत"
+    tax_80g_available: "८०G अंतर्गत देणगीवर करसवलत उपलब्ध आहे."
+    tax_80g_pending: "८०G प्रमाणपत्राची पडताळणी सुरू आहे."

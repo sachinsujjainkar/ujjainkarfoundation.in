@@ -1,0 +1,19 @@
+# पारदर्शकता page. registration_number/type/date and iso_certification come
+# from SiteSetting, seeded with the confirmed facts -- the ११५४२/८-१-२०१०
+# seal numbers are a SEPARATE certificate, not used here as the
+# registration date (prompts/phase-05-static-pages.md).
+mr:
+  transparency:
+    registration_heading: "नोंदणी माहिती"
+    registration_type_label: "नोंदणी प्रकार"
+    registration_number_label: "नोंदणी क्रमांक"
+    registration_date_label: "नोंदणी दिनांक"
+    certification_heading: "प्रमाणपत्रे"
+    tax_status_heading: "करविषयक दर्जा"
+    has_12a: "१२A नोंदणीकृत"
+    no_12a: "१२A स्थिती अद्याप पडताळणी अंतर्गत"
+    has_80g: "८०G नोंदणीकृत"
+    no_80g: "८०G स्थिती अद्याप पडताळणी अंतर्गत"
+    documents_heading: "वार्षिक अहवाल व कागदपत्रे"
+    documents_pending: "कागदपत्रे लवकरच येथे उपलब्ध केली जातील."
+    committee_link: "पदाधिकाऱ्यांची यादी पाहा"

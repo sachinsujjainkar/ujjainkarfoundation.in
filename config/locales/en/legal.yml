@@ -1,0 +1,18 @@
+en:
+  legal:
+    privacy_heading: "Privacy Policy"
+    privacy_intro: "This website is run by Shivcharan Ujjainkar Foundation. We take the privacy of your information seriously."
+    privacy_collect_heading: "What we collect"
+    privacy_collect_body: "When you fill in the contact form or volunteer registration form, we store the information you provide (name, mobile number, email, taluka, message). A cookie is used to remember your language preference on the site."
+    privacy_use_heading: "How we use it"
+    privacy_use_body: "Information collected is used only to contact you and respond to your inquiry or registration. It is never sold or rented to any third party."
+    privacy_contact_heading: "Contact"
+    privacy_contact_body: "If you have questions about this policy, please get in touch with us."
+    terms_heading: "Terms and Conditions"
+    terms_intro: "Please read the following terms and conditions before using this website."
+    terms_use_heading: "Use of the site"
+    terms_use_body: "Content on this website is for informational purposes only. We try to keep it accurate, but errors are possible."
+    terms_content_heading: "Content ownership"
+    terms_content_body: "Content, photographs, and the logo on this website belong to Shivcharan Ujjainkar Foundation unless stated otherwise."
+    terms_changes_heading: "Changes"
+    terms_changes_body: "These terms may be updated from time to time. This date will be updated if there are significant changes."

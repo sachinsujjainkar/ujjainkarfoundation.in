@@ -10,10 +10,82 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_05_141010) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_05_155212) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
+
+  create_table "committee_translations", force: :cascade do |t|
+    t.bigint "committee_id", null: false
+    t.datetime "created_at", null: false
+    t.string "locale", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+    t.index ["committee_id", "locale"], name: "index_committee_translations_on_committee_id_and_locale", unique: true
+    t.index ["locale"], name: "index_committee_translations_on_locale"
+  end
+
+  create_table "committees", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "contact_messages", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email", null: false
+    t.text "message", null: false
+    t.string "name", null: false
+    t.boolean "read", default: false, null: false
+    t.string "subject"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "membership_translations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "locale", null: false
+    t.bigint "membership_id", null: false
+    t.string "role_title"
+    t.datetime "updated_at", null: false
+    t.index ["locale"], name: "index_membership_translations_on_locale"
+    t.index ["membership_id", "locale"], name: "index_membership_translations_on_membership_id_and_locale", unique: true
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "committee_id", null: false
+    t.datetime "created_at", null: false
+    t.bigint "person_id", null: false
+    t.integer "position_order", default: 0, null: false
+    t.datetime "updated_at", null: false
+    t.index ["committee_id"], name: "index_memberships_on_committee_id"
+    t.index ["person_id"], name: "index_memberships_on_person_id"
+  end
+
+  create_table "people", force: :cascade do |t|
+    t.string "city"
+    t.boolean "committee_member", default: false, null: false
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "phone"
+    t.integer "position_order", default: 0, null: false
+    t.string "slug", null: false
+    t.date "term_end"
+    t.date "term_start"
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_people_on_slug", unique: true
+  end
+
+  create_table "person_translations", force: :cascade do |t|
+    t.text "bio"
+    t.datetime "created_at", null: false
+    t.string "honorific"
+    t.string "locale", null: false
+    t.string "name"
+    t.bigint "person_id", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale"], name: "index_person_translations_on_locale"
+    t.index ["person_id", "locale"], name: "index_person_translations_on_person_id_and_locale", unique: true
+  end
 
   create_table "site_settings", force: :cascade do |t|
     t.string "address_line1"
@@ -50,4 +122,22 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_05_141010) do
     t.datetime "updated_at", null: false
     t.string "youtube_url"
   end
+
+  create_table "volunteers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "interest_area"
+    t.text "message"
+    t.string "name", null: false
+    t.string "phone", null: false
+    t.string "status", default: "new", null: false
+    t.string "taluka"
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "committee_translations", "committees"
+  add_foreign_key "membership_translations", "memberships"
+  add_foreign_key "memberships", "committees"
+  add_foreign_key "memberships", "people"
+  add_foreign_key "person_translations", "people"
 end

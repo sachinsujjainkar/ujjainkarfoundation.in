@@ -1,0 +1,11 @@
+mr:
+  contact:
+    heading: "आमच्याशी संपर्क साधा"
+    hours_label: "कार्यालयीन वेळ"
+    hours_pending: "लवकरच जाहीर केली जाईल"
+    form_heading: "चौकशी पाठवा"
+    name_label: "नाव"
+    email_label: "ईमेल"
+    subject_label: "विषय"
+    message_label: "संदेश"
+    success: "आपला संदेश यशस्वीरित्या पाठवला गेला. आम्ही लवकरच आपल्याशी संपर्क साधू."

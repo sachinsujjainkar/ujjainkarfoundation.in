@@ -1,1 +1,28 @@
-<%= render "shared/placeholder_page", title_key: "navigation.donate" %>
+<% content_for :title, t("navigation.donate") %>
+<%= render "components/page_header", title: t("navigation.donate"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.donate"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-12 px-5 py-16">
+  <p class="measure text-body-lg text-ink"><%= t("donate.intro") %></p>
+
+  <section class="card flex flex-col gap-3">
+    <h2 class="text-h3 font-display"><%= t("donate.bank_heading") %></h2>
+    <% if site_setting.donation_bank_details.present? || site_setting.donation_upi_id.present? %>
+      <% if site_setting.donation_bank_details.present? %>
+        <p class="whitespace-pre-line text-body text-ink"><%= site_setting.donation_bank_details %></p>
+      <% end %>
+      <% if site_setting.donation_upi_id.present? %>
+        <p class="text-body text-ink"><%= site_setting.donation_upi_id %></p>
+      <% end %>
+    <% else %>
+      <p class="text-body text-ink-muted"><%= t("donate.bank_pending") %></p>
+    <% end %>
+  </section>
+
+  <section class="card flex flex-col gap-3">
+    <h2 class="text-h3 font-display"><%= t("donate.tax_heading") %></h2>
+    <p class="text-body text-ink">
+      <%= site_setting.has_80g? ? t("donate.tax_80g_available") : t("donate.tax_80g_pending") %>
+    </p>
+  </section>
+</div>

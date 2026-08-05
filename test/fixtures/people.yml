@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# name/honorific/bio are Mobility-translated (person_translations table),
+# not plain columns -- no fixture value for them here.
+
+one:
+  slug: person-one
+  committee_member: true
+  position_order: 1
+  phone: "9000000001"
+  email: one@example.com
+
+two:
+  slug: person-two
+  committee_member: false
+  position_order: 2
+  phone: "9000000002"
+  email: two@example.com

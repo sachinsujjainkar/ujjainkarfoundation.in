@@ -10,6 +10,10 @@
 module LocalizedPages
   SEGMENTS = {
     about:        { mr: "aamchyavishayi", en: "about" },
+    # docs/04-routes.md originally nests this under /aamchyavishayi/padadhikari;
+    # kept flat here instead, consistent with every other page in this table
+    # (and renamed from पदाधिकारी to कार्यकारणी -- prompts/phase-05-static-pages.md).
+    committee:    { mr: "karyakarani",    en: "committee" },
     activities:   { mr: "karyakshetre",   en: "activities" },
     articles:     { mr: "batmya",         en: "news" },
     events:       { mr: "karyakram",      en: "events" },
@@ -24,6 +28,7 @@ module LocalizedPages
 
   TARGETS = {
     about: "pages#about",
+    committee: "pages#committee",
     activities: "activities#index",
     articles: "articles#index",
     events: "events#index",

@@ -1,1 +1,45 @@
-<%= render "shared/placeholder_page", title_key: "navigation.transparency" %>
+<% content_for :title, t("navigation.transparency") %>
+<%= render "components/page_header", title: t("navigation.transparency"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.transparency"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-12 px-5 py-16">
+  <section class="card flex flex-col gap-4">
+    <h2 class="text-h3 font-display"><%= t("transparency.registration_heading") %></h2>
+    <dl class="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div>
+        <dt class="text-small text-ink-muted"><%= t("transparency.registration_type_label") %></dt>
+        <dd class="text-body text-ink"><%= site_setting.registration_type.presence || "—" %></dd>
+      </div>
+      <div>
+        <dt class="text-small text-ink-muted"><%= t("transparency.registration_number_label") %></dt>
+        <dd class="text-body text-ink"><%= site_setting.registration_number.presence || "—" %></dd>
+      </div>
+      <div>
+        <dt class="text-small text-ink-muted"><%= t("transparency.registration_date_label") %></dt>
+        <dd class="text-body text-ink">
+          <%= site_setting.registration_date ? localized_date(site_setting.registration_date) : "—" %>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <% if site_setting.iso_certification.present? %>
+    <section class="card flex flex-col gap-2">
+      <h2 class="text-h3 font-display"><%= t("transparency.certification_heading") %></h2>
+      <p class="text-body text-ink"><%= site_setting.iso_certification %></p>
+    </section>
+  <% end %>
+
+  <section class="card flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("transparency.tax_status_heading") %></h2>
+    <p class="text-body text-ink"><%= site_setting.has_12a? ? t("transparency.has_12a") : t("transparency.no_12a") %></p>
+    <p class="text-body text-ink"><%= site_setting.has_80g? ? t("transparency.has_80g") : t("transparency.no_80g") %></p>
+  </section>
+
+  <section class="flex flex-col gap-2">
+    <h2 class="text-h3 font-display"><%= t("transparency.documents_heading") %></h2>
+    <p class="text-body text-ink-muted"><%= t("transparency.documents_pending") %></p>
+  </section>
+
+  <%= link_to t("transparency.committee_link"), nav_path(:committee), class: "text-body font-semibold text-brand-700 hover:text-brand-500 w-fit" %>
+</div>

@@ -1,0 +1,11 @@
+en:
+  volunteer:
+    heading: "Volunteer registration"
+    intro: "Fill in the form below to volunteer with us."
+    name_label: "Name"
+    phone_label: "Mobile number"
+    email_label: "Email (optional)"
+    taluka_label: "Taluka"
+    interest_area_label: "Area of interest"
+    message_label: "Message (optional)"
+    success: "Your volunteer registration was successful. Our team will get in touch with you soon."
