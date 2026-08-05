@@ -15,11 +15,14 @@ Person record fields this maps to:
     full About-page biography)
 
 Source: supplied directly by Sachin, 2026-08-05 (derived from an original
-upload referenced as `About_Founder`). Treated as authoritative -- specific
-figures below (award count, COVID-warrior count, lecture series length) are
-as given, not independently verified, per "nothing invented ships": these
-are the foundation's own claims about itself, not something I should
-second-guess, but also not something to embellish further.
+upload referenced as `About_Founder`; revised same day to replace the
+Recognition section's generic "37+ awards" summary with the specific named
+awards/institutions below -- current version reflects the revision).
+Treated as authoritative -- specific figures below (COVID-warrior count,
+lecture series length, institution count) are as given, not independently
+verified, per "nothing invented ships": these are the foundation's own
+claims about itself, not something I should second-guess, but also not
+something to embellish further.
 
 Correction made off the back of this: prompts/phase-05-static-pages.md's
 lineage note said "महर्षी वाल्मिकी मंडळ → कवी राम कदम फाउंडेशन (2009) →
@@ -84,7 +87,7 @@ For the आमच्याविषयी / About page.
 
 ### सन्मान आणि पुरस्कार
 
-डॉ. शिवचरण उज्जैनकर यांच्या आजीवन कार्याची दखल घेत त्यांना ३७हून अधिक राज्य, राष्ट्रीय व आंतरराष्ट्रीय पुरस्कारांनी सन्मानित करण्यात आले आहे — यामध्ये दोन आंतरराष्ट्रीय मानद डॉक्टरेट, द ग्रेट इंडियन बुक ऑफ रेकॉर्ड्सची नोंद, भारतीय समाजरत्न, महाराष्ट्र समाजरत्न, राष्ट्रीय समाजरत्न, अनेक आदर्श शिक्षक पुरस्कार, नेशन बिल्डर पुरस्कार, समाजभूषण पुरस्कार आणि साहित्य क्षेत्रातील विविध सन्मानांचा समावेश आहे.
+डॉ. शिवचरण उज्जैनकर यांच्या आजीवन कार्याची दखल घेत त्यांना राज्य, राष्ट्रीय व आंतरराष्ट्रीय पातळीवर अनेक सन्मान लाभले आहेत — ग्लोबल स्कॉलर्स फाउंडेशन, पुणे यांच्यातर्फे पद्मश्री नीलमताई मिश्रा यांच्या हस्ते भारतीय समाजरत्न पुरस्कार, त्याच संस्थेतर्फे पद्मश्री पोपटराव पवार यांच्या हस्ते जळगाव जिल्हा भूषण पुरस्कार, साऊथ वेस्टर्न युनिव्हर्सिटी (अमेरिका) कडून मानद डॉक्टरेट, आणि कॉमनवेल्थ युनिव्हर्सिटी, दक्षिण आफ्रिका-टोंगा यांच्याकडून मानद डी.लिट. याशिवाय महाराष्ट्रातील ४१ नामवंत संस्थांनी आदर्श शिक्षक, आदर्श समाजसेवक, समाजगौरव, अंकुररत्न अशा विविध पुरस्कारांनी त्यांना गौरवले आहे.
 
 ### कुटुंब
 
@@ -132,7 +135,7 @@ His most distinctive achievement from that period was a Facebook Live lecture se
 
 ### Recognition
 
-Dr. Ujjainkar's work has been recognised with 37-plus state, national, and international awards, including two international honorary doctorates, recognition from The Great Indian Book of Records, the Bharatiya Samaj Ratna, Maharashtra Samaj Ratna, and National Samaj Ratna awards, several Best Teacher honours, the Nation Builder Award, the Samaj Bhushan Award, and multiple honours in literature.
+Dr. Ujjainkar's work has been recognised at state, national, and international level — the Bharatiya Samaj Ratna Award from the Global Scholars Foundation, Pune, presented by Padma Shri Neelamtai Mishra; the Jalgaon Jilla Bhushan Award, presented by Padma Shri Popatrao Pawar; an honorary doctorate from South Western University, USA; and an honorary D.Litt. from Commonwealth University, South Africa-Tonga. He has also been honoured by 41 institutions across Maharashtra with awards for teaching, social service, and community contribution.
 
 ### Family
 
@@ -149,6 +152,6 @@ Through the Shivcharan Ujjainkar Foundation, Dr. Ujjainkar continues to work tow
 - The Marathi and English versions are independent tellings, not translations of each other — per the site's editorial policy, this is expected and correct for a static About page (unlike newsroom articles, which require Marathi and treat English as optional).
 - Homepage teaser sections are sized for the founder card in Phase 04; full biography sections are sized for the आमच्याविषयी page in Phase 05.
 - The "1,428 COVID Warriors" and "155 speakers, 5 months 20 days" figures are strong, specific, verifiable-sounding numbers — good candidates for Article seed content (Phase 09, `initiative`/`award` types) rather than just About-page prose.
-- Award count ("37+") is stated as given in the source; a full itemized list (if it exists) would strengthen the Transparency page and could seed individual `award`-type articles, but isn't required for the About page itself. Add `docs/content/founder/awards.md` if/when that list arrives.
+- The "41 institutions" figure matches `docs/content/events.md`'s Numbers reference table exactly ("मान्यवर संस्थांकडून सन्मान: ४१ संस्था") -- good cross-confirmation. A full itemized list of which institutions/awards, if it exists, would strengthen the Transparency page and could seed individual `award`-type articles (see `docs/content/events.md` #14 for one already-named example: आपला जिल्हा आपले उपक्रम). Add `docs/content/founder/awards.md` if/when that list arrives.
 - Still needed per `docs/05-content-checklist.md`: founder **photo**.
 - No claim of tax-exempt status (80G) appears here, consistent with `SiteSetting.has_80g` still being unconfirmed.
