@@ -1,0 +1,16 @@
+# Homepage-specific copy. Hero/CTA-band copy is placeholder-length example
+# text for judging the design (docs/prompts/phase-04-home-page.md says to
+# judge against real-length Marathi, not lorem ipsum) — not final marketing
+# copy, and not a factual claim. Replace when the foundation supplies real copy.
+mr:
+  home:
+    hero_headline: "साहित्य, सन्मान आणि सामाजिक कार्यातून समाजाची सेवा"
+    hero_supporting: "साहित्य संमेलने, पुरस्कार, विद्यार्थी सत्कार आणि सामाजिक उपक्रमांद्वारे शिवचरण उज्जैनकर फाउंडेशन कार्यरत आहे."
+    impact_heading: "आमचा परिणाम"
+    news_heading: "ताज्या बातम्या"
+    events_heading: "येणारे कार्यक्रम"
+    sammelan_heading: "आगामी संमेलन"
+    sammelan_body: "पुढील साहित्य संमेलनाचा तपशील लवकरच जाहीर होईल."
+    sammelan_pending: "तारीख व स्थळ लवकरच"
+    cta_heading: "आमच्या कार्यात सहभागी व्हा"
+    cta_body: "देणगी देऊन किंवा स्वयंसेवक म्हणून सहभागी होऊन आमच्या उपक्रमांना पाठिंबा द्या."

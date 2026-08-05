@@ -24,7 +24,20 @@ site_setting.update!(
   city: "मुक्ताईनगर",
   district: "जळगाव",
   state: "महाराष्ट्र",
-  pincode: "425306"
+  pincode: "425306",
+  # Labels only, not values -- prompts/phase-04-home-page.md names these
+  # three as CANDIDATES pending the real record in docs/content/, which
+  # doesn't exist in this repo yet. The label text ("what this stat
+  # measures") isn't a factual claim the way a specific number is, so it's
+  # safe to seed; stat_*_value stays nil until a real count is confirmed.
+  # The homepage renders an em dash in place of a blank value rather than
+  # inventing one -- see app/views/home/index.html.erb.
+  stat_1_label_mr: "पुरस्कारप्राप्त मान्यवर",
+  stat_1_label_en: "Awarded dignitaries",
+  stat_2_label_mr: "गुणवंत विद्यार्थी सत्कार",
+  stat_2_label_en: "Meritorious students honoured",
+  stat_3_label_mr: "२०१० पासूनची साहित्य संमेलने",
+  stat_3_label_en: "Literary conventions since 2010"
   # Everything else (phones, email, social, map, donation details, 12A/80G,
-  # stats) is still unconfirmed -- left as the column default (nil/false).
+  # stat values) is still unconfirmed -- left as the column default (nil/false).
 )

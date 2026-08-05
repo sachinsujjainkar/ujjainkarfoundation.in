@@ -31,11 +31,15 @@ class ErrorsControllerTest < ActionDispatch::IntegrationTest
   # styled 404, not a static file or the debug page.
 
   test "site_setting falls back gracefully if SiteSetting is unavailable" do
+    original_instance_method = SiteSetting.method(:instance)
     SiteSetting.define_singleton_method(:instance) { raise ActiveRecord::StatementInvalid, "connection lost" }
 
     get "/404"
     assert_response :not_found
   ensure
-    SiteSetting.singleton_class.send(:remove_method, :instance)
+    # Restore, don't remove -- test.rb doesn't reload classes between tests
+    # (config.enable_reloading = false), so a bare remove_method would
+    # permanently delete SiteSetting.instance for the rest of the run.
+    SiteSetting.define_singleton_method(:instance, original_instance_method)
   end
 end

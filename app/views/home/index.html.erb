@@ -1,1 +1,134 @@
-<p>शिवचरण उज्जैनकर फाउंडेशन — Phase 00 floor.</p>
+<%# Homepage — Phase 04. Placeholder content throughout (grey image blocks,
+    example headlines, blank stat values) until real photos/records exist.
+    See docs/prompts/phase-04-home-page.md. %>
+
+<%# ============================================================ Hero %>
+<section class="relative flex min-h-[560px] items-end overflow-hidden bg-brand-100 sm:min-h-[640px]">
+  <div class="absolute inset-0 flex items-center justify-center text-small text-ink-muted">
+    1920×800
+  </div>
+  <%# Solid scrim, not a gradient -- docs/02-design-system.md, "No gradients. Anywhere." %>
+  <div class="absolute inset-0 bg-brand-900/60"></div>
+  <div class="container relative mx-auto flex flex-col items-start gap-6 px-5 py-16">
+    <h1 class="text-display font-display text-paper measure"><%= t("home.hero_headline") %></h1>
+    <p class="text-body-lg text-brand-100 measure"><%= t("home.hero_supporting") %></p>
+    <div class="flex flex-wrap gap-4">
+      <%= render "components/button", label: t("common.donate_cta"), variant: :cta, href: nav_path(:donate) %>
+      <%= render "components/button", label: t("common.volunteer_cta"), variant: :secondary, href: nav_path(:volunteer) %>
+    </div>
+  </div>
+</section>
+
+<%# ============================================================ आमचा परिणाम %>
+<section class="border-b border-line py-16 sm:py-24">
+  <div class="container mx-auto px-5">
+    <h2 class="mb-12 text-h2 font-display"><%= t("home.impact_heading") %></h2>
+    <%
+      stats = if I18n.locale == :mr
+        [[site_setting.stat_1_value, site_setting.stat_1_label_mr],
+         [site_setting.stat_2_value, site_setting.stat_2_label_mr],
+         [site_setting.stat_3_value, site_setting.stat_3_label_mr]]
+      else
+        [[site_setting.stat_1_value, site_setting.stat_1_label_en],
+         [site_setting.stat_2_value, site_setting.stat_2_label_en],
+         [site_setting.stat_3_value, site_setting.stat_3_label_en]]
+      end
+    %>
+    <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
+      <% stats.each do |value, label| %>
+        <%= render "components/stat", value: value.presence || "—", label: label %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# ============================================================ कार्यक्षेत्रे %>
+<section class="border-b border-line bg-paper py-16 sm:py-24">
+  <div class="container mx-auto px-5">
+    <div class="mb-12 flex items-end justify-between gap-4">
+      <h2 class="text-h2 font-display"><%= t("navigation.activities") %></h2>
+      <%= link_to t("common.view_all"), nav_path(:activities), class: "text-body font-semibold text-brand-700 hover:text-brand-500" %>
+    </div>
+    <div class="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+      <% @activities.each do |activity| %>
+        <%
+          # Monochrome, one weight, brand-700 -- not accent-600. The donate
+          # CTA above is this page's one accent use; docs/02-design-system.md
+          # is explicit that accent doesn't also go on a set of icons.
+        %>
+        <%= link_to nav_path(:activities), class: "card flex flex-col items-center gap-3 p-6 text-center hover:border-brand-700" do %>
+          <span class="text-brand-700">
+            <%= render "home/activity_icon", icon: activity.icon %>
+          </span>
+          <span class="text-body font-semibold text-ink"><%= t("activities.#{activity.slug}") %></span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+<%# ============================================================ ताज्या बातम्या / येणारे कार्यक्रम %>
+<section class="border-b border-line py-16 sm:py-24">
+  <div class="container mx-auto grid grid-cols-1 gap-12 px-5 lg:grid-cols-3">
+    <div class="lg:col-span-2">
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <h2 class="text-h2 font-display"><%= t("home.news_heading") %></h2>
+        <%= link_to t("common.view_all"), nav_path(:articles), class: "text-body font-semibold text-brand-700 hover:text-brand-500" %>
+      </div>
+
+      <% lead, *rest = @news_items %>
+      <div class="flex flex-col gap-8">
+        <%= render "components/card_article", tag_label: lead.tag, headline: lead.headline,
+              href: nav_path(:articles), dateline: lead.dateline, excerpt: lead.excerpt %>
+        <div class="flex flex-col gap-6 border-t border-line pt-6">
+          <% rest.each do |item| %>
+            <article class="flex flex-col gap-1">
+              <span class="tag w-fit"><%= item.tag %></span>
+              <h3 class="text-h3 font-display">
+                <%= link_to item.headline, nav_path(:articles), class: "text-ink hover:text-brand-700" %>
+              </h3>
+              <p class="text-small text-ink-muted"><%= item.dateline %></p>
+            </article>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="mb-8 flex items-end justify-between gap-4">
+        <h2 class="text-h2 font-display"><%= t("home.events_heading") %></h2>
+        <%= link_to t("common.view_all"), nav_path(:events), class: "text-body font-semibold text-brand-700 hover:text-brand-500" %>
+      </div>
+      <div class="flex flex-col gap-4">
+        <% @events.each do |event| %>
+          <%= render "components/card_event", day: event.day, month: event.month,
+                title: event.title, venue: event.venue, href: nav_path(:events), status: event.status %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# ============================================================ आगामी संमेलन %>
+<section class="border-b border-line bg-brand-100 py-16 sm:py-24">
+  <div class="container mx-auto px-5">
+    <div class="card mx-auto flex max-w-2xl flex-col items-center gap-4 p-12 text-center">
+      <span class="tag"><%= t("activities.sahitya_sammelan") %></span>
+      <h2 class="text-h2 font-display"><%= t("home.sammelan_heading") %></h2>
+      <p class="measure text-body-lg text-ink-muted"><%= t("home.sammelan_body") %></p>
+      <p class="text-small font-semibold text-ink-muted"><%= t("home.sammelan_pending") %></p>
+    </div>
+  </div>
+</section>
+
+<%# ============================================================ CTA band %>
+<section class="bg-brand-800 py-16 text-paper sm:py-24">
+  <div class="container mx-auto flex flex-col items-center gap-6 px-5 text-center">
+    <h2 class="text-h2 font-display"><%= t("home.cta_heading") %></h2>
+    <p class="measure text-body-lg text-brand-100"><%= t("home.cta_body") %></p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <%= render "components/button", label: t("common.donate_cta"), variant: :cta, href: nav_path(:donate) %>
+      <%= render "components/button", label: t("common.volunteer_cta"), variant: :secondary, href: nav_path(:volunteer) %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,12 @@
+# The six confirmed कार्यक्षेत्रे — see prompts/phase-08-activities.md for
+# the slug mapping. The real Activity model and its own translated content
+# arrive in Phase 08; this is just the fixed category names, used by the
+# homepage's कार्यक्षेत्रे section until then.
+mr:
+  activities:
+    sahitya_sammelan: "साहित्य संमेलन"
+    puraskar: "पुरस्कार"
+    vidyarthi_satkar: "विद्यार्थी सत्कार"
+    vyakhyanmala: "व्याख्यानमाला"
+    prakashan: "प्रकाशन"
+    arogya_va_samajik_upakram: "आरोग्य व सामाजिक उपक्रम"
