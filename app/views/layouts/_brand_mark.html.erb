@@ -1,0 +1,24 @@
+<%#
+  Locals: href (optional) -- wraps in a link to that URL if given, otherwise
+  renders as a plain label.
+
+  The badge is a circle-cropped export of the full circular emblem, small
+  enough that the ring text isn't meant to be legible -- it reads as a
+  seal/trust mark rather than something to read letter by letter. See
+  app/assets/images/logo-mark.png and prompts/phase-03-layout-shell.md: the
+  full emblem doesn't survive at nav size, and a simplified horizontal
+  lockup doesn't exist yet, so this is the interim mark until one does.
+  alt="" because the wordmark right next to it already states the org name
+  as visible text -- an alt text here would just repeat it for screen readers.
+%>
+<% content = capture do %>
+  <%= image_tag "logo-mark.png", alt: "", width: 40, height: 40, class: "size-10 shrink-0 rounded-full" %>
+  <span class="font-display text-h3 text-brand-700"><%= brand_wordmark %></span>
+<% end %>
+<% if local_assigns[:href].present? %>
+  <%= link_to href, class: "flex items-center gap-3" do %>
+    <%= content %>
+  <% end %>
+<% else %>
+  <div class="flex items-center gap-3"><%= content %></div>
+<% end %>
