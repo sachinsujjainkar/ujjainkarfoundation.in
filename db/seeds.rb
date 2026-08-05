@@ -25,19 +25,25 @@ site_setting.update!(
   district: "जळगाव",
   state: "महाराष्ट्र",
   pincode: "425306",
-  # Labels only, not values -- prompts/phase-04-home-page.md names these
-  # three as CANDIDATES pending the real record in docs/content/, which
-  # doesn't exist in this repo yet. The label text ("what this stat
-  # measures") isn't a factual claim the way a specific number is, so it's
-  # safe to seed; stat_*_value stays nil until a real count is confirmed.
-  # The homepage renders an em dash in place of a blank value rather than
-  # inventing one -- see app/views/home/index.html.erb.
-  stat_1_label_mr: "पुरस्कारप्राप्त मान्यवर",
-  stat_1_label_en: "Awarded dignitaries",
-  stat_2_label_mr: "गुणवंत विद्यार्थी सत्कार",
-  stat_2_label_en: "Meritorious students honoured",
-  stat_3_label_mr: "२०१० पासूनची साहित्य संमेलने",
-  stat_3_label_en: "Literary conventions since 2010"
-  # Everything else (phones, email, social, map, donation details, 12A/80G,
-  # stat values) is still unconfirmed -- left as the column default (nil/false).
+  # Confirmed against docs/content/foundation/impact-statistics.md and
+  # docs/content/events.md's numbers table (Sachin, 2026-08-05). stat_1 and
+  # stat_2 are direct source matches. stat_3 was a judgment call between two
+  # source-offered options (years of continuous service vs. free eye
+  # screenings) -- picked "years of service" because it's org-wide rather
+  # than specific to one कार्यक्षेत्र (the other two stats are both
+  # recognition/award counts, so this adds variety) and because it echoes
+  # the "25 years" figure already in home.hero_supporting rather than
+  # introducing a fourth, unrelated claim. Easy to swap -- it's a column,
+  # not code.
+  stat_1_label_mr: "गुणवंत विद्यार्थी सन्मानित",
+  stat_1_label_en: "Students Honoured",
+  stat_1_value: "१,०००+",
+  stat_2_label_mr: "साहित्यिक तापी-पूर्णा पुरस्काराने सन्मानित",
+  stat_2_label_en: "Writers Awarded (Tapi-Purna)",
+  stat_2_value: "८००+",
+  stat_3_label_mr: "वर्षांचा अखंड सामाजिक कार्याचा वारसा",
+  stat_3_label_en: "Years of Continuous Service",
+  stat_3_value: "२५+"
+  # Everything else (phones, email, social, map, donation details, 12A/80G)
+  # is still unconfirmed -- left as the column default (nil/false).
 )

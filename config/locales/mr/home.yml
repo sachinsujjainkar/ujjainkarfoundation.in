@@ -1,16 +1,16 @@
-# Homepage-specific copy. Hero/CTA-band copy is placeholder-length example
-# text for judging the design (docs/prompts/phase-04-home-page.md says to
-# judge against real-length Marathi, not lorem ipsum) — not final marketing
-# copy, and not a factual claim. Replace when the foundation supplies real copy.
+# Homepage-specific copy. Real copy from docs/content/ (Sachin, 2026-08-05)
+# as of hero/CTA/sammelan text below -- see that directory for source and
+# provenance notes. Not yet foundation-signed-off (see the source document's
+# closing note) but no longer placeholder-length example text.
 mr:
   home:
-    hero_headline: "साहित्य, सन्मान आणि सामाजिक कार्यातून समाजाची सेवा"
-    hero_supporting: "साहित्य संमेलने, पुरस्कार, विद्यार्थी सत्कार आणि सामाजिक उपक्रमांद्वारे शिवचरण उज्जैनकर फाउंडेशन कार्यरत आहे."
+    hero_headline: "साहित्य, शिक्षण आणि सेवेतून समाजाची उभारणी करूया."
+    hero_supporting: "शिवचरण उज्जैनकर फाउंडेशन मराठी साहित्य, शिक्षण आणि सामाजिक उपक्रमांच्या माध्यमातून गेल्या २५ वर्षांपासून महाराष्ट्रभर कार्यरत आहे."
     impact_heading: "आमचा परिणाम"
     news_heading: "ताज्या बातम्या"
     events_heading: "येणारे कार्यक्रम"
     sammelan_heading: "आगामी संमेलन"
-    sammelan_body: "पुढील साहित्य संमेलनाचा तपशील लवकरच जाहीर होईल."
-    sammelan_pending: "तारीख व स्थळ लवकरच"
-    cta_heading: "आमच्या कार्यात सहभागी व्हा"
+    sammelan_body: "कल्याण व त्र्यंबकेश्वर येथे आगामी साहित्य संमेलन आयोजित करण्याचे नियोजन आहे."
+    sammelan_pending: "तारीख निश्चित झाल्यावर येथे अद्ययावत केली जाईल."
+    cta_heading: "तुमच्या सहभागातून साहित्य व शिक्षणाचा वारसा पुढे नेऊया."
     cta_body: "देणगी देऊन किंवा स्वयंसेवक म्हणून सहभागी होऊन आमच्या उपक्रमांना पाठिंबा द्या."

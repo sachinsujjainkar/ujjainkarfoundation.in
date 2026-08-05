@@ -22,3 +22,20 @@ What's still needed:
 ## English
 
 (paste here)
+
+## Tagline (draft, not wired into the header — see note)
+
+Source: Sachin, 2026-08-05 ("होमपेज सामग्री" homepage content fill).
+
+- मराठी: सेवा • साहित्य • समर्पण
+- English: Service • Literature • Dedication
+
+Explicitly flagged by the source document as a draft superseding an
+earlier generic-NGO tagline (सेवा • संस्कार • समृद्धी), written for this
+foundation's actual literary/cultural identity -- but also flagged as
+possibly superseded by a tagline the foundation already has. Not wired
+into the live header: there's no tagline slot in the current design
+(`app/views/layouts/_brand_mark.html.erb` shows name only), and adding one
+is a small design decision of its own, not just copy -- worth doing
+deliberately once the tagline itself is actually confirmed, rather than
+building UI around a draft.

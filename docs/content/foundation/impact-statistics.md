@@ -43,8 +43,13 @@ Authoritative figures, more specific than earlier drafts:
   venues, not necessarily a 1:1 count of संमेलने held — some venues may have
   hosted more than once. Needs the actual संमेलन count, not a venue count.
 
-Still open — fill in once resolved:
+## Resolved (Sachin, 2026-08-05 — "होमपेज सामग्री")
 
-1. पुरस्कारप्राप्त मान्यवर / Awarded dignitaries: __________
-2. गुणवंत विद्यार्थी सत्कार / Meritorious students honoured: १,०००+
-3. २०१० पासूनची साहित्य संमेलने / Literary conventions since 2010: __________
+Superseded the mapping above entirely -- labels themselves changed, not
+just values. Now live in `SiteSetting` (see `db/seeds.rb`):
+
+1. **गुणवंत विद्यार्थी सन्मानित / Students Honoured** — १,०००+
+2. **साहित्यिक तापी-पूर्णा पुरस्काराने सन्मानित / Writers Awarded (Tapi-Purna)** — ८००+
+3. **वर्षांचा अखंड सामाजिक कार्याचा वारसा / Years of Continuous Service** — २५+
+   (picked over the source's offered alternative, १,२००+ मोफत नेत्र तपासणी /
+   Free Eye Screenings -- see `db/seeds.rb`'s comment for why)
