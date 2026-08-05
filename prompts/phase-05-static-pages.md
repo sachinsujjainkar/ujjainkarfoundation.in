@@ -16,7 +16,7 @@ Every page that is not driven by the newsroom.
 ## Pages
 
 1. **आमच्याविषयी** — identity, history, ध्येय, दृष्टी, values, founder section with portrait and 150–200 words. All copy from locale YAML so it is editable without touching views.
-   Founder content already exists in `docs/content/founder.md` — use it rather than writing fresh copy. The foundation's lineage belongs in the history section: महर्षी वाल्मिकी मंडळ → कवी राम कदम फाउंडेशन (2009) → शिवचरण उज्जैनकर फाउंडेशन (2016).
+   Founder content already exists in `docs/content/founder/biography.md` — use it rather than writing fresh copy. The foundation's lineage belongs in the history section: अंकुर साहित्य संघ, परम पूज्य महर्षी वाल्मिकी बहुउद्देशीय मंडळ → कवी राम कदम फाउंडेशन (2009) → शिवचरण उज्जैनकर फाउंडेशन (2016).
 
 2. **कार्यकारणी** — office bearers, built on the new `Committee` and `Membership` models (schema in `docs/03-data-model.md`), not a flag on `Person`. Three concurrent committees, roughly 60 people total, displayed as an accordion with one section per committee. Each member shows honorific, name, role title, and city — note that `role_title` lives on the `Membership`, not on `Person`. **Never render `phone` or `email`** — admin-only fields.
 
@@ -33,7 +33,7 @@ Every page that is not driven by the newsroom.
 
 ## Tasks
 
-- `Person`, `Committee`, `Membership`, `Volunteer`, `ContactMessage`, `SiteSetting` models and migrations. Seed all three committees from `docs/content/committees.md`.
+- `Person`, `Committee`, `Membership`, `Volunteer`, `ContactMessage`, `SiteSetting` models and migrations. Seed all three committees from `docs/content/organisation/committees.md`.
 - `SiteSetting` as a singleton with sensible placeholder defaults and a seed task.
 - Server-side validation on both forms, with errors rendered inline in the correct locale.
 - Long-form copy in locale YAML, not hardcoded in ERB.
