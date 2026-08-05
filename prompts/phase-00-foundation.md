@@ -4,17 +4,22 @@
 
 ---
 
+## Context for this run
+
+- The Rails app is already generated in this directory. Skip task 1 — instead verify the existing setup meets its requirements (Rails 8, Ruby 3.4, postgresql adapter, Tailwind, importmap, Solid Queue/Cache/Cable retained). Report mismatches rather than regenerating.
+- Local PostgreSQL is 18, not 16. Use 18 wherever this prompt says 16.
+- DB role is `sachin`, superuser + createdb, no password locally.
+- Skip task 6 (Railway) entirely. Being set up manually afterwards. Do not attempt it, do not wait on it, do not add Railway config files.
+- Do task 7 (README) last.
+- `docs/` and `prompts/` already exist in the repo — do not modify or delete them.
+
 ## Goal
 
-A Rails 8 app that boots locally, passes CI, and deploys to Railway. No design, no content, no models beyond what Rails generates. Just a solid floor.
+A Rails 8 app that boots locally and passes CI. No design, no content, no models beyond what Rails generates. Just a solid floor.
 
 ## Tasks
 
-1. **Generate the app**
-   ```
-   rails new ujjainkarfoundation -d postgresql -c tailwind -j importmap
-   ```
-   Ruby 3.3+, Rails 8. Keep Solid Queue, Solid Cache, and Solid Cable — no Redis anywhere in this project.
+1. **Verify the existing app** (see context above — do not regenerate).
 
 2. **Gemfile**
    - `mobility` — translated model content
@@ -27,7 +32,7 @@ A Rails 8 app that boots locally, passes CI, and deploys to Railway. No design, 
    - dev/test: `rubocop-rails-omakase`, `brakeman`, `dotenv-rails`, `faker`
 
 3. **Database**
-   - PostgreSQL 16 locally
+   - PostgreSQL 18 locally
    - Enable `pg_trgm` in a migration. **Postgres full-text dictionaries do not support Marathi** — trigram search is the approach for Devanagari, and setting it up now avoids a retrofit in Phase 09.
 
 4. **Config**
@@ -38,12 +43,7 @@ A Rails 8 app that boots locally, passes CI, and deploys to Railway. No design, 
 
 5. **CI** — GitHub Actions on push and PR: `bundle exec rubocop`, `bundle exec brakeman`, `bin/rails test`. Failing CI blocks merge.
 
-6. **Railway**
-   - New **project** in the existing account. Not a new account, not a service inside the DealKhata project — see `docs/06-infrastructure.md` for why.
-   - Services: `web` + `postgres`
-   - Env vars per the infrastructure doc
-   - `/up` health check wired to Railway
-   - Confirm a deploy succeeds and the health check is green
+6. Skipped — see context above.
 
 7. **README** — setup steps, env vars, how to run tests, deploy process, link to this pack.
 
@@ -60,5 +60,4 @@ A Rails 8 app that boots locally, passes CI, and deploys to Railway. No design, 
 - [ ] RuboCop and Brakeman clean
 - [ ] `pg_trgm` extension present
 - [ ] `I18n.default_locale == :mr`
-- [ ] Deployed to Railway, `/up` green, custom domain not yet pointed
 - [ ] Committed: `phase-00: foundation and setup`

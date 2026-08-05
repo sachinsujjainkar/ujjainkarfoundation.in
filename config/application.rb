@@ -21,7 +21,12 @@ module Ujjainkarfoundation
     # These settings can be overridden in specific environments using the files
     # in config/environments, which are processed later.
     #
-    # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.time_zone = "Mumbai"
+
+    # Marathi is the source of record; the mr locale is the application default.
+    config.i18n.available_locales = [ :mr, :en ]
+    config.i18n.default_locale = :mr
   end
 end

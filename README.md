@@ -68,6 +68,64 @@ These apply whether or not a given prompt repeats them.
 
 ---
 
+## Development setup (Phase 00)
+
+Rails 8.1, Ruby 3.4, PostgreSQL. No Redis — Solid Queue/Cache/Cable run on Postgres.
+
+```bash
+bundle install
+bin/rails db:create db:migrate
+bin/rails server
+```
+
+Visit `http://localhost:3000` — root and `/up` should both return 200.
+
+### Requirements
+
+- Ruby 3.4+ (see `.ruby-version`)
+- PostgreSQL 16+ (developed against 18 locally; `pg_trgm` extension is enabled via migration, needed because Postgres full-text dictionaries don't support Marathi)
+- A local Postgres role that can create databases (no password needed for local dev — `config/database.yml` connects as the current OS user)
+
+### Environment variables
+
+None are required to boot locally. In production the app expects:
+
+```
+DATABASE_URL                  (provided by the host)
+RAILS_MASTER_KEY
+R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY / R2_BUCKET / R2_ENDPOINT
+R2_PUBLIC_HOST
+SMTP_ADDRESS / SMTP_USERNAME / SMTP_PASSWORD
+SENTRY_DSN
+HCAPTCHA_SITE_KEY / HCAPTCHA_SECRET
+APP_HOST=ujjainkarfoundation.in
+```
+
+See `docs/06-infrastructure.md` for what each is for. `dotenv-rails` is available in development/test if a local `.env` is useful — it's git-ignored, never commit it.
+
+### Tests and checks
+
+```bash
+bin/rails test        # unit/integration tests
+bin/rubocop            # style (rubocop-rails-omakase)
+bin/brakeman            # static security analysis
+bin/bundler-audit       # gem vulnerability audit
+```
+
+CI (`.github/workflows/ci.yml`) runs all of the above plus system tests and importmap audit on every push to `main` and every pull request.
+
+### Deploy
+
+Target is Railway (app + Postgres, new project in the existing account) with Cloudflare in front for DNS/SSL/CDN — see `docs/06-infrastructure.md`. Railway provisioning itself is being done manually outside this build pack and isn't wired up in this repo yet (no `kamal` deploy config committed for it, no Railway-specific files).
+
+### Notable choices from Phase 00
+
+- **Admin:** `avo` pinned to `~> 3.0` per the project brief. `pagy` (an Avo dependency) is pinned `< 9.0` — Avo 3.x's pagination assumes Pagy's pre-9.0 `Pagy::Backend` API, which was removed in Pagy 9.
+- **Slugs:** plain slug columns, not `friendly_id`. Article slugs are frozen on create (numeric ID prefix + transliterated headline, per `docs/01-glossary.md`) and never change, so slug history isn't needed — a plain column is simpler.
+- **Locale:** `config.i18n.default_locale = :mr` and `available_locales = [:mr, :en]` are set in `config/application.rb` now, per the brief's instruction to fix this before it gets expensive to change.
+
+---
+
 ## Unresolved — confirm before Phase 05
 
 These are still open and will cause rework if guessed:
