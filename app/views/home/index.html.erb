@@ -4,9 +4,40 @@
 
 <%# ============================================================ Hero %>
 <section class="relative flex min-h-[560px] items-end overflow-hidden bg-brand-100 sm:min-h-[640px]">
-  <div class="absolute inset-0 flex items-center justify-center text-small text-ink-muted">
-    1920×800
-  </div>
+  <% if site_setting.hero_image.attached? %>
+    <%
+      # Full-bleed hero, so a fixed sizes="100vw" -- unlike
+      # ResponsiveImageHelper's in-content images, this is the LCP element:
+      # loading="eager" + fetchpriority="high", the opposite of lazy. No
+      # explicit width/height attrs: blob.metadata[:width/height] needs
+      # Active Storage's image analysis job, which needs libvips (not
+      # available in this dev container, see app/models/concerns/photoable.rb)
+      # -- safe to omit here specifically because the section's own
+      # min-h-[...] already fixes its box height in CSS, so there's no CLS
+      # risk from the image's intrinsic size being unknown to the browser.
+      #
+      # UNVERIFIED end to end: url_for(variant) doesn't eagerly process
+      # anything (confirmed elsewhere in this codebase), so this HTML is
+      # structurally correct, but no variant has actually been processed
+      # or loaded in a browser here -- no libvips in this environment.
+      hero = site_setting.hero_image
+      widths = SiteSetting::HERO_IMAGE_WIDTHS
+    %>
+    <picture class="absolute inset-0">
+      <% %i[avif webp].each do |format| %>
+        <%
+          srcset = widths.map { |w| "#{url_for(hero.variant(:"#{w}_#{format}"))} #{w}w" }.join(", ")
+        %>
+        <source srcset="<%= srcset %>" sizes="100vw" type="image/<%= format %>">
+      <% end %>
+      <%= image_tag hero.variant(:"#{widths.max}_jpg"), alt: "", loading: "eager", fetchpriority: "high",
+            class: "size-full object-cover" %>
+    </picture>
+  <% else %>
+    <div class="absolute inset-0 flex items-center justify-center text-small text-ink-muted">
+      1920×800
+    </div>
+  <% end %>
   <%# Solid scrim, not a gradient -- docs/02-design-system.md, "No gradients. Anywhere." %>
   <div class="absolute inset-0 bg-brand-900/60"></div>
   <div class="container relative mx-auto flex flex-col items-start gap-6 px-5 py-16">
