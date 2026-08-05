@@ -224,4 +224,12 @@
       <%= render "components/lang_switch", current: locale, links: { mr: "#", en: "#" } %>
     <% end %>
   </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">YouTube embed (click-to-load facade)</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/youtube_embed", youtube_id: "dQw4w9WgXcQ", title: t("styleguide.sample_headline") %>
+    <% end %>
+  </section>
 </div>

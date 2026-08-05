@@ -6,22 +6,22 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
-# Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
-# amazon:
-#   service: S3
-#   access_key_id: <%= Rails.application.credentials.dig(:aws, :access_key_id) %>
-#   secret_access_key: <%= Rails.application.credentials.dig(:aws, :secret_access_key) %>
-#   region: us-east-1
-#   bucket: your_own_bucket-<%= Rails.env %>
-
-# Remember not to checkin your GCS keyfile to a repository
-# google:
-#   service: GCS
-#   project: your_project
-#   credentials: <%= Rails.root.join("path/to/gcs.keyfile") %>
-#   bucket: your_own_bucket-<%= Rails.env %>
-
-# mirror:
-#   service: Mirror
-#   primary: local
-#   mirrors: [ amazon, google, microsoft ]
+# Cloudflare R2, S3-API compatible -- no extra gem, just the standard S3
+# service with a custom endpoint. See docs/06-infrastructure.md, "Media
+# storage -- Cloudflare R2": egress (not storage) is the cost driver for a
+# public photo-heavy site, and R2 charges nothing for it.
+#
+# No real credentials exist in this environment -- these all come from
+# ENV, and are unset until the actual R2 bucket is provisioned. Until
+# then, config.active_storage.service stays :local even in a would-be
+# "production" boot here; see config/environments/production.rb.
+cloudflare:
+  service: S3
+  endpoint: https://<%= ENV["R2_ACCOUNT_ID"] %>.r2.cloudflarestorage.com
+  access_key_id: <%= ENV["R2_ACCESS_KEY_ID"] %>
+  secret_access_key: <%= ENV["R2_SECRET_ACCESS_KEY"] %>
+  region: auto
+  bucket: <%= ENV.fetch("R2_BUCKET", "ujjainkar-media") %>
+  # R2 needs path-style requests, not the virtual-hosted-style S3 defaults
+  # to -- see prompts/phase-06-media-pipeline.md, "Watch for."
+  force_path_style: true

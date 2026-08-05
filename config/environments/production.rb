@@ -21,8 +21,13 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   # config.asset_host = "http://assets.example.com"
 
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :local
+  # Cloudflare R2 -- see config/storage.yml and docs/06-infrastructure.md.
+  # Requires R2_ACCOUNT_ID / R2_ACCESS_KEY_ID / R2_SECRET_ACCESS_KEY /
+  # R2_BUCKET to actually be set; there's no local fallback here on
+  # purpose -- a production boot without real R2 credentials should fail
+  # loudly on first upload, not silently write to the container's local
+  # disk and lose everything on the next deploy.
+  config.active_storage.service = :cloudflare
 
   # Assume all access to the app is happening through a SSL-terminating reverse proxy.
   # config.assume_ssl = true

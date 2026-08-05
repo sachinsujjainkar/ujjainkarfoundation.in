@@ -2,6 +2,8 @@ en:
   errors:
     messages:
       blank: "can't be blank"
+      too_large: "The photo is larger than 10MB. Please upload a smaller photo."
+      invalid_content_type: "Please upload a JPEG, PNG, or WebP photo."
   activerecord:
     errors:
       models:

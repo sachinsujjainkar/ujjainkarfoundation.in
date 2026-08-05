@@ -10,6 +10,11 @@ mr:
       # attribute name ("नाव आवश्यक आहे"), just not as tailored as a
       # dedicated message.
       blank: "आवश्यक आहे."
+      # Photoable (app/models/concerns/photoable.rb) -- shared by every
+      # photo-attaching model, so these live at the generic errors.messages
+      # level rather than per-model.
+      too_large: "छायाचित्राचा आकार १० MB पेक्षा जास्त आहे. कृपया लहान आकाराचे छायाचित्र अपलोड करा."
+      invalid_content_type: "कृपया JPEG, PNG किंवा WebP प्रकारचे छायाचित्र अपलोड करा."
   activerecord:
     errors:
       models:
