@@ -1,0 +1,18 @@
+<%#
+  Locals: tag_label, headline, href, dateline, excerpt
+  Photos are flat --line blocks with dimensions labelled until real photos
+  arrive — never an AI-generated placeholder.
+%>
+<article class="card flex flex-col gap-4">
+  <div class="aspect-video w-full rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
+    800×450
+  </div>
+  <div class="flex flex-col gap-2">
+    <span class="tag"><%= tag_label %></span>
+    <h3 class="text-h3 font-display">
+      <%= link_to headline, href, class: "text-ink hover:text-brand-700" %>
+    </h3>
+    <p class="text-small text-ink-muted"><%= dateline %></p>
+    <p class="text-body text-ink"><%= excerpt %></p>
+  </div>
+</article>

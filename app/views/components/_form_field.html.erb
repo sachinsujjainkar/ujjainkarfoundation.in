@@ -1,0 +1,35 @@
+<%#
+  Text-input form field: label, input, hint, error.
+
+  Locals:
+    name:     String, used for id/name
+    label:    String
+    type:     String, input[type], default "text"
+    value:    String, optional
+    hint:     String, optional
+    error:    String, optional — presence also sets aria-invalid + red border
+%>
+<%
+  field_id = "field_#{name}"
+  error = local_assigns[:error]
+  hint = local_assigns[:hint]
+  describedby = [(error ? "#{field_id}_error" : nil), (hint ? "#{field_id}_hint" : nil)].compact.join(" ").presence
+%>
+<div class="form-field">
+  <label class="form-label" for="<%= field_id %>"><%= label %></label>
+  <input
+    class="form-input"
+    type="<%= local_assigns[:type] || "text" %>"
+    id="<%= field_id %>"
+    name="<%= name %>"
+    value="<%= local_assigns[:value] %>"
+    aria-invalid="<%= error.present? %>"
+    <%= "aria-describedby=\"#{describedby}\"" if describedby %>
+  >
+  <% if hint.present? %>
+    <p class="form-hint" id="<%= field_id %>_hint"><%= hint %></p>
+  <% end %>
+  <% if error.present? %>
+    <p class="form-error" id="<%= field_id %>_error"><%= error %></p>
+  <% end %>
+</div>

@@ -1,0 +1,30 @@
+<%#
+  Button primitive — covers btn-primary / btn-secondary / btn-ghost / btn-cta.
+
+  Locals:
+    label:    String, required
+    variant:  :primary (default) | :secondary | :ghost | :cta
+    href:     String — renders an <a>; omit to render a <button>
+    type:     String — button[type], default "button" (ignored for <a>)
+    disabled: Boolean, default false
+    loading:  Boolean, default false — shows a spinner, implies disabled
+%>
+<%
+  variant = (local_assigns[:variant] || :primary).to_sym
+  disabled = local_assigns[:disabled] || false
+  loading = local_assigns[:loading] || false
+  href = local_assigns[:href]
+  variant_class = { primary: "btn-primary", secondary: "btn-secondary", ghost: "btn-ghost", cta: "btn-cta" }.fetch(variant)
+  classes = class_names("btn", variant_class, "btn-loading" => loading)
+  is_disabled = disabled || loading
+%>
+<% if href.present? && !is_disabled %>
+  <%= link_to label, href, class: classes %>
+<% else %>
+  <button
+    type="<%= local_assigns[:type] || "button" %>"
+    class="<%= classes %>"
+    <%= "disabled" if is_disabled %>
+    aria-busy="<%= loading %>"
+  ><%= label %><span class="btn-spinner" aria-hidden="true"<%= " hidden" unless loading %>></span></button>
+<% end %>

@@ -1,0 +1,51 @@
+/*
+ * ============================================================================
+ * DEVANAGARI GUARD — read before touching any [lang="mr"] / [lang="hi"] rule
+ * ============================================================================
+ * Never apply to Devanagari text (breaks conjuncts or describes a concept the
+ * script doesn't have):
+ *   - letter-spacing: anything    (breaks conjuncts — क्ष ज्ञ त्र)
+ *   - text-transform: uppercase   (the concept doesn't exist in Devanagari)
+ *   - font-stretch: condensed
+ * This is enforced in CI by script/check-devanagari-css.sh, which fails the
+ * build if any of these three properties appear anywhere in this directory.
+ * The site's design doesn't call for any of them on Latin text either, so
+ * the check is a blanket ban rather than a per-selector one — simpler to
+ * enforce correctly than trying to scope it to just Devanagari selectors.
+ * ============================================================================
+ */
+
+@layer base {
+  html {
+    background-color: var(--paper);
+    color: var(--ink);
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+
+  ::selection {
+    background-color: var(--accent-100);
+    color: var(--ink);
+  }
+
+  /* Visible focus ring on every interactive element. Never override with outline: none. */
+  :focus-visible {
+    outline: 2px solid var(--accent-600);
+    outline-offset: 2px;
+  }
+}
+
+@utility measure {
+  /* Marathi/English body copy: 60-70 characters per line (Devanagari words
+     run longer than Latin, so a 75ch measure that reads right in English
+     sprawls in Marathi). */
+  max-width: 66ch;
+}

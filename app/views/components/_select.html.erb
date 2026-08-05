@@ -1,0 +1,27 @@
+<%#
+  Locals:
+    name:    String
+    label:   String
+    options: Array of [label, value] pairs
+    hint:    String, optional
+    error:   String, optional
+%>
+<%
+  field_id = "field_#{name}"
+  error = local_assigns[:error]
+  hint = local_assigns[:hint]
+%>
+<div class="form-field">
+  <label class="form-label" for="<%= field_id %>"><%= label %></label>
+  <select class="form-input select" id="<%= field_id %>" name="<%= name %>" aria-invalid="<%= error.present? %>">
+    <% options.each do |opt_label, opt_value| %>
+      <option value="<%= opt_value %>"><%= opt_label %></option>
+    <% end %>
+  </select>
+  <% if hint.present? %>
+    <p class="form-hint"><%= hint %></p>
+  <% end %>
+  <% if error.present? %>
+    <p class="form-error"><%= error %></p>
+  <% end %>
+</div>

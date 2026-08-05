@@ -1,0 +1,18 @@
+<%#
+  Locals: name, label, value (optional), hint (optional), error (optional)
+%>
+<%
+  field_id = "field_#{name}"
+  error = local_assigns[:error]
+  hint = local_assigns[:hint]
+%>
+<div class="form-field">
+  <label class="form-label" for="<%= field_id %>"><%= label %></label>
+  <textarea class="form-input textarea" id="<%= field_id %>" name="<%= name %>" aria-invalid="<%= error.present? %>"><%= local_assigns[:value] %></textarea>
+  <% if hint.present? %>
+    <p class="form-hint"><%= hint %></p>
+  <% end %>
+  <% if error.present? %>
+    <p class="form-error"><%= error %></p>
+  <% end %>
+</div>

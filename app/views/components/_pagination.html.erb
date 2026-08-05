@@ -1,0 +1,27 @@
+<%#
+  Locals:
+    current_page: Integer
+    total_pages:  Integer
+    path_for:     Proc taking a page number, returning a URL
+%>
+<nav class="pagination" aria-label="Pagination">
+  <% if current_page > 1 %>
+    <%= link_to t("ui.previous"), path_for.call(current_page - 1), class: "pagination-link" %>
+  <% else %>
+    <span class="pagination-link" aria-disabled="true"><%= t("ui.previous") %></span>
+  <% end %>
+
+  <% (1..total_pages).each do |page| %>
+    <% if page == current_page %>
+      <span class="pagination-link" aria-current="page"><%= page %></span>
+    <% else %>
+      <%= link_to page, path_for.call(page), class: "pagination-link" %>
+    <% end %>
+  <% end %>
+
+  <% if current_page < total_pages %>
+    <%= link_to t("ui.next"), path_for.call(current_page + 1), class: "pagination-link" %>
+  <% else %>
+    <span class="pagination-link" aria-disabled="true"><%= t("ui.next") %></span>
+  <% end %>
+</nav>

@@ -1,0 +1,37 @@
+# Canonical site chrome strings — see docs/01-glossary.md. Use these exactly;
+# do not paraphrase. mr is the application default locale.
+mr:
+  ui:
+    home: "मुख्यपृष्ठ"
+    read_more: "अधिक वाचा"
+    view_all: "सर्व पहा"
+    search: "शोधा"
+    share: "शेअर करा"
+    submit: "पाठवा"
+    register: "नोंदणी करा"
+    download: "डाउनलोड करा"
+    date: "दिनांक"
+    venue: "स्थळ"
+    upcoming: "आगामी"
+    past: "झालेले"
+    photos: "छायाचित्रे"
+    videos: "चित्रफिती"
+    founder: "संस्थापक"
+    our_vision: "आमची दृष्टी"
+    our_mission: "आमचे ध्येय"
+    office_bearers: "पदाधिकारी"
+    not_found: "पृष्ठ सापडले नाही"
+    loading: "लोड होत आहे…"
+    previous: "मागील"
+    next: "पुढील"
+
+  styleguide:
+    title: "शैली मार्गदर्शक"
+    sample_tag: "शिक्षण"
+    sample_headline: "नीट मांडलेला मथळा छोट्या जागेतही शांतपणे वाचता येतो"
+    sample_body: "मराठी किंवा इंग्रजी वाचकाच्या नजरेला दोन ओळींमध्ये फार अंतर कापावे लागू नये, म्हणून मुख्य मजकूर साधारण साठ ते सत्तर अक्षरांच्या रुंदीत बसवला जातो."
+    sample_caption: "डावीकडून: छायाचित्र श्रेय ओळीसाठी नमुना मजकूर."
+    sample_stat_label: "एकूण कार्यक्रम"
+    sample_error: "ही माहिती भरणे आवश्यक आहे."
+    sample_hint: "तुमच्या अर्जाबाबत संपर्क साधण्यासाठीच याचा वापर केला जाईल."
+    empty_state: "इथे अजून काही नाही."

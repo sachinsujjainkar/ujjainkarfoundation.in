@@ -1,0 +1,205 @@
+/*
+ * Component primitives — docs/02-design-system.md Phase 01 deliverables.
+ * All hover/focus transitions are 150ms ease-out; nothing else animates
+ * (no scroll fades, no parallax, no auto-animating counters, no carousels).
+ * The global `:focus-visible` ring (base.css) applies everywhere; components
+ * below don't redeclare it.
+ *
+ * Contrast note: --accent-600 and --warn only clear 3:1 against paper/surface,
+ * not the 4.5:1 the accessibility floor requires for body-sized text (see
+ * docs/02-design-system.md's own floor). So: accent-600 is used here only as
+ * a large-text CTA fill (.btn-cta, sized well above the 18.66px/14pt-bold
+ * "large text" threshold), or as a non-text UI element (icon, border, ring),
+ * both of which only need 3:1. warn is used only as an icon/border color,
+ * never as running text — status message copy stays --ink.
+ */
+
+@layer components {
+  /* ---- Buttons ---- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-card px-6 py-3
+      font-body text-body font-semibold transition-colors duration-150 ease-out
+      disabled:opacity-50 disabled:pointer-events-none;
+    min-height: 44px;
+  }
+  /* Variants add to .btn — templates use class="btn btn-primary" etc. */
+  .btn-primary {
+    @apply bg-brand-700 text-paper hover:bg-brand-500;
+  }
+  .btn-secondary {
+    @apply bg-transparent text-brand-700 border border-brand-700 hover:bg-brand-100;
+  }
+  .btn-ghost {
+    @apply bg-transparent text-brand-700 px-4 hover:bg-brand-100;
+  }
+  /* The one accent CTA per screen. Label must stay large (text-h3 weight 700
+     and up) — see the contrast note above. */
+  .btn-cta {
+    @apply bg-accent-600 text-paper text-h3 font-bold hover:bg-brand-600;
+  }
+  .btn-loading {
+    @apply relative text-transparent pointer-events-none;
+  }
+  .btn-loading .btn-spinner {
+    @apply absolute inset-0 m-auto size-5 animate-spin rounded-full border-2
+      border-current border-t-transparent text-current opacity-70;
+  }
+
+  /* ---- Cards ---- */
+  .card {
+    @apply rounded-card border border-line bg-surface p-6 shadow-none
+      transition-shadow duration-150 ease-out hover:shadow-md;
+  }
+
+  /* ---- Tag ---- */
+  .tag {
+    @apply inline-flex items-center rounded-full bg-brand-100 px-3 py-1
+      text-small font-body font-semibold text-brand-700;
+  }
+
+  /* ---- Breadcrumb ---- */
+  .breadcrumb {
+    @apply flex flex-wrap items-center gap-2 text-small text-ink-muted;
+  }
+  .breadcrumb a {
+    @apply text-ink-muted underline decoration-line underline-offset-2 hover:text-brand-700;
+  }
+  .breadcrumb [aria-current="page"] {
+    @apply text-ink font-semibold no-underline;
+  }
+
+  /* ---- Page header (coloured band + breadcrumb) ---- */
+  .page-header {
+    @apply bg-brand-700 px-6 py-12 text-paper;
+  }
+  .page-header .breadcrumb,
+  .page-header .breadcrumb a {
+    @apply text-brand-100;
+  }
+  .page-header .breadcrumb [aria-current="page"] {
+    @apply text-paper;
+  }
+
+  /* ---- Stat ---- */
+  .stat {
+    @apply flex flex-col gap-1;
+  }
+  .stat-value {
+    @apply font-body text-h1 font-bold text-brand-700;
+  }
+  .stat-label {
+    @apply text-small text-ink-muted;
+  }
+
+  /* ---- Form field wrapper (label, hint, error) ---- */
+  .form-field {
+    @apply flex flex-col gap-2;
+  }
+  .form-label {
+    @apply text-small font-semibold text-ink;
+  }
+  .form-hint {
+    @apply text-small text-ink-muted;
+  }
+  .form-error {
+    @apply flex items-center gap-1 text-small font-semibold text-danger;
+  }
+  .form-input {
+    @apply w-full rounded-card border border-line bg-surface px-4 py-3 text-body
+      text-ink placeholder:text-ink-muted transition-colors duration-150 ease-out
+      hover:border-ink-muted disabled:cursor-not-allowed disabled:bg-brand-100/40 disabled:opacity-60;
+  }
+  .form-input[aria-invalid="true"] {
+    @apply border-danger;
+  }
+
+  /* ---- Select ---- (template: class="form-input select") */
+  .select {
+    @apply appearance-none bg-no-repeat pr-10;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%236B615C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5.25 7.5l4.75 5 4.75-5'/%3E%3C/svg%3E");
+    background-size: 20px;
+    background-position: right 0.75rem center;
+  }
+
+  /* ---- Textarea ---- (template: class="form-input textarea") */
+  .textarea {
+    @apply min-h-32 resize-y;
+  }
+
+  /* ---- Checkbox ---- (44px min height so the row is a real tap target, not just the 20px box) */
+  .checkbox-field {
+    @apply flex items-center gap-3 py-2;
+    min-height: 44px;
+  }
+  .checkbox-input {
+    @apply size-5 shrink-0 rounded border border-line text-brand-700
+      accent-brand-700 transition-colors duration-150 ease-out disabled:opacity-50;
+  }
+  .checkbox-label {
+    @apply text-body text-ink;
+  }
+
+  /* ---- Pagination ---- */
+  .pagination {
+    @apply flex items-center justify-center gap-2 text-body;
+  }
+  .pagination-link {
+    @apply inline-flex size-11 items-center justify-center rounded-card
+      text-ink-muted transition-colors duration-150 ease-out hover:bg-brand-100 hover:text-brand-700;
+  }
+  .pagination-link[aria-current="page"] {
+    @apply bg-brand-700 text-paper hover:bg-brand-700;
+  }
+  .pagination-link[aria-disabled="true"] {
+    @apply pointer-events-none opacity-40;
+  }
+
+  /* ---- Empty state ---- */
+  .empty-state {
+    @apply flex flex-col items-center gap-3 rounded-card border border-dashed
+      border-line px-6 py-16 text-center text-ink-muted;
+  }
+
+  /* ---- Flash ---- */
+  .flash {
+    @apply flex items-start gap-3 rounded-card border-l-4 bg-surface px-4 py-3 text-body text-ink;
+  }
+  .flash-success {
+    @apply border-success;
+  }
+  .flash-warn {
+    @apply border-warn;
+  }
+  .flash-danger {
+    @apply border-danger;
+  }
+
+  /* ---- Photo figure (image + caption + credit) ---- */
+  .photo-figure {
+    @apply flex flex-col gap-2;
+  }
+  .photo-figure-media {
+    @apply aspect-video w-full rounded-card border border-line bg-brand-100;
+  }
+  .photo-figure-caption {
+    @apply text-small text-ink-muted;
+  }
+
+  /* ---- Share to WhatsApp ---- (template: class="btn btn-secondary share-whatsapp") */
+  .share-whatsapp {
+    @apply gap-2;
+  }
+
+  /* ---- Language switch ---- */
+  .lang-switch {
+    @apply inline-flex items-center gap-1 text-small font-semibold;
+  }
+  .lang-switch a {
+    @apply inline-flex items-center justify-center rounded-card px-3 text-ink-muted
+      transition-colors duration-150 ease-out hover:text-brand-700;
+    min-height: 44px;
+  }
+  .lang-switch [aria-current="true"] {
+    @apply text-brand-700;
+  }
+}

@@ -1,0 +1,227 @@
+<% content_for :title, "Style guide — उज्जैनकर फाउंडेशन" %>
+
+<div class="w-full py-12">
+  <header class="mb-16">
+    <p class="text-small font-semibold uppercase tracking-normal text-ink-muted">Development only</p>
+    <h1 class="text-display font-display text-ink">Style guide</h1>
+    <p class="text-body-lg text-ink-muted measure mt-2">
+      Every component rendered twice, Marathi on the left and English on the right, at the same
+      nominal size — the only reliable way to catch the two scripts looking wrong next to each
+      other. See <code>docs/02-design-system.md</code>.
+    </p>
+  </header>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Palette</h2>
+    <div class="grid grid-cols-2 gap-3 sm:grid-cols-4 lg:grid-cols-8">
+      <% {
+        "brand-900" => "#3F0F17", "brand-800" => "#55151F", "brand-700" => "#6E1B26",
+        "brand-600" => "#8A2430", "brand-500" => "#A63946", "brand-100" => "#F4E4E4",
+        "accent-600" => "#B4622A", "accent-100" => "#F7EADF",
+        "paper" => "#FAF7F2", "surface" => "#FFFFFF", "ink" => "#1A1614", "ink-muted" => "#6B615C",
+        "line" => "#E5DDD4", "success" => "#2E6B4F", "warn" => "#A6721E", "danger" => "#9B2C2C"
+      }.each do |name, hex| %>
+        <div class="flex flex-col gap-1">
+          <div class="h-16 rounded-card border border-line" style="background-color: <%= hex %>"></div>
+          <span class="text-small font-semibold text-ink"><%= name %></span>
+          <span class="text-small text-ink-muted"><%= hex %></span>
+        </div>
+      <% end %>
+    </div>
+    <p class="text-small text-ink-muted mt-4 measure">
+      accent-600 and warn clear 3:1 against paper/surface (large text, icons, borders, focus
+      rings) but not the 4.5:1 body-text floor — see the contrast note in
+      <code>app/assets/tailwind/components.css</code>.
+    </p>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Type scale</h2>
+    <%= locale_pair do |locale| %>
+      <div class="flex flex-col gap-3">
+        <p class="text-display font-display">Display / <%= locale %></p>
+        <p class="text-h1 font-display">Heading 1</p>
+        <p class="text-h2 font-display">Heading 2</p>
+        <p class="text-h3 font-display">Heading 3</p>
+        <p class="text-body-lg"><%= t("styleguide.sample_body") %></p>
+        <p class="text-body"><%= t("styleguide.sample_body") %></p>
+        <p class="text-small text-ink-muted"><%= t("styleguide.sample_body") %></p>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Buttons</h2>
+    <%= locale_pair do |locale| %>
+      <div class="flex flex-col gap-4">
+        <div class="flex flex-wrap items-center gap-3">
+          <%= render "components/button", label: t("ui.submit"), variant: :primary %>
+          <%= render "components/button", label: t("ui.share"), variant: :secondary %>
+          <%= render "components/button", label: t("ui.view_all"), variant: :ghost %>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <%= render "components/button", label: t("ui.download"), variant: :cta %>
+        </div>
+        <div class="flex flex-wrap items-center gap-3">
+          <%= render "components/button", label: t("ui.submit"), variant: :primary, disabled: true %>
+          <%= render "components/button", label: t("ui.submit"), variant: :primary, loading: true %>
+        </div>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Card</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/card" do %>
+        <p class="text-body"><%= t("styleguide.sample_body") %></p>
+      <% end %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Card — article</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/card_article",
+            tag_label: t("styleguide.sample_tag"),
+            headline: t("styleguide.sample_headline"),
+            href: "#",
+            dateline: "५ ऑगस्ट २०२६",
+            excerpt: t("styleguide.sample_body") %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Card — event</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/card_event",
+            day: "25", month: "मे", title: t("styleguide.sample_headline"),
+            venue: "सभागृह, नमुना ठिकाण", href: "#", status: :upcoming %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Page header + breadcrumb</h2>
+    <%= locale_pair do |locale| %>
+      <div class="-m-6 overflow-hidden rounded-card">
+        <%= render "components/page_header",
+              title: t("styleguide.sample_headline"),
+              breadcrumbs: [[t("ui.home"), "#"], [t("styleguide.title"), "#"]] %>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Tag &amp; stat</h2>
+    <%= locale_pair do |locale| %>
+      <div class="flex flex-col gap-6">
+        <%= render "components/tag", label: t("styleguide.sample_tag") %>
+        <%= render "components/stat", value: "128", label: t("styleguide.sample_stat_label") %>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Form field</h2>
+    <%= locale_pair do |locale| %>
+      <div class="flex flex-col gap-6">
+        <%= render "components/form_field", name: "name_#{locale}", label: t("ui.register"),
+              hint: t("styleguide.sample_hint") %>
+        <%= render "components/form_field", name: "name_error_#{locale}", label: t("ui.register"),
+              error: t("styleguide.sample_error") %>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Select</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/select", name: "area_#{locale}", label: t("ui.venue"),
+            options: [[t("styleguide.sample_tag"), "1"], ["आरोग्य / Health", "2"]] %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Textarea</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/textarea", name: "message_#{locale}", label: t("ui.share"),
+            hint: t("styleguide.sample_hint") %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Checkbox</h2>
+    <%= locale_pair do |locale| %>
+      <div class="flex flex-col gap-3">
+        <%= render "components/checkbox", name: "consent_#{locale}", label: t("styleguide.sample_hint") %>
+        <%= render "components/checkbox", name: "consent_checked_#{locale}", label: t("styleguide.sample_hint"), checked: true %>
+        <%= render "components/checkbox", name: "consent_disabled_#{locale}", label: t("styleguide.sample_hint"), disabled: true %>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Pagination</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/pagination", current_page: 2, total_pages: 5, path_for: ->(page) { "#page-#{page}" } %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Empty state</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/empty_state", message: t("styleguide.empty_state") %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Flash</h2>
+    <%= locale_pair do |locale| %>
+      <div class="flex flex-col gap-3">
+        <%= render "components/flash", type: :success, message: t("styleguide.sample_body") %>
+        <%= render "components/flash", type: :warn, message: t("styleguide.sample_body") %>
+        <%= render "components/flash", type: :danger, message: t("styleguide.sample_error") %>
+      </div>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Photo figure</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/photo_figure", width: 800, height: 450,
+            caption: t("styleguide.sample_caption"), credit: "नमुना छायाचित्रकार" %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Share to WhatsApp</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/share_whatsapp", url: "https://ujjainkarfoundation.in", text: t("styleguide.sample_headline") %>
+    <% end %>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="mb-16">
+    <h2 class="text-h2 font-display mb-4">Language switch</h2>
+    <%= locale_pair do |locale| %>
+      <%= render "components/lang_switch", current: locale, links: { mr: "#", en: "#" } %>
+    <% end %>
+  </section>
+</div>

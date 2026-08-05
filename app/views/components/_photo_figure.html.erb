@@ -1,0 +1,16 @@
+<%#
+  Locals: width, height, caption, credit (optional)
+  Flat --line-coloured block with dimensions labelled until real photos
+  arrive — never an AI-generated placeholder.
+%>
+<figure class="photo-figure">
+  <div class="photo-figure-media flex items-center justify-center text-small text-ink-muted">
+    <%= width %>×<%= height %>
+  </div>
+  <figcaption class="photo-figure-caption">
+    <%= caption %>
+    <% if local_assigns[:credit].present? %>
+      <span class="text-ink-muted"> — <%= credit %></span>
+    <% end %>
+  </figcaption>
+</figure>

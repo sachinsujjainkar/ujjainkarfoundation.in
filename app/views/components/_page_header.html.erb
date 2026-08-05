@@ -1,0 +1,9 @@
+<%#
+  Locals:
+    title:       String
+    breadcrumbs: Array of [label, url] pairs; last entry is the current page
+%>
+<div class="page-header">
+  <%= render "components/breadcrumb", items: breadcrumbs %>
+  <h1 class="mt-4 text-h1 font-display"><%= title %></h1>
+</div>

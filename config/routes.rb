@@ -11,4 +11,8 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "home#index"
+
+  # Component gallery — development environment only, never routable in
+  # production or test. See docs/02-design-system.md.
+  get "styleguide", to: "styleguide#index" if Rails.env.development?
 end

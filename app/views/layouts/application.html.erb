@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="<%= I18n.locale %>">
   <head>
-    <title><%= content_for(:title) || "Ujjainkarfoundation" %></title>
+    <title><%= content_for(:title) || "उज्जैनकर फाउंडेशन" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Ujjainkarfoundation">
     <meta name="mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <%# Preload only the two body weights — the first-paint-critical fonts.
+        Display/headline and heavier weights lazy-load via @font-face. %>
+    <%= tag.link rel: "preload", href: asset_path("mukta-400.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
+    <%= tag.link rel: "preload", href: asset_path("inter-400.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
 
     <%= yield :head %>
 
@@ -24,7 +29,8 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <%# Provisional container — the real header/nav/footer shell lands in Phase 03. %>
+    <main class="container mx-auto mt-24 px-5 flex">
       <%= yield %>
     </main>
   </body>

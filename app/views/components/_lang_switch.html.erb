@@ -1,0 +1,10 @@
+<%#
+  Locals:
+    current: :mr | :en
+    links:   { mr: url, en: url }
+%>
+<nav class="lang-switch" aria-label="Language / भाषा">
+  <a href="<%= links[:mr] %>" lang="mr" aria-current="<%= current == :mr %>">मराठी</a>
+  <span aria-hidden="true" class="text-ink-muted">|</span>
+  <a href="<%= links[:en] %>" lang="en" aria-current="<%= current == :en %>">English</a>
+</nav>

@@ -1,0 +1,74 @@
+/*
+ * Self-hosted, subsetted webfonts. Never load from the Google Fonts CDN at
+ * runtime — the audience is on mid-range Android over 4G.
+ *
+ * Subset ranges: Devanagari core block (U+0900-097F) + ZWJ/ZWNJ (needed for
+ * conjuncts) + Rupee sign, and Latin basic + Latin-1 + general punctuation +
+ * currency. GSUB/GPOS retained so Devanagari shaping (क्ष ज्ञ त्र) works.
+ * See app/assets/fonts/README.md for how these were built and how to rebuild
+ * them once real site copy exists and the subset can be tightened further.
+ */
+
+@font-face {
+  font-family: "Tiro Devanagari Marathi";
+  src: url("../fonts/tiro-devanagari-marathi-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mukta";
+  src: url("../fonts/mukta-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mukta";
+  src: url("../fonts/mukta-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Mukta";
+  src: url("../fonts/mukta-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("../fonts/source-serif-4-display-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,0 +1,12 @@
+<%# Locals: items — Array of [label, url] pairs; last entry is the current page %>
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <% items.each_with_index do |(label, url), index| %>
+    <% is_last = index == items.length - 1 %>
+    <% if is_last %>
+      <span aria-current="page"><%= label %></span>
+    <% else %>
+      <%= link_to label, url %>
+      <span aria-hidden="true">/</span>
+    <% end %>
+  <% end %>
+</nav>

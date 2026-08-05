@@ -1,0 +1,17 @@
+<%#
+  Locals: name, label, checked (optional, default false), disabled (optional)
+%>
+<%
+  field_id = "field_#{name}"
+%>
+<div class="checkbox-field">
+  <input
+    class="checkbox-input"
+    type="checkbox"
+    id="<%= field_id %>"
+    name="<%= name %>"
+    <%= "checked" if local_assigns[:checked] %>
+    <%= "disabled" if local_assigns[:disabled] %>
+  >
+  <label class="checkbox-label" for="<%= field_id %>"><%= label %></label>
+</div>

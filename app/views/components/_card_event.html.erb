@@ -1,0 +1,16 @@
+<%#
+  Locals: day, month, title, venue, href, status (:upcoming | :past)
+%>
+<article class="card flex gap-4">
+  <div class="flex w-16 shrink-0 flex-col items-center justify-center rounded-card bg-brand-700 py-2 text-paper">
+    <span class="text-h3 font-bold leading-none"><%= day %></span>
+    <span class="text-small"><%= month %></span>
+  </div>
+  <div class="flex flex-col gap-1">
+    <span class="tag"><%= status == :past ? t("ui.past") : t("ui.upcoming") %></span>
+    <h3 class="text-h3 font-display">
+      <%= link_to title, href, class: "text-ink hover:text-brand-700" %>
+    </h3>
+    <p class="text-small text-ink-muted"><%= t("ui.venue") %>: <%= venue %></p>
+  </div>
+</article>
