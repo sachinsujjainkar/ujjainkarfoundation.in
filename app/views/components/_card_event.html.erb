@@ -7,10 +7,10 @@
     <span class="text-small"><%= month %></span>
   </div>
   <div class="flex flex-col gap-1">
-    <span class="tag"><%= status == :past ? t("ui.past") : t("ui.upcoming") %></span>
+    <span class="tag"><%= status == :past ? t("common.past") : t("common.upcoming") %></span>
     <h3 class="text-h3 font-display">
       <%= link_to title, href, class: "text-ink hover:text-brand-700" %>
     </h3>
-    <p class="text-small text-ink-muted"><%= t("ui.venue") %>: <%= venue %></p>
+    <p class="text-small text-ink-muted"><%= t("common.venue") %>: <%= venue %></p>
   </div>
 </article>

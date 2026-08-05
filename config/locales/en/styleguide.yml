@@ -1,0 +1,12 @@
+# Demo copy for the dev-only /styleguide page. Not site content.
+en:
+  styleguide:
+    title: "Style guide"
+    sample_tag: "Education"
+    sample_headline: "A well-set headline reads calmly, even in a small space"
+    sample_body: "Body copy sits at a measure of sixty to seventy characters so a Marathi or English reader's eye doesn't have to travel too far between lines."
+    sample_caption: "From left: sample caption text for a photo credit line."
+    sample_stat_label: "Programmes run"
+    sample_error: "This field is required."
+    sample_hint: "We'll only use this to get in touch about your submission."
+    empty_state: "Nothing here yet."

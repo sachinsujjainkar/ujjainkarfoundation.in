@@ -1,0 +1,5 @@
+# Nav-specific chrome — see docs/01-glossary.md. Full menu labels land in
+# Phase 03 (layout shell); this is what exists so far.
+mr:
+  navigation:
+    home: "मुख्यपृष्ठ"

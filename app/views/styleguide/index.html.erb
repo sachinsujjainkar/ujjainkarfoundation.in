@@ -58,16 +58,16 @@
     <%= locale_pair do |locale| %>
       <div class="flex flex-col gap-4">
         <div class="flex flex-wrap items-center gap-3">
-          <%= render "components/button", label: t("ui.submit"), variant: :primary %>
-          <%= render "components/button", label: t("ui.share"), variant: :secondary %>
-          <%= render "components/button", label: t("ui.view_all"), variant: :ghost %>
+          <%= render "components/button", label: t("forms.submit"), variant: :primary %>
+          <%= render "components/button", label: t("common.share"), variant: :secondary %>
+          <%= render "components/button", label: t("common.view_all"), variant: :ghost %>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <%= render "components/button", label: t("ui.download"), variant: :cta %>
+          <%= render "components/button", label: t("common.download"), variant: :cta %>
         </div>
         <div class="flex flex-wrap items-center gap-3">
-          <%= render "components/button", label: t("ui.submit"), variant: :primary, disabled: true %>
-          <%= render "components/button", label: t("ui.submit"), variant: :primary, loading: true %>
+          <%= render "components/button", label: t("forms.submit"), variant: :primary, disabled: true %>
+          <%= render "components/button", label: t("forms.submit"), variant: :primary, loading: true %>
         </div>
       </div>
     <% end %>
@@ -113,7 +113,7 @@
       <div class="-m-6 overflow-hidden rounded-card">
         <%= render "components/page_header",
               title: t("styleguide.sample_headline"),
-              breadcrumbs: [[t("ui.home"), "#"], [t("styleguide.title"), "#"]] %>
+              breadcrumbs: [[t("navigation.home"), "#"], [t("styleguide.title"), "#"]] %>
       </div>
     <% end %>
   </section>
@@ -134,9 +134,9 @@
     <h2 class="text-h2 font-display mb-4">Form field</h2>
     <%= locale_pair do |locale| %>
       <div class="flex flex-col gap-6">
-        <%= render "components/form_field", name: "name_#{locale}", label: t("ui.register"),
+        <%= render "components/form_field", name: "name_#{locale}", label: t("forms.register"),
               hint: t("styleguide.sample_hint") %>
-        <%= render "components/form_field", name: "name_error_#{locale}", label: t("ui.register"),
+        <%= render "components/form_field", name: "name_error_#{locale}", label: t("forms.register"),
               error: t("styleguide.sample_error") %>
       </div>
     <% end %>
@@ -146,7 +146,7 @@
   <section class="mb-16">
     <h2 class="text-h2 font-display mb-4">Select</h2>
     <%= locale_pair do |locale| %>
-      <%= render "components/select", name: "area_#{locale}", label: t("ui.venue"),
+      <%= render "components/select", name: "area_#{locale}", label: t("common.venue"),
             options: [[t("styleguide.sample_tag"), "1"], ["आरोग्य / Health", "2"]] %>
     <% end %>
   </section>
@@ -155,7 +155,7 @@
   <section class="mb-16">
     <h2 class="text-h2 font-display mb-4">Textarea</h2>
     <%= locale_pair do |locale| %>
-      <%= render "components/textarea", name: "message_#{locale}", label: t("ui.share"),
+      <%= render "components/textarea", name: "message_#{locale}", label: t("common.share"),
             hint: t("styleguide.sample_hint") %>
     <% end %>
   </section>

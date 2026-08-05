@@ -14,6 +14,13 @@
     <%= tag.link rel: "preload", href: asset_path("mukta-400.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
     <%= tag.link rel: "preload", href: asset_path("inter-400.woff2"), as: "font", type: "font/woff2", crossorigin: "anonymous" %>
 
+    <%# Reciprocal hreflang pair + x-default, on every page. See
+        docs/04-routes.md, "SEO requirements per page". %>
+    <% I18n.available_locales.each do |locale| %>
+      <%= tag.link rel: "alternate", hreflang: locale, href: alternate_locale_url(locale) %>
+    <% end %>
+    <%= tag.link rel: "alternate", hreflang: "x-default", href: alternate_locale_url(:mr) %>
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -29,8 +36,15 @@
   </head>
 
   <body>
-    <%# Provisional container — the real header/nav/footer shell lands in Phase 03. %>
-    <main class="container mx-auto mt-24 px-5 flex">
+    <%# Provisional header — the real header/nav/footer shell lands in Phase 03.
+        The switcher itself is real: it maps to the same record by ID, per
+        docs/04-routes.md, not just a locale-swapped homepage link. %>
+    <div class="container mx-auto flex justify-end px-5 pt-4">
+      <%= render "components/lang_switch", current: I18n.locale,
+            links: { mr: alternate_locale_url(:mr, only_path: true), en: alternate_locale_url(:en, only_path: true) } %>
+    </div>
+
+    <main class="container mx-auto mt-8 px-5 flex">
       <%= yield %>
     </main>
   </body>

@@ -1,30 +1,5 @@
-# Canonical site chrome strings — see docs/01-glossary.md. Use these exactly;
-# do not paraphrase. mr is the application default locale.
+# Demo copy for the dev-only /styleguide page. Not site content.
 mr:
-  ui:
-    home: "मुख्यपृष्ठ"
-    read_more: "अधिक वाचा"
-    view_all: "सर्व पहा"
-    search: "शोधा"
-    share: "शेअर करा"
-    submit: "पाठवा"
-    register: "नोंदणी करा"
-    download: "डाउनलोड करा"
-    date: "दिनांक"
-    venue: "स्थळ"
-    upcoming: "आगामी"
-    past: "झालेले"
-    photos: "छायाचित्रे"
-    videos: "चित्रफिती"
-    founder: "संस्थापक"
-    our_vision: "आमची दृष्टी"
-    our_mission: "आमचे ध्येय"
-    office_bearers: "पदाधिकारी"
-    not_found: "पृष्ठ सापडले नाही"
-    loading: "लोड होत आहे…"
-    previous: "मागील"
-    next: "पुढील"
-
   styleguide:
     title: "शैली मार्गदर्शक"
     sample_tag: "शिक्षण"

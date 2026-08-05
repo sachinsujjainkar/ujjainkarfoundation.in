@@ -1,0 +1,66 @@
+# Marathi date/time formatting -- Rails' reserved date/time i18n structure
+# (used internally by I18n.l), not app vocabulary. English doesn't need an
+# equivalent file: Rails ships correct English date/time formatting
+# built in, as the ultimate fallback locale.
+#
+# These formats use Latin numerals on purpose -- see app/services/devanagari_numerals.rb
+# and DateFormattingHelper for the Devanagari-numeral prose forms
+# (marathi_date / dateline). "Devanagari numerals in prose; Latin numerals
+# in form inputs and admin tables, where they are easier to scan."
+mr:
+  date:
+    formats:
+      default: "%-d %B %Y"
+      long: "%-d %B %Y"
+      short: "%-d %b"
+    month_names:
+      - ~
+      - जानेवारी
+      - फेब्रुवारी
+      - मार्च
+      - एप्रिल
+      - मे
+      - जून
+      - जुलै
+      - ऑगस्ट
+      - सप्टेंबर
+      - ऑक्टोबर
+      - नोव्हेंबर
+      - डिसेंबर
+    abbr_month_names:
+      - ~
+      - जाने
+      - फेब्रु
+      - मार्च
+      - एप्रि
+      - मे
+      - जून
+      - जुलै
+      - ऑग
+      - सप्टें
+      - ऑक्टो
+      - नोव्हें
+      - डिसें
+    day_names:
+      - रविवार
+      - सोमवार
+      - मंगळवार
+      - बुधवार
+      - गुरुवार
+      - शुक्रवार
+      - शनिवार
+    abbr_day_names:
+      - रवि
+      - सोम
+      - मंगळ
+      - बुध
+      - गुरु
+      - शुक्र
+      - शनि
+  time:
+    formats:
+      default: "%-d %B %Y, %I:%M %p"
+      long: "%-d %B %Y, %I:%M %p"
+      short: "%-d %b, %I:%M %p"
+    am: "सकाळी"
+    pm: "संध्याकाळी"
