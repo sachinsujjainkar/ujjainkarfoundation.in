@@ -11,7 +11,8 @@ The frame every page sits in: header, navigation, language switcher, footer, bre
 ## Tasks
 
 1. **Header**
-   - Logo (placeholder SVG until the real vector arrives) + wordmark उज्जैनकर फाउंडेशन + tagline
+   - Logo: the full circular emblem exists at `assets-source/brand/logo/`, but it isn't usable in the header at nav size — fine radial text in a seal doesn't survive below ~120px. The header needs a simplified horizontal lockup (mark + Tiro Devanagari Marathi wordmark), which doesn't exist yet. Use a placeholder wordmark-only header for now (उज्जैनकर फाउंडेशन set in Tiro Devanagari Marathi + tagline, no mark) and flag the simplified lockup as a follow-up asset need — don't squeeze the full emblem into a 40px slot.
+   - Favicon: a complete set already exists at `assets-source/brand/favicon/` (ico, 16px through 512px, Apple touch icon, Android Chrome icons). Use these directly — no need to generate placeholders.
    - Nav: मुख्यपृष्ठ · आमच्याविषयी · कार्यक्षेत्रे · कार्यक्रम · बातम्या · गॅलरी · संपर्क
    - Language switcher (मराठी / English)
    - One CTA: देणगी द्या

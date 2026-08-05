@@ -15,14 +15,17 @@ The complete homepage, styled, both locales, placeholder content, grey blocks wh
 
 2. **आमचा परिणाम** — **three** statistics, not five. Numbers very large in Devanagari numerals, Marathi label beneath, no icons, no sub-labels. Values from `SiteSetting`.
    Five metrics each with icon + number + label + sub-label is doing too much; three set large reads as confident.
+   The three headline numbers should be drawn from the real record in `docs/content/` — candidates are १०००+ पुरस्कारप्राप्त मान्यवर, १०००+ गुणवंत विद्यार्थी सत्कार, and the संमेलन count since 2010.
 
-3. **कार्यक्षेत्रे** — the focus areas. Monochrome icons in a single accent at varying opacity, or line icons at one weight. **Not five different colours** — that is the template tell this project is specifically avoiding.
+3. **कार्यक्षेत्रे** — the focus areas: साहित्य संमेलन, पुरस्कार, विद्यार्थी सत्कार, व्याख्यानमाला, प्रकाशन, आरोग्य व सामाजिक उपक्रम. Monochrome icons in a single accent at varying opacity, or line icons at one weight. **Not five different colours** — that is the template tell this project is specifically avoiding.
 
 4. **ताज्या बातम्या / येणारे कार्यक्रम** — two-column split. News as an asymmetric editorial grid (one lead item larger, then a denser list), events as the date-chip list from the reference mockups. Both patterns are good; keep them.
 
-5. **CTA band** — donate and volunteer, on `--brand-800`.
+5. **आगामी संमेलन** — a single prominent panel for the next साहित्य संमेलन. This is the foundation's flagship activity and deserves its own homepage slot, distinct from the general events list above.
 
-6. Footer (already built in Phase 03).
+6. **CTA band** — donate and volunteer, on `--brand-800`.
+
+7. Footer (already built in Phase 03).
 
 ## Tasks
 
@@ -40,7 +43,7 @@ The complete homepage, styled, both locales, placeholder content, grey blocks wh
 
 ## Definition of done
 
-- [ ] All six sections built, both locales
+- [ ] All seven sections built, both locales
 - [ ] Three stats, not five; no icons on them
 - [ ] Focus-area icons monochrome, single weight
 - [ ] No carousel anywhere

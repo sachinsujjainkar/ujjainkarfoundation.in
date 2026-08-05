@@ -25,7 +25,16 @@ Earlier drafts used उपक्रम loosely for both. That ambiguity is resol
 
 4. **Avo resource** with the icon picker, ordering, and publish toggle.
 
-5. **Seed data** — the five assumed areas: शिक्षण, आरोग्य, पर्यावरण, अन्न वितरण, महिला सक्षमीकरण. Mark clearly in the seed file that this list is **unconfirmed** and pending foundation input.
+5. **Seed data** — the six confirmed areas, with slugs:
+
+   | कार्यक्षेत्र | slug |
+   |---|---|
+   | साहित्य संमेलन | `sahitya-sammelan` |
+   | पुरस्कार | `puraskar` |
+   | विद्यार्थी सत्कार | `vidyarthi-satkar` |
+   | व्याख्यानमाला | `vyakhyanmala` |
+   | प्रकाशन | `prakashan` |
+   | आरोग्य व सामाजिक उपक्रम | `arogya-va-samajik-upakram` |
 
 6. **Icon set** — commission or select 8–10 monochrome line icons, single weight, as SVG in `assets-source/icons/`. Consistency of weight across the set matters more than the individual icons.
 

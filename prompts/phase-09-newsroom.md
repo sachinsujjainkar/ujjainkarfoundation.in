@@ -55,6 +55,8 @@ Full schema in `docs/03-data-model.md`. The fields that matter and why:
 - `needs_english_translation` surfaced as a filterable queue in admin.
 - Action Text sanitisation configured; reporters will paste from WhatsApp and Word.
 - Test the full write-and-submit flow on an actual phone before calling this done.
+- The foundation's dominant article types will be पुरस्कार and कार्यक्रम वृत्त, and articles routinely name twenty or more people. The व्यक्ती tagging autocomplete must stay fast and usable with several hundred `Person` records, and must support adding several people quickly in sequence.
+- Seed content for the first articles can be drawn from the events record in `docs/content/events.md`.
 
 ## Definition of done
 
