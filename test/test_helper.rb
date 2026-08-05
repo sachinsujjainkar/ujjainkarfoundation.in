@@ -4,6 +4,12 @@ require "rails/test_help"
 
 module ActiveSupport
   class TestCase
+    # assert_enqueued_with, assert_enqueued_jobs, etc. -- used by
+    # ImageUploadSafety-backed models (Person#photo) to confirm background
+    # work is scheduled without actually running it (no libvips in this
+    # environment; see app/models/concerns/photoable.rb).
+    include ActiveJob::TestHelper
+
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
 
