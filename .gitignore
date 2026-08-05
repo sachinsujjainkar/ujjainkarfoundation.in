@@ -31,6 +31,11 @@
 
 /public/assets
 
+# Windows/WSL "downloaded from the internet" zone marker -- shows up
+# alongside files dropped into assets-source/ from a Windows filesystem,
+# never something anyone means to commit.
+*.Identifier
+
 # Ignore key files for decrypting credentials and more.
 /config/*.key
 

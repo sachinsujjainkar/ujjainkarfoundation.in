@@ -1,0 +1,6 @@
+<%= t("passwords_mailer.reset.body_text") %>
+<%= edit_password_url(@user.password_reset_token) %>
+
+<%= t("passwords_mailer.reset.expires", minutes: @expires_in_minutes) %>
+
+<%= t("passwords_mailer.reset.not_requested") %>

@@ -1,0 +1,23 @@
+# Staff login / password reset only -- see app/controllers/sessions_controller.rb
+# and passwords_controller.rb. Not part of the public site's vocabulary
+# files; kept separate since nothing here is ever shown to a visitor.
+mr:
+  auth:
+    sign_in: "प्रवेश करा"
+    email_address: "ईमेल पत्ता"
+    password: "पासवर्ड"
+    forgot_password: "पासवर्ड विसरलात?"
+    invalid_credentials: "ईमेल पत्ता किंवा पासवर्ड चुकीचा आहे."
+    account_inactive: "हे खाते सध्या निष्क्रिय आहे. प्रशासकाशी संपर्क साधा."
+    not_authorized: "ही कृती करण्याची तुम्हाला परवानगी नाही."
+    try_again_later: "खूप प्रयत्न झाले. कृपया काही वेळाने पुन्हा प्रयत्न करा."
+    forgot_password_heading: "पासवर्ड विसरलात?"
+    email_reset_instructions: "सूचना ईमेल करा"
+    reset_instructions_sent: "पासवर्ड रीसेट करण्याच्या सूचना ईमेलवर पाठवल्या आहेत (जर तो ईमेल पत्ता नोंदणीकृत असेल तर)."
+    reset_link_invalid: "पासवर्ड रीसेट लिंक अवैध आहे किंवा कालबाह्य झाली आहे."
+    update_password_heading: "नवीन पासवर्ड सेट करा"
+    new_password: "नवीन पासवर्ड"
+    confirm_password: "पासवर्ड पुन्हा लिहा"
+    save: "जतन करा"
+    password_reset: "पासवर्ड यशस्वीरित्या बदलला गेला."
+    passwords_did_not_match: "दोन्ही पासवर्ड जुळत नाहीत."

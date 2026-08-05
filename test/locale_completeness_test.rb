@@ -10,8 +10,11 @@ class LocaleCompletenessTest < ActiveSupport::TestCase
   # Rails' reserved date/time i18n structure (config/locales/mr/datetime.yml)
   # is excluded on purpose: Rails ships correct English date/time formatting
   # built in, so there's no en/datetime.yml to compare against, and that's
-  # not drift.
-  EXCLUDED_FILES = %w[datetime.yml].freeze
+  # not drift. Same reasoning for avo.yml: it's a full translation of the
+  # avo gem's own bundled English strings (see that file's header comment),
+  # which live in the gem, not in config/locales/en/ -- there's nothing to
+  # compare it against in this repo.
+  EXCLUDED_FILES = %w[datetime.yml avo.yml].freeze
 
   test "every key in mr's locale files has a matching key in en, and vice versa" do
     mr_keys = flattened_keys(:mr)

@@ -1,4 +1,13 @@
 class ApplicationController < ActionController::Base
+  # Authentication is NOT included here on purpose -- almost every
+  # controller in this app serves the public bilingual site and must stay
+  # reachable with no login at all (docs/00-project-brief.md: "There is no
+  # public registration... 95%+ of traffic" is anonymous visitors). Staff
+  # auth is scoped to the admin surface only: Avo's own controllers via
+  # config/initializers/avo.rb's authenticate_with, and SessionsController/
+  # PasswordsController, which explicitly `include Authentication`
+  # themselves where they need it. See app/controllers/concerns/authentication.rb.
+
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
 

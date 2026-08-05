@@ -1,0 +1,15 @@
+<% password_digest = BCrypt::Password.create("password") %>
+
+one:
+  name: "एक प्रशासक"
+  email_address: one@example.com
+  password_digest: <%= password_digest %>
+  role: <%= User.roles.fetch(:admin) %>
+  active: true
+
+two:
+  name: "दोन वार्ताहर"
+  email_address: two@example.com
+  password_digest: <%= password_digest %>
+  role: <%= User.roles.fetch(:reporter) %>
+  active: true

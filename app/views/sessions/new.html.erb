@@ -1,0 +1,21 @@
+<% content_for :title, t("auth.sign_in") %>
+
+<h1 class="mb-6 text-h2 font-display text-ink"><%= t("auth.sign_in") %></h1>
+
+<%= form_with url: session_url, class: "flex flex-col gap-5" do |form| %>
+  <div class="form-field">
+    <label class="form-label" for="email_address"><%= t("auth.email_address") %></label>
+    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
+          value: params[:email_address], id: "email_address", class: "form-input" %>
+  </div>
+
+  <div class="form-field">
+    <label class="form-label" for="password"><%= t("auth.password") %></label>
+    <%= form.password_field :password, required: true, autocomplete: "current-password", maxlength: 72,
+          id: "password", class: "form-input" %>
+  </div>
+
+  <%= form.submit t("auth.sign_in"), class: "btn btn-primary w-full" %>
+
+  <%= link_to t("auth.forgot_password"), new_password_path, class: "text-center text-small font-semibold text-brand-700 hover:text-brand-500" %>
+<% end %>

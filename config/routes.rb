@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  mount_avo
+  resource :session
+  resources :passwords, param: :token
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -53,5 +56,14 @@ Rails.application.routes.draw do
       post LocalizedPages::SEGMENTS.dig(:contact, locale), to: "contact_messages#create"
       post LocalizedPages::SEGMENTS.dig(:volunteer, locale), to: "volunteers#create"
     end
+  end
+end
+
+if defined? ::Avo
+  Avo::Engine.routes.draw do
+    # Already covered by config.authenticate_with (config/initializers/avo.rb)
+    # -- that runs as a before_action on every Avo controller, this one
+    # included, not just Avo::ResourcesController.
+    get "dashboard", to: "tools#dashboard", as: :dashboard
   end
 end

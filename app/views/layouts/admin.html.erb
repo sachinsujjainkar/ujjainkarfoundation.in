@@ -1,0 +1,37 @@
+<%#
+  Minimal layout for the staff-only screens that exist outside Avo itself
+  -- login, password reset. No public header/nav/footer/language switcher:
+  none of that belongs in front of a staff member trying to sign in, and
+  reusing layouts/application.html.erb here would drag in public-site
+  assumptions (site_name, alternate_locale_url, donate CTA) that don't fit.
+  Deliberately Marathi-only chrome -- see prompts/phase-07-admin-auth.md,
+  "Admin UI labels in Marathi, defaulting to mr." ApplicationController's
+  set_locale already defaults to :mr here since these routes carry no
+  :locale param.
+%>
+<!DOCTYPE html>
+<html lang="mr">
+  <head>
+    <title><%= [content_for(:title), "प्रशासक"].compact_blank.join(" — ") %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="robots" content="noindex, nofollow">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag "/favicon.ico" %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="min-h-screen bg-brand-100">
+    <%= render "layouts/flash_messages" %>
+
+    <main class="flex min-h-screen items-center justify-center px-5 py-12">
+      <div class="card w-full max-w-sm p-8">
+        <%= render "layouts/brand_mark" %>
+        <div class="mt-8">
+          <%= yield %>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
