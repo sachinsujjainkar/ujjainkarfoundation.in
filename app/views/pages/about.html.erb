@@ -20,12 +20,26 @@
   </section>
 
   <section class="flex flex-col items-start gap-6 sm:flex-row">
-    <div class="aspect-square w-40 shrink-0 rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
-      400×400
-    </div>
+    <%# No named variants on Person#photo (see app/models/person.rb's own
+        comment) and no real photo attached yet either -- docs/content/founder/biography.md's
+        own "Notes for implementation" flags a founder photo as still
+        needed. Flat placeholder block, not a stock/AI image, until one
+        arrives. %>
+    <% if @founder&.photo&.attached? %>
+      <%= image_tag @founder.photo, alt: "", class: "aspect-square w-40 shrink-0 rounded-card object-cover" %>
+    <% else %>
+      <div class="aspect-square w-40 shrink-0 rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
+        400×400
+      </div>
+    <% end %>
     <div class="flex flex-col gap-2">
       <h2 class="text-h3 font-display"><%= t("common.founder") %></h2>
-      <p class="measure text-body text-ink-muted"><%= t("about.founder_pending") %></p>
+      <% if @founder&.bio.present? %>
+        <p class="text-body font-semibold text-ink"><%= [@founder.honorific, @founder.name].compact_blank.join(" ") %></p>
+        <div class="measure text-body text-ink-muted"><%= simple_format(@founder.bio) %></div>
+      <% else %>
+        <p class="measure text-body text-ink-muted"><%= t("about.founder_pending") %></p>
+      <% end %>
     </div>
   </section>
 </div>
