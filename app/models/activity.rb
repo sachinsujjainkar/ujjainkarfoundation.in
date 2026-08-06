@@ -15,7 +15,8 @@ class Activity < ApplicationRecord
   has_one_attached :hero_image
   image_upload_safety :hero_image
 
-  # has_many :articles, has_many :events -- Phase 09/10, not yet real models.
+  has_many :articles, dependent: :nullify
+  has_many :events, dependent: :nullify
 
   validates :slug, presence: true, uniqueness: true
   validates :name_mr, presence: true

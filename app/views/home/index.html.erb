@@ -137,12 +137,17 @@
         <h2 class="text-h2 font-display"><%= t("home.events_heading") %></h2>
         <%= link_to t("common.view_all"), nav_path(:events), class: "text-body font-semibold text-brand-700 hover:text-brand-500" %>
       </div>
-      <div class="flex flex-col gap-4">
-        <% @events.each do |event| %>
-          <%= render "components/card_event", day: event.day, month: event.month,
-                title: event.title, venue: event.venue, href: nav_path(:events), status: event.status %>
-        <% end %>
-      </div>
+      <% if @events.any? %>
+        <div class="flex flex-col gap-4">
+          <% @events.each do |event| %>
+            <% day, month = event_date_chip(event.starts_at) %>
+            <%= render "components/card_event", day: day, month: month,
+                  title: event.title, venue: event.venue_name, href: localized_detail_path(:events, event.slug), status: :upcoming %>
+          <% end %>
+        </div>
+      <% else %>
+        <%= render "components/empty_state", message: t("events.upcoming_empty") %>
+      <% end %>
     </div>
   </div>
 </section>

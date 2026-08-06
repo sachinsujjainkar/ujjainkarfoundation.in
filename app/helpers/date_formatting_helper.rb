@@ -27,6 +27,16 @@ module DateFormattingHelper
     "#{place}, दि. #{DevanagariNumerals.convert(date.day)} #{marathi_month_name(date)}"
   end
 
+  # [day, month] for the event "date chip" card (components/_card_event) --
+  # Devanagari day number, Marathi abbreviated month name. Locale-aware
+  # like localized_date -- Latin numerals and English abbreviation in :en.
+  def event_date_chip(date)
+    return [ "", "" ] if date.blank?
+    return [ date.day.to_s, I18n.t("date.abbr_month_names")[date.month] ] unless I18n.locale == :mr
+
+    [ DevanagariNumerals.convert(date.day), I18n.t("date.abbr_month_names", locale: :mr)[date.month] ]
+  end
+
   private
 
   def marathi_month_name(date)

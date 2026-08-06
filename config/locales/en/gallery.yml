@@ -1,0 +1,11 @@
+# गॅलरी -- Phase 10. Tab labels reuse common.photos/common.videos rather
+# than repeating them here; this is just the gallery page's own filter/
+# empty-state chrome.
+en:
+  gallery:
+    filter_by_activity: "Filter by focus area"
+    all_activities: "All focus areas"
+    filter_by_year: "Filter by year"
+    all_years: "All years"
+    index_empty: "Photos will appear here soon."
+    videos_empty: "Videos will appear here soon."

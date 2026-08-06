@@ -29,8 +29,10 @@ class Article < ApplicationRecord
 
   belongs_to :author, class_name: "User"
   belongs_to :published_by, class_name: "User", optional: true
-  # event_id -> Event is Phase 10's addition; Event doesn't exist yet.
   belongs_to :activity, optional: true
+  # Deferred until Phase 10 (Event didn't exist in Phase 09 -- see
+  # db/migrate/20260806040552_add_event_to_articles.rb).
+  belongs_to :event, optional: true
 
   has_many :article_photos, -> { order(:position) }, dependent: :destroy
   has_many :mentions, dependent: :destroy

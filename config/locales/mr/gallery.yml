@@ -1,0 +1,11 @@
+# गॅलरी -- Phase 10. Tab labels reuse common.photos/common.videos (see
+# common.yml's "use these exact words" note) rather than repeating them
+# here; this is just the gallery page's own filter/empty-state chrome.
+mr:
+  gallery:
+    filter_by_activity: "कार्यक्षेत्रानुसार गाळा"
+    all_activities: "सर्व कार्यक्षेत्रे"
+    filter_by_year: "वर्षानुसार गाळा"
+    all_years: "सर्व वर्षे"
+    index_empty: "छायाचित्रे लवकरच येथे दिसतील."
+    videos_empty: "चित्रफिती लवकरच येथे दिसतील."

@@ -1,3 +1,10 @@
 # Event-specific vocabulary beyond the shared common.* terms (date, venue,
 # upcoming, past) — populated in Phase 10.
-mr: {}
+mr:
+  events:
+    upcoming_heading: "आगामी कार्यक्रम"
+    upcoming_empty: "आगामी कार्यक्रमांची घोषणा लवकरच येथे होईल."
+    past_heading: "झालेले कार्यक्रम"
+    past_empty: "झालेल्या कार्यक्रमांची नोंद लवकरच येथे दिसेल."
+    photos_heading: "छायाचित्रे"
+    coverage_heading: "संबंधित बातम्या"

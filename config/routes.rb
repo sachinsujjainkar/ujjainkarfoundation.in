@@ -99,6 +99,16 @@ Rails.application.routes.draw do
   # literal filenames).
   get "feed.mr.xml", to: "articles#feed", defaults: { locale: "mr" }, as: :feed_mr
   get "feed.en.xml", to: "articles#feed", defaults: { locale: "en" }, as: :feed_en
+
+  # गॅलरी year archive -- docs/04-routes.md: "/mr/dalan/:year". A year
+  # number, not a slug, so it's its own route rather than going through
+  # DETAIL_TARGETS (which assumes a Latin-transliterated slug param).
+  %i[mr en].each do |locale|
+    scope "/#{locale}", locale: locale.to_s, as: locale do
+      get "#{LocalizedPages::SEGMENTS.dig(:gallery, locale)}/:year", to: "gallery#index",
+        as: "gallery_year", constraints: { year: /\d{4}/ }
+    end
+  end
 end
 
 if defined? ::Avo

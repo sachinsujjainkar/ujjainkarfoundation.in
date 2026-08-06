@@ -1,1 +1,47 @@
-<%= render "shared/placeholder_page", title_key: "navigation.events" %>
+<% content_for :title, t("navigation.events") %>
+<%= render "components/page_header", title: t("navigation.events"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.events"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-16 px-5 py-16">
+  <section class="flex flex-col gap-6">
+    <h2 class="text-h2 font-display"><%= t("events.upcoming_heading") %></h2>
+    <% if @upcoming.any? %>
+      <div class="flex flex-col gap-4">
+        <% @upcoming.each do |event| %>
+          <% day, month = event_date_chip(event.starts_at) %>
+          <%= render "components/card_event", day: day, month: month, title: event.title,
+                venue: event.venue_name, href: localized_detail_path(:events, event.slug), status: :upcoming %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= render "components/empty_state", message: t("events.upcoming_empty") %>
+    <% end %>
+  </section>
+
+  <section class="flex flex-col gap-6 border-t border-line pt-16">
+    <h2 class="text-h2 font-display"><%= t("events.past_heading") %></h2>
+    <% if @past.any? %>
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <% @past.each do |event| %>
+          <% cover = event.event_photos.first %>
+          <%= link_to localized_detail_path(:events, event.slug), class: "card flex flex-col gap-3 hover:border-brand-700" do %>
+            <% if cover %>
+              <%= responsive_image_tag cover, sizes: "(min-width: 1024px) 33vw, 100vw", class: "aspect-video w-full rounded-card object-cover" %>
+            <% else %>
+              <div class="aspect-video w-full rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
+                800×450
+              </div>
+            <% end %>
+            <div class="flex flex-col gap-1 p-2">
+              <span class="tag"><%= t("common.past") %></span>
+              <h3 class="text-h3 font-display text-ink"><%= event.title %></h3>
+              <p class="text-small text-ink-muted"><%= localized_date(event.starts_at) %></p>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= render "components/empty_state", message: t("events.past_empty") %>
+    <% end %>
+  </section>
+</div>

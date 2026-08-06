@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# title/description/venue_note are Mobility-translated (event_translations
+# table), no fixture value for them here.
+
+one:
+  slug: chachani-karyakram-ek
+  starts_at: <%= 30.days.from_now %>
+  ends_at: <%= 30.days.from_now + 2.hours %>
+  venue_name: चाचणी सभागृह
+  venue_address: चाचणी पत्ता
+  activity: one
+  published: true
+  youtube_id:
+
+two:
+  slug: chachani-karyakram-don
+  starts_at: <%= 30.days.ago %>
+  ends_at: <%= 30.days.ago + 2.hours %>
+  venue_name: चाचणी सभागृह
+  venue_address: चाचणी पत्ता
+  activity: two
+  published: false
+  youtube_id:

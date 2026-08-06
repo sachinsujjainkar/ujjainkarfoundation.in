@@ -1,1 +1,119 @@
-<%= render "shared/placeholder_page", title_key: "navigation.gallery" %>
+<% content_for :title, t("navigation.gallery") %>
+<%= render "components/page_header", title: t("navigation.gallery"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.gallery"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-8 px-5 py-16">
+  <%# चित्रफिती tab -- server-rendered via ?tab=, same pattern as the
+      articles type filter (query params, no JS required to switch). %>
+  <div class="flex gap-2">
+    <%= link_to t("common.photos"), nav_path(:gallery),
+          class: class_names("tag", "!bg-brand-700 !text-paper" => @tab == GalleryController::PHOTO_TAB) %>
+    <%= link_to t("common.videos"), "#{nav_path(:gallery)}?tab=#{GalleryController::VIDEO_TAB}",
+          class: class_names("tag", "!bg-brand-700 !text-paper" => @tab == GalleryController::VIDEO_TAB) %>
+  </div>
+
+  <% if @tab == GalleryController::VIDEO_TAB %>
+    <% if @videos.any? %>
+      <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <% @videos.each do |event| %>
+          <div class="flex flex-col gap-2">
+            <%= render "components/youtube_embed", youtube_id: event.youtube_id, title: event.title %>
+            <h3 class="text-body font-semibold">
+              <%= link_to event.title, localized_detail_path(:events, event.slug), class: "text-ink hover:text-brand-700" %>
+            </h3>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <%= render "components/empty_state", message: t("gallery.videos_empty") %>
+    <% end %>
+  <% else %>
+    <%# कार्यक्षेत्र / वर्ष filters -- query params, GalleryPhoto filters at
+        the SQL level so these never load the full photo set to narrow it. %>
+    <div class="flex flex-col gap-3">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="text-small font-semibold uppercase tracking-normal text-ink-muted"><%= t("gallery.filter_by_activity") %>:</span>
+        <%= link_to t("gallery.all_activities"), "#{nav_path(:gallery)}#{"?year=#{@selected_year}" if @selected_year}",
+              class: class_names("tag", "!bg-brand-700 !text-paper" => @selected_activity.blank?) %>
+        <% @activities.each do |activity| %>
+          <%= link_to activity.name, "#{nav_path(:gallery)}?karyakshetra=#{activity.slug}#{"&year=#{@selected_year}" if @selected_year}",
+                class: class_names("tag", "!bg-brand-700 !text-paper" => @selected_activity == activity) %>
+        <% end %>
+      </div>
+
+      <% if @years.any? %>
+        <div class="flex flex-wrap items-center gap-2">
+          <span class="text-small font-semibold uppercase tracking-normal text-ink-muted"><%= t("gallery.filter_by_year") %>:</span>
+          <%= link_to t("gallery.all_years"), "#{nav_path(:gallery)}#{"?karyakshetra=#{@selected_activity.slug}" if @selected_activity}",
+                class: class_names("tag", "!bg-brand-700 !text-paper" => @selected_year.blank?) %>
+          <% @years.each do |year| %>
+            <%= link_to(I18n.locale == :mr ? DevanagariNumerals.convert(year) : year.to_s,
+                  "#{send("#{I18n.locale}_gallery_year_path", year)}#{"?karyakshetra=#{@selected_activity.slug}" if @selected_activity}",
+                  class: class_names("tag", "!bg-brand-700 !text-paper" => @selected_year == year)) %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+
+    <% if @photos.any? %>
+      <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" data-controller="lightbox">
+        <% @photos.each do |photo| %>
+          <button
+            type="button"
+            data-lightbox-target="item"
+            data-action="lightbox#open"
+            data-full="<%= url_for(photo.image.variant(:hero_jpg)) %>"
+            data-caption="<%= photo.caption %>"
+            data-credit="<%= photo.credit %>"
+            class="block overflow-hidden rounded-card text-left"
+          >
+            <%= responsive_image_tag photo, sizes: "(min-width: 1024px) 25vw, 50vw", class: "aspect-square w-full object-cover" %>
+          </button>
+        <% end %>
+
+        <div
+          data-lightbox-target="overlay"
+          data-action="touchstart->lightbox#touchStart touchend->lightbox#touchEnd"
+          class="fixed inset-0 z-50 hidden flex-col items-center justify-center gap-4 bg-brand-900/95 p-4"
+          role="dialog"
+          aria-modal="true"
+          aria-label="<%= t('common.photos') %>"
+          tabindex="-1"
+        >
+          <button type="button" data-action="lightbox#close" class="absolute right-4 top-4 text-paper" aria-label="<%= t('common.dismiss') %>">
+            <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" d="M6 6l12 12M18 6L6 18" />
+            </svg>
+          </button>
+          <button type="button" data-action="lightbox#prev" class="absolute left-2 top-1/2 -translate-y-1/2 text-paper sm:left-6" aria-label="<%= t('common.previous') %>">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6" />
+            </svg>
+          </button>
+          <button type="button" data-action="lightbox#next" class="absolute right-2 top-1/2 -translate-y-1/2 text-paper sm:right-6" aria-label="<%= t('common.next') %>">
+            <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
+          <img data-lightbox-target="image" src="" alt="" class="max-h-[75vh] max-w-full rounded-card object-contain">
+          <div class="max-w-2xl text-center text-paper">
+            <p data-lightbox-target="caption" class="text-body"></p>
+            <p data-lightbox-target="credit" class="text-small text-paper/70"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <%= render "components/pagination", current_page: @pagy.page, total_pages: @pagy.pages,
+              path_for: ->(page) {
+                query = { page: page }
+                query[:karyakshetra] = @selected_activity.slug if @selected_activity
+                query[:year] = @selected_year if @selected_year
+                "#{nav_path(:gallery)}?#{query.to_query}"
+              } %>
+      </div>
+    <% else %>
+      <%= render "components/empty_state", message: t("gallery.index_empty") %>
+    <% end %>
+  <% end %>
+</div>

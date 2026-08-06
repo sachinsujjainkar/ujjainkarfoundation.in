@@ -55,6 +55,7 @@ module LocalizedPages
   # activities below, not a special case.
   DETAIL_TARGETS = {
     activities: "activities#show",
-    articles: "articles#show"
+    articles: "articles#show",
+    events: "events#show"
   }.freeze
 end

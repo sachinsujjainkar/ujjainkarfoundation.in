@@ -1,3 +1,10 @@
 # Event-specific vocabulary beyond the shared common.* terms — populated in
 # Phase 10.
-en: {}
+en:
+  events:
+    upcoming_heading: "Upcoming Events"
+    upcoming_empty: "Upcoming events will be announced here soon."
+    past_heading: "Past Events"
+    past_empty: "A record of past events will appear here soon."
+    photos_heading: "Photos"
+    coverage_heading: "Related News"

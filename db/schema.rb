@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_030536) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_040552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -115,6 +115,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_030536) do
     t.bigint "author_id", null: false
     t.datetime "created_at", null: false
     t.string "dateline_place"
+    t.bigint "event_id"
     t.boolean "featured", default: false, null: false
     t.boolean "needs_english_translation", default: false, null: false
     t.datetime "published_at"
@@ -125,6 +126,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_030536) do
     t.integer "view_count", default: 0, null: false
     t.index ["activity_id"], name: "index_articles_on_activity_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
+    t.index ["event_id"], name: "index_articles_on_event_id"
     t.index ["published_at"], name: "index_articles_on_published_at"
     t.index ["published_by_id"], name: "index_articles_on_published_by_id"
     t.index ["slug"], name: "index_articles_on_slug", unique: true
@@ -154,6 +156,53 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_030536) do
     t.boolean "read", default: false, null: false
     t.string "subject"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "event_photo_translations", force: :cascade do |t|
+    t.string "caption"
+    t.datetime "created_at", null: false
+    t.bigint "event_photo_id", null: false
+    t.string "locale", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_photo_id", "locale"], name: "index_event_photo_translations_on_event_photo_id_and_locale", unique: true
+    t.index ["locale"], name: "index_event_photo_translations_on_locale"
+  end
+
+  create_table "event_photos", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "credit"
+    t.bigint "event_id", null: false
+    t.integer "position"
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_event_photos_on_event_id"
+  end
+
+  create_table "event_translations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.bigint "event_id", null: false
+    t.string "locale", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.string "venue_note"
+    t.index ["event_id", "locale"], name: "index_event_translations_on_event_id_and_locale", unique: true
+    t.index ["locale"], name: "index_event_translations_on_locale"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "activity_id"
+    t.datetime "created_at", null: false
+    t.datetime "ends_at"
+    t.boolean "published", default: false, null: false
+    t.string "slug", null: false
+    t.datetime "starts_at"
+    t.datetime "updated_at", null: false
+    t.text "venue_address"
+    t.string "venue_name"
+    t.string "youtube_id"
+    t.index ["activity_id"], name: "index_events_on_activity_id"
+    t.index ["slug"], name: "index_events_on_slug", unique: true
+    t.index ["starts_at"], name: "index_events_on_starts_at"
   end
 
   create_table "membership_translations", force: :cascade do |t|
@@ -286,8 +335,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_030536) do
   add_foreign_key "article_photos", "articles"
   add_foreign_key "article_translations", "articles"
   add_foreign_key "articles", "activities"
+  add_foreign_key "articles", "events"
   add_foreign_key "articles", "users", column: "author_id"
   add_foreign_key "committee_translations", "committees"
+  add_foreign_key "event_photo_translations", "event_photos"
+  add_foreign_key "event_photos", "events"
+  add_foreign_key "event_translations", "events"
+  add_foreign_key "events", "activities"
   add_foreign_key "membership_translations", "memberships"
   add_foreign_key "memberships", "committees"
   add_foreign_key "memberships", "people"

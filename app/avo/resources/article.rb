@@ -46,6 +46,7 @@ class Avo::Resources::Article < Avo::BaseResource
     field :article_type, as: :select, name: "प्रकार", required: true,
       options: Article.article_types.keys.index_by { |t| I18n.t("articles.types.#{t}", locale: :mr) }
     field :activity, as: :belongs_to, name: "कार्यक्षेत्र", help: "ऐच्छिक -- लागू असल्यास"
+    field :event, as: :belongs_to, name: "कार्यक्रम", help: "ऐच्छिक -- एखाद्या कार्यक्रमाचे वृत्तांकन असल्यास"
     field :dateline_place, as: :text, name: "दिनांकरेषा गाव/शहर", help: "उदा. पुणे, मुक्ताईनगर -- वृत्तपत्रांच्या पद्धतीने बातमीच्या सुरुवातीला दिसते"
     field :featured, as: :boolean, name: "ठळक बातमी आहे का?"
     field :needs_english_translation, as: :boolean, name: "इंग्रजी अनुवाद प्रलंबित आहे का?",
