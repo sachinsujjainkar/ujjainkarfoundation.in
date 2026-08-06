@@ -12,6 +12,10 @@ class Avo::Resources::Article < Avo::BaseResource
     filter Avo::Filters::NeedsEnglishTranslationFilter
   end
 
+  def actions
+    action Avo::Actions::GeneratePoster
+  end
+
   STATUS_LABELS_MR = {
     "draft" => "मसुदा", "submitted" => "पुनरावलोकनासाठी", "published" => "प्रकाशित", "archived" => "संग्रहित"
   }.freeze

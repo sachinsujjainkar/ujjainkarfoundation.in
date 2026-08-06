@@ -1,0 +1,352 @@
+/*
+ * Poster generator (Phase 11) -- self-hosted fonts + brand palette,
+ * scoped under .poster-* so this never touches Avo's own admin chrome.
+ * Loaded on every Avo page via app/views/avo/partials/_head.html.erb
+ * (small and inert outside .poster-stage, so that's a safe default
+ * rather than plumbing a per-page content_for through Avo's layout).
+ *
+ * Deliberately NOT the public site's own Tailwind build
+ * (app/assets/builds/tailwind.css) -- that carries the whole public
+ * component library (header, footer, hero...) which risks colliding with
+ * Avo's own class names. Just the four self-hosted font files (same
+ * ones as the public site -- see app/assets/tailwind/fonts.css) and the
+ * palette values from docs/02-design-system.md, duplicated here as
+ * plain hex since tokens.css itself is Tailwind-build-only.
+ */
+
+@font-face {
+  font-family: "Tiro Devanagari Marathi";
+  src: url("../fonts/tiro-devanagari-marathi-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block; /* never rasterise a poster on the system-font fallback */
+}
+
+@font-face {
+  font-family: "Mukta";
+  src: url("../fonts/mukta-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Mukta";
+  src: url("../fonts/mukta-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("../fonts/source-serif-4-display-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: block;
+}
+
+.poster-editor {
+  --pb-brand-900: #3f0f17;
+  --pb-brand-800: #55151f;
+  --pb-brand-700: #6e1b26;
+  --pb-accent-600: #b4622a;
+  --pb-accent-100: #f7eadf;
+  --pb-paper: #faf7f2;
+  --pb-ink: #1a1614;
+
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .poster-editor {
+    grid-template-columns: 1fr;
+  }
+}
+
+.poster-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-family: "Inter", sans-serif;
+}
+
+.poster-controls fieldset {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 0.75rem;
+}
+
+.poster-controls legend {
+  font-weight: 600;
+  padding: 0 0.25rem;
+}
+
+.poster-swatches {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.poster-swatch {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+
+.poster-swatch[aria-pressed="true"] {
+  border-color: var(--pb-ink, #1a1614);
+}
+
+.poster-preview-wrap {
+  overflow: auto;
+  background: #e5e5e5;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.poster-preview-scale {
+  transform-origin: top left;
+}
+
+/* The stage is built at its REAL export pixel dimensions (1080x1080 or
+   1080x1920) -- .poster-preview-scale above shrinks it for on-screen
+   display via a CSS transform. html-to-image rasterises the stage's own
+   layout box, unaffected by that ancestor transform, so what gets
+   exported is the full-resolution artwork, not the shrunk preview. */
+.poster-stage {
+  position: relative;
+  width: 1080px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+  font-family: "Mukta", sans-serif;
+}
+
+.poster-stage[data-size="status"] {
+  height: 1920px;
+}
+
+.poster-template {
+  display: none;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+}
+
+.poster-template[data-active="true"] {
+  display: flex;
+}
+
+.poster-photo-frame {
+  position: relative;
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none;
+  background: var(--pb-brand-900);
+}
+
+.poster-photo-frame:active {
+  cursor: grabbing;
+}
+
+.poster-photo-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.poster-logo {
+  height: 64px;
+  width: auto;
+}
+
+.poster-headline {
+  font-family: "Tiro Devanagari Marathi", "Source Serif 4", serif;
+  font-weight: 400;
+  line-height: 1.3;
+  outline: none;
+}
+
+.poster-headline[contenteditable="true"]:focus,
+[contenteditable="true"]:focus {
+  outline: 2px dashed var(--pb-accent-600, #b4622a);
+  outline-offset: 4px;
+}
+
+/* ---------- news ---------- */
+.poster-template--news {
+  background: var(--pb-paper);
+}
+.poster-template--news .poster-photo-frame {
+  flex: 1;
+}
+.poster-template--news .poster-news-body {
+  background: var(--pb-brand-700);
+  color: var(--pb-paper);
+  padding: 56px 64px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.poster-template--news .poster-headline {
+  font-size: 56px;
+}
+.poster-template--news .poster-meta {
+  font-size: 26px;
+  opacity: 0.85;
+}
+
+/* ---------- event ---------- */
+.poster-template--event {
+  background: var(--pb-brand-900);
+  color: var(--pb-paper);
+  padding: 64px;
+  justify-content: space-between;
+}
+.poster-template--event .poster-headline {
+  font-size: 60px;
+}
+.poster-template--event .poster-event-datebadge {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--pb-paper);
+  color: var(--pb-brand-900);
+  border-radius: 12px;
+  padding: 20px 32px;
+  width: fit-content;
+}
+.poster-template--event .poster-event-datebadge .day {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+.poster-template--event .poster-event-datebadge .month {
+  font-size: 22px;
+}
+.poster-template--event .poster-event-venue {
+  font-size: 28px;
+  border-top: 1px solid rgba(250, 247, 242, 0.3);
+  padding-top: 24px;
+}
+
+/* ---------- award ---------- */
+.poster-template--award {
+  background: var(--pb-accent-100);
+  align-items: center;
+  text-align: center;
+  padding: 72px 56px;
+  gap: 32px;
+  border: 16px solid var(--pb-brand-700);
+}
+.poster-template--award .poster-photo-frame {
+  width: 320px;
+  height: 320px;
+  border-radius: 9999px;
+  border: 8px solid var(--pb-brand-700);
+}
+.poster-template--award .poster-award-title {
+  font-size: 30px;
+  color: var(--pb-accent-600);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.poster-template--award .poster-headline {
+  font-size: 52px;
+}
+
+/* ---------- festival ---------- */
+.poster-template--festival {
+  background: linear-gradient(160deg, var(--pb-brand-700), var(--pb-brand-900));
+  color: var(--pb-paper);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 24px;
+  padding: 64px;
+}
+.poster-template--festival .poster-headline {
+  font-size: 72px;
+}
+.poster-template--festival .poster-meta {
+  font-size: 30px;
+  opacity: 0.9;
+}
+
+/* ---------- quote ---------- */
+.poster-template--quote {
+  background: var(--pb-paper);
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 32px;
+  padding: 80px;
+}
+.poster-template--quote .poster-headline {
+  font-size: 48px;
+  font-style: italic;
+}
+.poster-template--quote .poster-quote-mark {
+  font-family: "Source Serif 4", serif;
+  font-size: 120px;
+  line-height: 0.5;
+  color: var(--pb-accent-600);
+}
+.poster-template--quote .poster-meta {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ---------- colour variants ---------- */
+.poster-stage[data-variant="ochre"] .poster-template--news .poster-news-body,
+.poster-stage[data-variant="ochre"] .poster-template--event,
+.poster-stage[data-variant="ochre"] .poster-template--award {
+  background: var(--pb-accent-600);
+  border-color: var(--pb-accent-600);
+  color: var(--pb-paper);
+}
+.poster-stage[data-variant="ochre"] .poster-template--festival {
+  background: linear-gradient(160deg, var(--pb-accent-600), var(--pb-brand-900));
+}
+.poster-stage[data-variant="paper"] .poster-template--news .poster-news-body {
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+  border-top: 4px solid var(--pb-brand-700);
+}
+.poster-stage[data-variant="paper"] .poster-template--event {
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+}
+.poster-stage[data-variant="paper"] .poster-template--event .poster-event-datebadge {
+  background: var(--pb-brand-700);
+  color: var(--pb-paper);
+}
+.poster-stage[data-variant="paper"] .poster-template--festival {
+  background: var(--pb-paper);
+  color: var(--pb-ink);
+}

@@ -3,3 +3,9 @@
     exactly this: pulling in our own JS on top of Avo's own admin panel.
     See app/javascript/avo.custom.js. %>
 <%= javascript_importmap_tags "avo.custom" %>
+
+<%# poster.css is small and scoped under .poster-* (see that file's own
+    header comment) -- safe to load on every Avo page rather than plumbing
+    a per-page content_for through Avo's own layout, which doesn't yield
+    one here. Phase 11 (poster generator). %>
+<%= stylesheet_link_tag "poster" %>

@@ -1,0 +1,145 @@
+<%
+  # Prefill values, all Marathi (see tools_controller.rb#poster's comment
+  # on why this tool is Marathi-only). event_date backs the कार्यक्रम
+  # template's date badge -- the linked Event's own date if there is one,
+  # else the article's publish date, since "date" per
+  # prompts/phase-11-poster-generator.md task 3 just means "a date to
+  # prefill", not specifically the event's.
+  event = @article.event
+  event_date = event&.starts_at || @article.published_at
+  photo_url = @article.featured_image.attached? ? url_for(@article.featured_image.variant(resize_to_limit: [ 1080, 1080 ])) : nil
+  logo_url = asset_path("logo-mark.png")
+%>
+
+<h1 class="text-h2" style="font-family: 'Inter', sans-serif; margin-bottom: 1.5rem;">
+  पोस्टर तयार करा — <%= @headline %>
+</h1>
+
+<%#
+  logo_url above is app/assets/images/logo-mark.png, a raster PNG --
+  prompts/phase-11-poster-generator.md says "Logo must be the vector,
+  never a rasterised copy," but no vector lockup exists in this repo yet
+  (see app/views/layouts/_brand_mark.html.erb's own comment: "a simplified
+  horizontal lockup doesn't exist yet"). Using the same real asset every
+  other part of the site uses rather than drawing an SVG version of the
+  emblem myself -- inventing brand artwork isn't this tool's call to make.
+  Revisit once a real vector mark exists.
+%>
+<div
+  id="poster-app"
+  class="poster-editor"
+  data-controller="poster"
+  data-poster-slug-value="<%= @article.slug %>"
+  data-poster-headline-value="<%= @headline %>"
+  data-poster-dateline-value="<%= @dateline %>"
+  data-poster-event-date-value="<%= event_date&.iso8601 %>"
+  data-poster-event-venue-value="<%= event&.venue_name %>"
+  data-poster-photo-url-value="<%= photo_url %>"
+  data-poster-logo-url-value="<%= logo_url %>"
+>
+  <aside class="poster-controls">
+    <fieldset>
+      <legend>टेम्पलेट</legend>
+      <select data-poster-target="templatePicker" data-action="poster#changeTemplate">
+        <option value="news">बातमी</option>
+        <option value="event">कार्यक्रम आमंत्रण</option>
+        <option value="award">पुरस्कार / अभिनंदन</option>
+        <option value="festival">सण शुभेच्छा</option>
+        <option value="quote">विचार</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend>आकार</legend>
+      <label><input type="radio" name="poster-size" value="square" data-action="poster#changeSize" checked> चौरस (१०८०×१०८०) — फीड</label><br>
+      <label><input type="radio" name="poster-size" value="status" data-action="poster#changeSize"> स्टेटस (१०८०×१९२०) — स्टेटस</label>
+    </fieldset>
+
+    <fieldset>
+      <legend>रंग</legend>
+      <div class="poster-swatches" data-poster-target="variantSwatches" data-action="click->poster#changeVariant">
+        <button type="button" class="poster-swatch" data-variant="maroon" style="background:#6e1b26" aria-pressed="true" aria-label="मरून"></button>
+        <button type="button" class="poster-swatch" data-variant="ochre" style="background:#b4622a" aria-pressed="false" aria-label="गेरू"></button>
+        <button type="button" class="poster-swatch" data-variant="paper" style="background:#faf7f2;border:1px solid #ccc" aria-pressed="false" aria-label="कागद"></button>
+      </div>
+    </fieldset>
+
+    <fieldset data-poster-target="festivalControls" style="display:none">
+      <legend>सण</legend>
+      <select data-poster-target="festivalPicker" data-action="poster#changeFestival">
+        <option value="गुढी पाडवाच्या हार्दिक शुभेच्छा!">गुढी पाडवा</option>
+        <option value="गणेशोत्सवाच्या हार्दिक शुभेच्छा!">गणेशोत्सव</option>
+        <option value="शिवजयंतीच्या हार्दिक शुभेच्छा!">शिवजयंती</option>
+        <option value="स्वातंत्र्य दिनाच्या हार्दिक शुभेच्छा!">स्वातंत्र्य दिन</option>
+      </select>
+    </fieldset>
+
+    <p style="font-size: 0.875rem; color: #666;">मजकुरावर क्लिक करून थेट संपादित करा. फोटो हलवण्यासाठी फोटोवर ओढा (drag).</p>
+
+    <div style="display:flex; flex-direction:column; gap:0.5rem;">
+      <button type="button" class="btn" data-action="poster#download" data-poster-target="downloadButton" style="padding:0.6rem 1rem; background:#6e1b26; color:#fff; border-radius:0.5rem; border:none; cursor:pointer;">
+        डाउनलोड करा (PNG)
+      </button>
+      <button type="button" class="btn" data-action="poster#share" data-poster-target="shareButton" style="padding:0.6rem 1rem; background:#25D366; color:#fff; border-radius:0.5rem; border:none; cursor:pointer; display:none;">
+        WhatsApp वर पाठवा
+      </button>
+      <p data-poster-target="status" role="status" aria-live="polite" style="font-size:0.875rem; min-height:1.25em;"></p>
+    </div>
+  </aside>
+
+  <div class="poster-preview-wrap">
+    <div class="poster-preview-scale" data-poster-target="scaleWrap">
+      <div class="poster-stage" data-poster-target="stage" data-size="square" data-variant="maroon" lang="mr">
+
+        <%# ---------- बातमी ---------- %>
+        <div class="poster-template poster-template--news" data-template="news" data-active="true">
+          <div class="poster-photo-frame" data-poster-target="photoFrame">
+            <img data-poster-target="photoImg" src="<%= photo_url %>" alt="">
+          </div>
+          <div class="poster-news-body">
+            <img class="poster-logo" src="<%= logo_url %>" alt="">
+            <p class="poster-headline" contenteditable="true" data-poster-target="newsHeadline"><%= @headline %></p>
+            <p class="poster-meta" data-poster-target="newsMeta"><%= @dateline %></p>
+          </div>
+        </div>
+
+        <%# ---------- कार्यक्रम ---------- %>
+        <div class="poster-template poster-template--event" data-template="event">
+          <img class="poster-logo" src="<%= logo_url %>" alt="">
+          <p class="poster-headline" contenteditable="true" data-poster-target="eventHeadline"><%= event&.title || @headline %></p>
+          <div class="poster-event-datebadge" data-poster-target="eventDateBadge">
+            <span class="day" data-poster-target="eventDay">—</span>
+            <span class="month" data-poster-target="eventMonth">—</span>
+          </div>
+          <p class="poster-event-venue" contenteditable="true" data-poster-target="eventVenue">📍 <%= event&.venue_name %></p>
+        </div>
+
+        <%# ---------- पुरस्कार / अभिनंदन ---------- %>
+        <div class="poster-template poster-template--award" data-template="award">
+          <div class="poster-photo-frame" data-poster-target="photoFrame">
+            <img data-poster-target="photoImg" src="<%= photo_url %>" alt="">
+          </div>
+          <p class="poster-award-title" contenteditable="true" data-poster-target="awardTitle">अभिनंदन</p>
+          <p class="poster-headline" contenteditable="true" data-poster-target="awardHeadline"><%= @headline %></p>
+          <img class="poster-logo" src="<%= logo_url %>" alt="">
+        </div>
+
+        <%# ---------- सण शुभेच्छा ---------- %>
+        <div class="poster-template poster-template--festival" data-template="festival">
+          <img class="poster-logo" src="<%= logo_url %>" alt="">
+          <p class="poster-headline" contenteditable="true" data-poster-target="festivalHeadline">गुढी पाडवाच्या हार्दिक शुभेच्छा!</p>
+          <p class="poster-meta" data-poster-target="festivalMeta">— शिवचरण उज्जैनकर फाउंडेशन</p>
+        </div>
+
+        <%# ---------- विचार ---------- %>
+        <div class="poster-template poster-template--quote" data-template="quote">
+          <span class="poster-quote-mark">“</span>
+          <p class="poster-headline" contenteditable="true" data-poster-target="quoteHeadline"><%= @headline %></p>
+          <p class="poster-meta" data-poster-target="quoteMeta">— शिवचरण उज्जैनकर फाउंडेशन</p>
+          <img class="poster-logo" src="<%= logo_url %>" alt="">
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

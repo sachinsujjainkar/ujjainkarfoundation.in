@@ -117,5 +117,12 @@ if defined? ::Avo
     # -- that runs as a before_action on every Avo controller, this one
     # included, not just Avo::ResourcesController.
     get "dashboard", to: "tools#dashboard", as: :dashboard
+
+    # पोस्टर generator (Phase 11) -- a Tool, same reasoning as dashboard
+    # above: Avo community's Dashboard DSL never gets a real route, a Tool
+    # does. :article_id, not :id -- this isn't a poster resource with its
+    # own persisted records (no Poster model, nothing to CRUD or list),
+    # just a per-article editor page.
+    get "posters/:article_id", to: "tools#poster", as: :poster
   end
 end
