@@ -45,9 +45,16 @@ module LocalizedPages
   # locked, Latin-transliterated slug (docs/01-glossary.md, "Slug policy")
   # rather than a second literal translated word. Only entries that need
   # one belong here -- most of SEGMENTS is index/static pages with no
-  # detail view. Article detail (`/mr/batmya/:id-:slug`) doesn't fit this
-  # shape (id-slug, not slug alone) and gets its own route in Phase 09.
+  # detail view.
+  #
+  # docs/04-routes.md writes the article URL shape as `/mr/batmya/:id-:slug`,
+  # which reads like two params -- it isn't. Article#slug (see
+  # app/models/article.rb's finalize_slug!) is already the single string
+  # "42-shikshan-purskar-vitaran", id and transliteration baked into one
+  # value at creation. So this fits the exact same single-:slug shape as
+  # activities below, not a special case.
   DETAIL_TARGETS = {
-    activities: "activities#show"
+    activities: "activities#show",
+    articles: "articles#show"
   }.freeze
 end

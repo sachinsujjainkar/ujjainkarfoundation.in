@@ -12,6 +12,11 @@ class Person < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :committees, through: :memberships
 
+  # From Phase 09 -- anyone named in a published article gets an automatic
+  # page listing every mention. See app/models/mention.rb.
+  has_many :mentions, dependent: :destroy
+  has_many :articles, through: :mentions
+
   # Founder portrait, committee member photos -- docs/03-data-model.md's
   # `has_one_attached :photo`. Deliberately no named variants here (unlike
   # Photoable's ArticlePhoto/EventPhoto): nothing in the data model or

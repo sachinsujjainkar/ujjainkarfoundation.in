@@ -1,0 +1,3 @@
+<%= t("article_mailer.published.body", headline: @article.headline_mr) %>
+
+<%= t("article_mailer.published.view_link") %>: <%= mr_articles_detail_url(@article.slug) %>

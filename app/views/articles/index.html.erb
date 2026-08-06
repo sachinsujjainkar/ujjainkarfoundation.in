@@ -1,1 +1,50 @@
-<%= render "shared/placeholder_page", title_key: "navigation.articles" %>
+<% content_for :title, t("navigation.articles") %>
+<%= render "components/page_header", title: t("navigation.articles"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.articles"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-10 px-5 py-16 lg:flex-row lg:items-start">
+  <%# Type filter sidebar -- "the mockup pattern works; keep it" per
+      prompts/phase-09-newsroom.md. %>
+  <aside class="flex flex-row flex-wrap gap-2 lg:w-56 lg:shrink-0 lg:flex-col">
+    <h2 class="w-full text-small font-semibold uppercase tracking-normal text-ink-muted"><%= t("articles.filter_by_type") %></h2>
+    <%= link_to t("articles.all_types"), nav_path(:articles),
+          class: class_names("tag", "!bg-brand-700 !text-paper" => @selected_type.blank?) %>
+    <% Article.article_types.each_key do |type| %>
+      <%= link_to t("articles.types.#{type}"), "#{nav_path(:articles)}?type=#{type}",
+            class: class_names("tag", "!bg-brand-700 !text-paper" => @selected_type == type) %>
+    <% end %>
+  </aside>
+
+  <div class="flex-1">
+    <% if @articles.empty? %>
+      <%= render "components/empty_state", message: t("articles.index_empty") %>
+    <% else %>
+      <%
+        lead, *rest = @articles
+      %>
+      <%# Asymmetric editorial grid -- one lead item spanning two columns,
+          then a denser list. Not a uniform card wall. %>
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <%= render "components/card_article", tag_label: t("articles.types.#{lead.article_type}"),
+              headline: lead.headline, href: localized_detail_path(:articles, lead.slug),
+              dateline: dateline(lead.dateline_place, lead.published_at), excerpt: lead.subheadline.presence || "" %>
+        <div class="flex flex-col gap-6 border-t border-line pt-6 lg:border-t-0 lg:border-l lg:pl-8 lg:pt-0">
+          <% rest.each do |article| %>
+            <article class="flex flex-col gap-1 border-b border-line pb-4 last:border-b-0">
+              <span class="tag w-fit"><%= t("articles.types.#{article.article_type}") %></span>
+              <h3 class="text-h3 font-display">
+                <%= link_to article.headline, localized_detail_path(:articles, article.slug), class: "text-ink hover:text-brand-700" %>
+              </h3>
+              <p class="text-small text-ink-muted"><%= dateline(article.dateline_place, article.published_at) %></p>
+            </article>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mt-12">
+        <%= render "components/pagination", current_page: @pagy.page, total_pages: @pagy.pages,
+              path_for: ->(page) { "#{nav_path(:articles)}?page=#{page}#{"&type=#{@selected_type}" if @selected_type}" } %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,109 @@
+<%
+  # English falls back to Marathi with a visible notice, never a 404 or an
+  # empty page -- prompts/phase-09-newsroom.md, "Watch for."
+  english_missing = I18n.locale == :en && @article.headline_en.blank?
+  display_locale = english_missing ? :mr : I18n.locale
+%>
+<% Mobility.with_locale(display_locale) do %>
+  <% content_for :title, @article.headline %>
+  <% content_for :meta_description, @article.meta_description.presence || @article.subheadline.presence %>
+  <% content_for :og_type, "article" %>
+
+  <%= render "components/page_header", title: @article.headline,
+        breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.articles"), nav_path(:articles)], [@article.headline, request.path]] %>
+
+  <div class="container mx-auto grid grid-cols-1 gap-12 px-5 py-16 lg:grid-cols-3">
+    <article class="flex flex-col gap-6 lg:col-span-2">
+      <% if english_missing %>
+        <div class="card border-warn bg-accent-100 p-4 text-small text-ink"><%= t("articles.english_missing_notice") %></div>
+      <% end %>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span class="tag"><%= t("articles.types.#{@article.article_type}") %></span>
+        <p class="text-small text-ink-muted"><%= dateline(@article.dateline_place, @article.published_at) %></p>
+      </div>
+
+      <% if @article.subheadline.present? %>
+        <p class="measure text-body-lg font-semibold text-ink-muted"><%= @article.subheadline %></p>
+      <% end %>
+
+      <% if @article.featured_image.attached? %>
+        <%# Plain image_tag, not responsive_image_tag -- that helper is
+            built specifically around Photoable's .image/.caption
+            convention (see app/helpers/responsive_image_helper.rb) and
+            featured_image has neither the attachment name nor any named
+            variants (same reasoning as Person#photo: nothing specifies a
+            size matrix for it, not inventing one). %>
+        <%= image_tag @article.featured_image, alt: "", class: "w-full rounded-card" %>
+      <% end %>
+
+      <div class="measure prose-article text-body text-ink"><%= @article.body %></div>
+
+      <% @article.article_photos.each do |photo| %>
+        <figure class="photo-figure">
+          <%= responsive_image_tag photo, sizes: "(min-width: 1024px) 66vw, 100vw" %>
+          <% if photo.caption.present? %>
+            <figcaption class="photo-figure-caption">
+              <%= photo.caption %>
+              <% if photo.credit.present? %>
+                <span class="text-ink-muted"> — <%= photo.credit %></span>
+              <% end %>
+            </figcaption>
+          <% end %>
+        </figure>
+      <% end %>
+
+      <% if @article.people.any? %>
+        <section class="flex flex-col gap-3 border-t border-line pt-6">
+          <h2 class="text-h3 font-display"><%= t("articles.mentioned_people") %></h2>
+          <div class="flex flex-wrap gap-2">
+            <% @article.people.each do |person| %>
+              <%= link_to person.name, person_path(person), class: "tag hover:bg-brand-700 hover:text-paper" %>
+            <% end %>
+          </div>
+        </section>
+      <% end %>
+
+      <div class="flex flex-wrap items-center gap-4 border-t border-line pt-6">
+        <% if @article.notice_pdf.attached? %>
+          <%= link_to t("articles.download_notice"), rails_blob_path(@article.notice_pdf, disposition: "attachment"), class: "btn btn-secondary" %>
+        <% end %>
+        <%= render "components/share_whatsapp", url: localized_detail_url(:articles, @article.slug), text: @article.headline %>
+      </div>
+    </article>
+
+    <aside class="flex flex-col gap-6">
+      <% if @related.present? && @related.any? %>
+        <section class="flex flex-col gap-4">
+          <h2 class="text-h3 font-display"><%= t("articles.related_articles") %></h2>
+          <% @related.each do |related| %>
+            <article class="flex flex-col gap-1 border-b border-line pb-4 last:border-b-0">
+              <h3 class="text-body font-semibold">
+                <%= link_to related.headline, localized_detail_path(:articles, related.slug), class: "text-ink hover:text-brand-700" %>
+              </h3>
+              <p class="text-small text-ink-muted"><%= dateline(related.dateline_place, related.published_at) %></p>
+            </article>
+          <% end %>
+        </section>
+      <% end %>
+    </aside>
+  </div>
+
+  <%# NewsArticle structured data -- headline, datePublished, author, image,
+      inLanguage. prompts/phase-09-newsroom.md, task 8. %>
+  <% content_for :head do %>
+    <%= tag.script type: "application/ld+json" do %>
+      <%= {
+        "@context" => "https://schema.org",
+        "@type" => "NewsArticle",
+        "headline" => @article.headline,
+        "datePublished" => @article.published_at&.iso8601,
+        "dateModified" => @article.updated_at.iso8601,
+        "inLanguage" => display_locale.to_s,
+        "author" => { "@type" => "Person", "name" => @article.author.name },
+        "image" => (@article.featured_image.attached? ? [ url_for(@article.featured_image) ] : []),
+        "mainEntityOfPage" => { "@type" => "WebPage", "@id" => request.original_url }
+      }.compact.to_json.html_safe %>
+    <% end %>
+  <% end %>
+<% end %>

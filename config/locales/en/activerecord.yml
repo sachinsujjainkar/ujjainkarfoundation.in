@@ -4,9 +4,16 @@ en:
       blank: "can't be blank"
       taken: "has already been taken"
       inclusion: "is not included in the list"
+      too_long: "is too long (maximum is %{count} characters)"
+      record_invalid: "Validation failed: %{errors}"
       too_large: "The photo is larger than 10MB. Please upload a smaller photo."
       invalid_content_type: "Please upload a JPEG, PNG, or WebP photo."
   activerecord:
+    attributes:
+      status: "Status"
+      article:
+        headline_mr: "Headline (Marathi)"
+        body_mr: "Body (Marathi)"
     errors:
       models:
         person:

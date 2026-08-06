@@ -16,6 +16,23 @@
       "confidence": "High",
       "cwe_id": [77],
       "note": "Reviewed 2026-08-05. `locale` is validated against I18n.available_locales and `page` against LocalizedPages::SEGMENTS.keys (both raise ArgumentError otherwise) immediately before this send -- see app/helpers/application_helper.rb#alternate_locale_url. Brakeman's static check flags the shape (dynamic method name from a method parameter) and can't see the runtime guard. The alternative -- an explicit 44-branch case statement (2 locales x 11 pages x path/url) -- is worse code for the same safety."
+    },
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 22,
+      "fingerprint": "d89efadd1d6e2af5e8fc3dbd077e51af960d17cc28489ac35d1a1144e435ba86",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/helpers/application_helper.rb",
+      "line": 105,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": null,
+      "render_path": null,
+      "location": null,
+      "user_input": null,
+      "confidence": "High",
+      "cwe_id": [77],
+      "note": "Reviewed 2026-08-06 (Phase 09). Same shape and same justification as the entry above -- this is alternate_locale_url's detail-page branch (added when DETAIL_TARGETS gained article/person routes), guarded identically: `page` is checked against LocalizedPages::DETAIL_TARGETS.key? and `slug` must be present, both immediately before this send. Brakeman flags the dynamic-send shape, not reachable data -- same reasoning, not a new risk."
     }
   ],
   "updated": "2026-08-05 14:00:00 +0000",

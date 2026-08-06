@@ -1,3 +1,21 @@
-# Newsroom/article vocabulary — populated in Phase 09. Kept as an empty file
-# for now so the locale-completeness test has a stable pair to check against.
-mr: {}
+# The six article types, locked in docs/01-glossary.md. Used for the type
+# filter sidebar and the tag shown on each card.
+mr:
+  articles:
+    types:
+      meeting: "बैठक वृत्त"
+      award: "पुरस्कार"
+      appointment: "निवड व नियुक्ती"
+      event_report: "कार्यक्रम वृत्त"
+      statement: "निवेदन"
+      initiative: "उपक्रम वृत्त"
+    all_types: "सर्व बातम्या"
+    filter_by_type: "प्रकारानुसार गाळा"
+    mentioned_people: "उल्लेखित व्यक्ती"
+    related_articles: "संबंधित बातम्या"
+    download_notice: "अधिसूचना डाउनलोड करा"
+    index_empty: "अद्याप कोणतीही बातमी प्रकाशित झालेली नाही."
+    english_missing_notice: "या बातमीचा इंग्रजी अनुवाद अद्याप उपलब्ध नाही -- मराठी मजकूर खाली दिला आहे."
+    search_placeholder: "बातम्या शोधा..."
+    search_results_heading: "\"%{query}\" साठी शोध निकाल"
+    search_empty: "काहीही सापडले नाही. वेगळे शब्द वापरून पहा."

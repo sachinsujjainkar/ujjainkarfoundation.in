@@ -1,0 +1,10 @@
+en:
+  article_mailer:
+    submitted_for_review:
+      subject: "New article for review: %{headline}"
+      body: "%{author} submitted \"%{headline}\" for review."
+      view_link: "View article"
+    published:
+      subject: "Your article was published: %{headline}"
+      body: "Your article \"%{headline}\" is now live on the site."
+      view_link: "View article"

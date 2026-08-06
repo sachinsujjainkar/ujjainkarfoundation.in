@@ -1,0 +1,29 @@
+<% content_for :title, @query.present? ? t("articles.search_results_heading", query: @query) : t("articles.search_placeholder") %>
+<%= render "components/page_header", title: @query.present? ? t("articles.search_results_heading", query: @query) : t("articles.search_placeholder"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("articles.search_placeholder"), request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-8 px-5 py-16">
+  <%= form_with url: request.path, method: :get, class: "flex gap-3" do %>
+    <input type="search" name="q" value="<%= @query %>" placeholder="<%= t("articles.search_placeholder") %>"
+      class="form-input flex-1" autofocus>
+    <%= render "components/button", label: t("common.search"), variant: :primary, type: "submit" %>
+  <% end %>
+
+  <% if @query.present? %>
+    <% if @results.any? %>
+      <div class="flex flex-col gap-6">
+        <% @results.each do |article| %>
+          <article class="flex flex-col gap-1 border-b border-line pb-4 last:border-b-0">
+            <span class="tag w-fit"><%= t("articles.types.#{article.article_type}") %></span>
+            <h3 class="text-h3 font-display">
+              <%= link_to article.headline, localized_detail_path(:articles, article.slug), class: "text-ink hover:text-brand-700" %>
+            </h3>
+            <p class="text-small text-ink-muted"><%= dateline(article.dateline_place, article.published_at) %></p>
+          </article>
+        <% end %>
+      </div>
+    <% else %>
+      <%= render "components/empty_state", message: t("articles.search_empty") %>
+    <% end %>
+  <% end %>
+</div>

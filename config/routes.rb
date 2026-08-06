@@ -61,6 +61,18 @@ Rails.application.routes.draw do
     end
   end
 
+  # व्यक्ती -- detail only, deliberately no public index. docs/04-routes.md:
+  # "/mr/vyakti/:slug person page -- all mentions" -- no bare /mr/vyakti
+  # listing is specified, so this doesn't go through the SEGMENTS/
+  # DETAIL_TARGETS machinery above (which always pairs an index with its
+  # detail route).
+  %i[mr en].each do |locale|
+    segment = locale == :mr ? "vyakti" : "people"
+    scope "/#{locale}", locale: locale.to_s, as: locale do
+      get "#{segment}/:slug", to: "people#show", as: "person_detail"
+    end
+  end
+
   # Form submissions POST to the same path their GET page lives at
   # (contact_messages#new / volunteers#new above) -- no separate named
   # route needed, forms just target nav_path(:contact) / nav_path(:volunteer)
@@ -71,6 +83,22 @@ Rails.application.routes.draw do
       post LocalizedPages::SEGMENTS.dig(:volunteer, locale), to: "volunteers#create"
     end
   end
+
+  # शोधा -- docs/04-routes.md: "/mr/shodha?q= search". Its own literal
+  # segment per locale, not nested under batmya -- a utility page, not an
+  # index/detail pair.
+  %i[mr en].each do |locale|
+    segment = locale == :mr ? "shodha" : "search"
+    scope "/#{locale}", locale: locale.to_s, as: locale do
+      get segment, to: "articles#search", as: "search"
+    end
+  end
+
+  # RSS -- docs/04-routes.md: "/feed.mr.xml /feed.en.xml". Not locale-
+  # scoped the usual way (no /mr or /en prefix -- these are their own
+  # literal filenames).
+  get "feed.mr.xml", to: "articles#feed", defaults: { locale: "mr" }, as: :feed_mr
+  get "feed.en.xml", to: "articles#feed", defaults: { locale: "en" }, as: :feed_en
 end
 
 if defined? ::Avo

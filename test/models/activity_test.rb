@@ -22,19 +22,24 @@ class ActivityTest < ActiveSupport::TestCase
   end
 
   test "default_scope orders by position" do
-    Activity.destroy_all
-    third = Activity.create!(slug: "c", name_mr: "तिसरे", position: 3)
-    first = Activity.create!(slug: "a", name_mr: "पहिले", position: 1)
-    second = Activity.create!(slug: "b", name_mr: "दुसरे", position: 2)
+    # Not Activity.destroy_all -- the activities fixture rows are now
+    # referenced by the articles fixtures via a foreign key (Phase 09),
+    # so wiping the whole table mid-test raises InvalidForeignKey. Scoped
+    # to a fresh, high position range instead, and asserted by relative
+    # order within that slice rather than exact table contents.
+    third = Activity.create!(slug: "order-c", name_mr: "तिसरे", position: 903)
+    first = Activity.create!(slug: "order-a", name_mr: "पहिले", position: 901)
+    second = Activity.create!(slug: "order-b", name_mr: "दुसरे", position: 902)
 
-    assert_equal [ first, second, third ], Activity.all.to_a
+    ordered = Activity.where(position: 901..903).to_a
+    assert_equal [ first, second, third ], ordered
   end
 
   test "published scope only returns published activities" do
-    Activity.destroy_all
-    published = Activity.create!(slug: "p", name_mr: "प्रकाशित", published: true)
-    Activity.create!(slug: "np", name_mr: "अप्रकाशित", published: false)
+    published = Activity.create!(slug: "pub-scope-yes", name_mr: "प्रकाशित", published: true)
+    unpublished = Activity.create!(slug: "pub-scope-no", name_mr: "अप्रकाशित", published: false)
 
-    assert_equal [ published ], Activity.published.to_a
+    assert_includes Activity.published, published
+    assert_not_includes Activity.published, unpublished
   end
 end

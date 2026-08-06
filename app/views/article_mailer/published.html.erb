@@ -1,0 +1,2 @@
+<p><%= t("article_mailer.published.body", headline: @article.headline_mr) %></p>
+<p><%= link_to t("article_mailer.published.view_link"), mr_articles_detail_url(@article.slug) %></p>

@@ -11,11 +11,18 @@
 # routable page in this edition. A custom Tool (also generated, confirmed
 # to get a real route) is the actual supported way to build this in
 # community Avo, so that's what this is.
+#
+# All five counts are real as of Phase 09 -- the first three were an
+# honest zero placeholder ("newsroom doesn't exist yet") until Article
+# landed.
 class Avo::ToolsController < Avo::ApplicationController
   def dashboard
     @page_title = "डॅशबोर्ड"
     add_breadcrumb "डॅशबोर्ड"
 
+    @pending_review_count = Article.submitted.count
+    @drafts_count = Article.draft.count
+    @recently_published_count = Article.published.where(published_at: 7.days.ago..).count
     @unread_messages_count = ContactMessage.where(read: false).count
     @new_volunteers_count = Volunteer.where(status: Volunteer::STATUSES.first).count
   end

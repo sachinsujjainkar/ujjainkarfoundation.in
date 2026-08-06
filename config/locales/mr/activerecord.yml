@@ -12,12 +12,36 @@ mr:
       blank: "आवश्यक आहे."
       taken: "आधीच वापरले गेले आहे."
       inclusion: "अवैध पर्याय आहे."
+      too_long: "खूप मोठे आहे (जास्तीत जास्त %{count} अक्षरे)."
+      # ActiveRecord::RecordInvalid's own message, built from
+      # errors.full_messages -- I18n.t looks this up with no default
+      # available in mr (Rails ships the English string, not translated
+      # equivalents), so raising it in a Marathi request context produced
+      # "Translation missing" until this was added. Caught the same way
+      # as taken/inclusion above: an actual raised exception, not assumed.
+      record_invalid: "जतन करता आले नाही: %{errors}"
       # Photoable (app/models/concerns/photoable.rb) -- shared by every
       # photo-attaching model, so these live at the generic errors.messages
       # level rather than per-model.
       too_large: "छायाचित्राचा आकार १० MB पेक्षा जास्त आहे. कृपया लहान आकाराचे छायाचित्र अपलोड करा."
       invalid_content_type: "कृपया JPEG, PNG किंवा WebP प्रकारचे छायाचित्र अपलोड करा."
   activerecord:
+    # Humanized attribute names -- used wherever Rails builds a message from
+    # "#{attribute} #{error}" (errors.full_messages, and so
+    # ActiveRecord::RecordInvalid#message) rather than a fully custom
+    # per-attribute override below. Without this, a _mr/_en-suffixed
+    # attribute like body_mr humanizes as the English "Body mr" even inside
+    # an otherwise-Marathi message -- caught by actually raising a
+    # RecordInvalid in the mr locale and reading its rendered message, not
+    # assumed.
+    attributes:
+      # Unscoped (no model prefix) -- Rails falls back to this for any
+      # model that doesn't define its own override, so "स्थिती" covers
+      # Article#status and Volunteer#status alike without repeating it.
+      status: "स्थिती"
+      article:
+        headline_mr: "मुख्य मथळा (मराठी)"
+        body_mr: "मजकूर (मराठी)"
     errors:
       models:
         person:

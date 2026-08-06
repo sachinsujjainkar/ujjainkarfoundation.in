@@ -1,0 +1,10 @@
+mr:
+  article_mailer:
+    submitted_for_review:
+      subject: "पुनरावलोकनासाठी नवीन बातमी: %{headline}"
+      body: "%{author} यांनी \"%{headline}\" ही बातमी पुनरावलोकनासाठी सादर केली आहे."
+      view_link: "बातमी पहा"
+    published:
+      subject: "तुमची बातमी प्रकाशित झाली: %{headline}"
+      body: "तुमची \"%{headline}\" ही बातमी आता संकेतस्थळावर प्रकाशित झाली आहे."
+      view_link: "बातमी पहा"

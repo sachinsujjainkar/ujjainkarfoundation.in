@@ -107,22 +107,29 @@
         <%= link_to t("common.view_all"), nav_path(:articles), class: "text-body font-semibold text-brand-700 hover:text-brand-500" %>
       </div>
 
-      <% lead, *rest = @news_items %>
-      <div class="flex flex-col gap-8">
-        <%= render "components/card_article", tag_label: lead.tag, headline: lead.headline,
-              href: nav_path(:articles), dateline: lead.dateline, excerpt: lead.excerpt %>
-        <div class="flex flex-col gap-6 border-t border-line pt-6">
-          <% rest.each do |item| %>
-            <article class="flex flex-col gap-1">
-              <span class="tag w-fit"><%= item.tag %></span>
-              <h3 class="text-h3 font-display">
-                <%= link_to item.headline, nav_path(:articles), class: "text-ink hover:text-brand-700" %>
-              </h3>
-              <p class="text-small text-ink-muted"><%= item.dateline %></p>
-            </article>
+      <% if @news_items.any? %>
+        <% lead, *rest = @news_items %>
+        <div class="flex flex-col gap-8">
+          <%= render "components/card_article", tag_label: t("articles.types.#{lead.article_type}"), headline: lead.headline,
+                href: localized_detail_path(:articles, lead.slug), dateline: dateline(lead.dateline_place, lead.published_at),
+                excerpt: lead.subheadline.presence || "" %>
+          <% if rest.any? %>
+            <div class="flex flex-col gap-6 border-t border-line pt-6">
+              <% rest.each do |item| %>
+                <article class="flex flex-col gap-1">
+                  <span class="tag w-fit"><%= t("articles.types.#{item.article_type}") %></span>
+                  <h3 class="text-h3 font-display">
+                    <%= link_to item.headline, localized_detail_path(:articles, item.slug), class: "text-ink hover:text-brand-700" %>
+                  </h3>
+                  <p class="text-small text-ink-muted"><%= dateline(item.dateline_place, item.published_at) %></p>
+                </article>
+              <% end %>
+            </div>
           <% end %>
         </div>
-      </div>
+      <% else %>
+        <%= render "components/empty_state", message: t("articles.index_empty") %>
+      <% end %>
     </div>
 
     <div>

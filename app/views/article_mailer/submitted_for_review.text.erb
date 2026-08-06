@@ -1,0 +1,3 @@
+<%= t("article_mailer.submitted_for_review.body", author: @article.author.name, headline: @article.headline_mr) %>
+
+<%= t("article_mailer.submitted_for_review.view_link") %>: <%= root_url.chomp('/') %>/admin/resources/articles/<%= @article.id %>

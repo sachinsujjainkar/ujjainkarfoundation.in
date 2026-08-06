@@ -2,6 +2,13 @@
 # See docs/03-data-model.md.
 class Avo::Resources::Person < Avo::BaseResource
   self.title = :name_mr
+  # Powers the searchable belongs_to picker on Mention's admin form
+  # (app/avo/resources/mention.rb) -- reporters routinely tag twenty-plus
+  # people per article (prompts/phase-09-newsroom.md, "Watch for"), so
+  # finding someone by typing their name, not scrolling an ID list, matters.
+  self.search = {
+    query: -> { query.where("name_mr ILIKE :q OR name_en ILIKE :q", q: "%#{params[:q]}%") }
+  }
 
   def fields
     field :id, as: :id

@@ -1,0 +1,20 @@
+# Bare rows only -- headline/body live in article_translations and Action
+# Text respectively, neither reachable from a plain fixture column, so
+# tests that need real content build real Article records instead (see
+# test/models/article_test.rb). These exist just so other fixtures/tests
+# that reference an article by label (article_photos, mentions) have a
+# real row to point at.
+
+one:
+  slug: chachani-lekh-ek
+  article_type: 0
+  status: 1
+  author: one
+  activity: one
+
+two:
+  slug: chachani-lekh-don
+  article_type: 0
+  status: 0
+  author: two
+  activity: two

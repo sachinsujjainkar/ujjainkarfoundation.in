@@ -47,6 +47,22 @@ module ApplicationHelper
     send("#{I18n.locale}_#{name}_detail_path", slug)
   end
 
+  # Absolute-URL sibling of localized_detail_path -- WhatsApp share links
+  # need a full URL, not a path.
+  def localized_detail_url(name, slug)
+    raise ArgumentError, "unknown detail page #{name.inspect}" unless LocalizedPages::DETAIL_TARGETS.key?(name.to_sym)
+
+    send("#{I18n.locale}_#{name}_detail_url", slug)
+  end
+
+  # व्यक्ती pages aren't in LocalizedPages at all (config/routes.rb: detail
+  # only, no index -- doesn't fit that module's index+detail pairing), so
+  # they get their own tiny helper rather than being forced into
+  # localized_detail_path's shape.
+  def person_path(person)
+    send("#{I18n.locale}_person_detail_path", person.slug)
+  end
+
   # Primary nav items, in the fixed order from docs/prompts/phase-03-layout-shell.md.
   def nav_items
     %i[home about activities events articles gallery contact]
@@ -77,7 +93,17 @@ module ApplicationHelper
     # param), but it's still validated here before being spliced into a
     # send, the same as `locale` above.
     page = request.path_parameters[:locale_page]
-    if page && LocalizedPages::SEGMENTS.key?(page.to_sym)
+    slug = request.path_parameters[:slug]
+
+    if page && slug && LocalizedPages::DETAIL_TARGETS.key?(page.to_sym)
+      # Detail routes need the :slug passed as an argument -- calling the
+      # index route helper here (as the branch below does) would 404/
+      # raise, which used to silently fall back to the locale root instead
+      # of the equivalent record. Caught by actually testing the language
+      # switcher on an activity detail page, not assumed from the index
+      # case working.
+      return send("#{locale}_#{page}_detail_#{only_path ? :path : :url}", slug)
+    elsif page && LocalizedPages::SEGMENTS.key?(page.to_sym)
       return send("#{locale}_#{page}_#{only_path ? :path : :url}")
     end
 

@@ -2,23 +2,9 @@
   <%= render Avo::PanelComponent.new(name: "डॅशबोर्ड", display_breadcrumbs: true) do |c| %>
     <% c.with_body do %>
       <div class="grid grid-cols-1 gap-8 p-6 sm:grid-cols-3 lg:grid-cols-5">
-        <%# The first three are honest zeros -- Article doesn't exist until
-            Phase 09, so there's genuinely nothing to count yet. Description
-            says so rather than implying a working, empty newsroom. %>
-        <div>
-          <%= render "components/stat", value: "०", label: "पुनरावलोकनासाठी प्रलंबित" %>
-          <p class="mt-1 text-small text-ink-muted">बातम्या विभाग अजून तयार झालेला नाही</p>
-        </div>
-        <div>
-          <%= render "components/stat", value: "०", label: "मसुदे" %>
-          <p class="mt-1 text-small text-ink-muted">बातम्या विभाग अजून तयार झालेला नाही</p>
-        </div>
-        <div>
-          <%= render "components/stat", value: "०", label: "अलीकडे प्रकाशित" %>
-          <p class="mt-1 text-small text-ink-muted">बातम्या विभाग अजून तयार झालेला नाही</p>
-        </div>
-
-        <%# Real counts. %>
+        <%= render "components/stat", value: DevanagariNumerals.convert(@pending_review_count), label: "पुनरावलोकनासाठी प्रलंबित" %>
+        <%= render "components/stat", value: DevanagariNumerals.convert(@drafts_count), label: "मसुदे" %>
+        <%= render "components/stat", value: DevanagariNumerals.convert(@recently_published_count), label: "अलीकडे प्रकाशित" %>
         <%= render "components/stat", value: DevanagariNumerals.convert(@unread_messages_count), label: "न वाचलेले संदेश" %>
         <%= render "components/stat", value: DevanagariNumerals.convert(@new_volunteers_count), label: "नवीन स्वयंसेवक" %>
       </div>
