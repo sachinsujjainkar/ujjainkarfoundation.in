@@ -1,0 +1,20 @@
+<%#
+  Locals: icon (:book | :award | :graduation_cap | :podium | :document | :heart), value, label
+
+  Card-framed variant of components/stat -- an icon badge above the number,
+  for a section that's meant to read as a small set of headline figures
+  (आमचा परिणाम) rather than a plain data row (the admin dashboard and
+  styleguide keep the bare components/stat for that reason -- this is a
+  homepage-specific dressing-up, not a replacement).
+
+  Icon stays brand-700 monochrome, same rule as home/_activity_icon:
+  docs/02-design-system.md's "one accent per screen" already spent on this
+  page's donate CTA, so the icon badge doesn't introduce a second one.
+%>
+<div class="card flex flex-col items-center gap-3 p-8 text-center">
+  <span class="flex size-14 items-center justify-center rounded-full bg-brand-100 text-brand-700">
+    <%= render "home/activity_icon", icon: icon %>
+  </span>
+  <span class="stat-value"><%= value %></span>
+  <span class="stat-label"><%= label %></span>
+</div>

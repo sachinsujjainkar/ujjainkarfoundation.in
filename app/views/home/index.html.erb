@@ -55,19 +55,26 @@
   <div class="container mx-auto px-5">
     <h2 class="mb-12 text-h2 font-display"><%= t("home.impact_heading") %></h2>
     <%
+      # Icons pair 1:1 with the three SiteSetting stat columns by what
+      # they actually mean (students / awards / years of service) --
+      # graduation_cap and award are exact matches; heart is the closest
+      # existing icon to "सामाजिक कार्याचा वारसा" (community/social work),
+      # same reasoning home/_activity_icon uses it for आरोग्य व सामाजिक
+      # उपक्रम. No new icon invented for this -- picking from the six the
+      # icon partial already draws.
       stats = if I18n.locale == :mr
-        [[site_setting.stat_1_value, site_setting.stat_1_label_mr],
-         [site_setting.stat_2_value, site_setting.stat_2_label_mr],
-         [site_setting.stat_3_value, site_setting.stat_3_label_mr]]
+        [[site_setting.stat_1_value, site_setting.stat_1_label_mr, :graduation_cap],
+         [site_setting.stat_2_value, site_setting.stat_2_label_mr, :award],
+         [site_setting.stat_3_value, site_setting.stat_3_label_mr, :heart]]
       else
-        [[site_setting.stat_1_value, site_setting.stat_1_label_en],
-         [site_setting.stat_2_value, site_setting.stat_2_label_en],
-         [site_setting.stat_3_value, site_setting.stat_3_label_en]]
+        [[site_setting.stat_1_value, site_setting.stat_1_label_en, :graduation_cap],
+         [site_setting.stat_2_value, site_setting.stat_2_label_en, :award],
+         [site_setting.stat_3_value, site_setting.stat_3_label_en, :heart]]
       end
     %>
-    <div class="grid grid-cols-1 gap-8 sm:grid-cols-3">
-      <% stats.each do |value, label| %>
-        <%= render "components/stat", value: value.presence || "—", label: label %>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <% stats.each do |value, label, icon| %>
+        <%= render "components/stat_card", icon: icon, value: value.presence || "—", label: label %>
       <% end %>
     </div>
   </div>

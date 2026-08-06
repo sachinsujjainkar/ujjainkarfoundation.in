@@ -125,6 +125,9 @@
       <div class="flex flex-col gap-6">
         <%= render "components/tag", label: t("styleguide.sample_tag") %>
         <%= render "components/stat", value: "128", label: t("styleguide.sample_stat_label") %>
+        <div class="grid max-w-xs grid-cols-1">
+          <%= render "components/stat_card", icon: :graduation_cap, value: "128", label: t("styleguide.sample_stat_label") %>
+        </div>
       </div>
     <% end %>
   </section>
