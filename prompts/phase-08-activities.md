@@ -34,7 +34,7 @@ Earlier drafts used उपक्रम loosely for both. That ambiguity is resol
    | विद्यार्थी सत्कार | `vidyarthi-satkar` |
    | व्याख्यानमाला | `vyakhyanmala` |
    | प्रकाशन | `prakashan` |
-   | आरोग्य व सामाजिक उपक्रम | `arogya-va-samajik-upakram` |
+   | आरोग्य व सामाजिक उपक्रम | `aarogya-samajik` |
 
 6. **Icon set** — commission or select 8–10 monochrome line icons, single weight, as SVG in `assets-source/icons/`. Consistency of weight across the set matters more than the individual icons.
 

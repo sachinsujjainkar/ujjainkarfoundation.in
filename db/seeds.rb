@@ -95,10 +95,11 @@ ACTIVITIES = [
     description_en: "Publishing the annual संमेलन विशेषांक and literary books."
   },
   {
-    # Locked slug from prompts/phase-08-activities.md -- docs/content's
-    # source document used "aarogya-samajik" instead; see
-    # docs/content/programmes/arogya-va-samajik-upakram.md's header note.
-    slug: "arogya-va-samajik-upakram", icon_key: "heart",
+    # "aarogya-samajik" -- corrected 2026-08-06 (implementation briefing):
+    # supersedes "arogya-va-samajik-upakram", which was the locked value
+    # in an earlier version of prompts/phase-08-activities.md. That file
+    # and docs/content/programmes/ have been updated to match.
+    slug: "aarogya-samajik", icon_key: "heart",
     name_mr: "आरोग्य व सामाजिक उपक्रम", name_en: "Health & Social Initiatives",
     tagline_mr: "मोफत नेत्र तपासणी, रक्तदान व सामुदायिक आरोग्य शिबिरे.",
     tagline_en: "Free eye camps, blood donation, and community health drives.",
