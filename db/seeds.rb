@@ -55,7 +55,10 @@ site_setting.update!(
 # biography" sections further down are longer than the phase spec calls
 # for here and aren't used by any page yet). Photo intentionally not
 # attached -- that file's own "Notes for implementation" says a founder
-# photo is still needed.
+# photo is still needed. The closing "पंख पिसारा" sentence in bio_mr/bio_en
+# below is the one addition beyond that teaser -- per
+# docs/content/reference/marathi-wikipedia-2026-08-06.md's "प्रकाशित
+# साहित्य" list, confirmed by Sachin, 2026-08-06.
 FOUNDER_NAME_MR = "शिवचरण मधुकर उज्जैनकर"
 # name_mr is Mobility-translated, not a real column -- find_or_initialize_by
 # can't query it directly. Same plain-Ruby-scan pattern as the person
@@ -67,10 +70,12 @@ founder.update!(
   city: "मुक्ताईनगर",
   bio_mr: "ज्याला स्वतःचे शिक्षण पूर्ण करण्यासाठी दुसऱ्यांच्या मदतीची वाट पाहावी लागली, तोच आज हजारो विद्यार्थी आणि साहित्यिकांच्या यशाची वाट मोकळी करत आहे.\n\n" \
     "डॉ. शिवचरण मधुकर उज्जैनकर यांचा जन्म १७ नोव्हेंबर १९६९ रोजी घाटपुरी, खामगाव येथे झाला. वडील मधुकरराव शिवणकाम करत, आई अनुसयाबाई शेतमजुरी करत घर चालवत. या परिस्थितीतही स्व. डॉ. के. एस. सावरकर आणि सौ. रत्नप्रभा सावरकर यांच्या पाठबळावर त्यांनी बी.ए., एम.ए. (इंग्रजी) आणि बी.एड. पूर्ण केले.\n\n" \
-    "१९९७ पासून नवीन माध्यमिक विद्यालय, परंबी येथे शिक्षक म्हणून सेवा देत असतानाच त्यांनी अंकुर साहित्य संघ, महर्षी वाल्मिकी मंडळ आणि कवी राम कदम फाउंडेशन (२००९) या संस्था उभारल्या. २०१६ मध्ये या साऱ्या प्रयत्नांचे रूपांतर शिवचरण उज्जैनकर फाउंडेशन मध्ये झाले — जे आज शिक्षण, साहित्य, आरोग्य आणि सामाजिक कार्याचे व्यासपीठ आहे.",
+    "१९९७ पासून नवीन माध्यमिक विद्यालय, परंबी येथे शिक्षक म्हणून सेवा देत असतानाच त्यांनी अंकुर साहित्य संघ, महर्षी वाल्मिकी मंडळ आणि कवी राम कदम फाउंडेशन (२००९) या संस्था उभारल्या. २०१६ मध्ये या साऱ्या प्रयत्नांचे रूपांतर शिवचरण उज्जैनकर फाउंडेशन मध्ये झाले — जे आज शिक्षण, साहित्य, आरोग्य आणि सामाजिक कार्याचे व्यासपीठ आहे.\n\n" \
+    "त्यांचे 'पंख पिसारा' (व्यक्तिचित्र संग्रह) हे पुस्तक प्रकाशित झाले आहे.",
   bio_en: "A man who once relied on others' generosity to complete his own education now clears the path for thousands of students and writers to reach theirs.\n\n" \
     "Dr. Shivcharan Madhukar Ujjainkar was born on 17 November 1969 in Ghatpuri, Khamgaon, to a family of modest means — his father took up tailoring work, his mother worked as a farm labourer. Higher education seemed out of reach until Dr. K. S. Savarkar and Smt. Ratnaprabha Savarkar stepped in, enabling him to complete his B.A., M.A. (English), and B.Ed.\n\n" \
-    "Since 1997 he has taught at Navin Madhyamik Vidyalaya, Parambi, while building, alongside his teaching, the Ankur Sahitya Sangh, Maharshi Valmiki Mandal, and the Ram Kadam Foundation (2009). In 2016, these efforts became the Shivcharan Ujjainkar Foundation — now a leading platform for education, literature, health, and community welfare across Maharashtra."
+    "Since 1997 he has taught at Navin Madhyamik Vidyalaya, Parambi, while building, alongside his teaching, the Ankur Sahitya Sangh, Maharshi Valmiki Mandal, and the Ram Kadam Foundation (2009). In 2016, these efforts became the Shivcharan Ujjainkar Foundation — now a leading platform for education, literature, health, and community welfare across Maharashtra.\n\n" \
+    "He is the author of 'Pankha Pisara', a collection of biographical sketches (व्यक्तिचित्र संग्रह)."
 )
 
 # The six confirmed कार्यक्षेत्रे -- slugs and order locked in
@@ -191,7 +196,12 @@ if seed_author
     # after_update_commit callback fills with the real seed-run date
     # (Time.current) rather than a fabricated historical one.
     {
+      # Date per Marathi Wikipedia's शिवचरण उज्जैनकर फाउंडेशन article
+      # (docs/content/reference/marathi-wikipedia-2026-08-06.md), confirmed
+      # by Sachin, 2026-08-06 -- not in docs/content/events.md itself,
+      # which gave no date for this story.
       article_type: :event_report, dateline_place: "कुऱ्हा काकोडा", activity_slug: "sahitya-sammelan",
+      published_at: Date.new(2010, 5, 8),
       headline_mr: "कुऱ्हा काकोडा येथे ४६ वे अंकुर मराठी साहित्य संमेलन",
       body_mr: "<div>ग्रामीण भागात प्रथमच आयोजित ४६ व्या अंकुर मराठी साहित्य संमेलनाला कुऱ्हा काकोडा येथे उत्स्फूर्त प्रतिसाद मिळाला. ग्रामपंचायत कुऱ्हा काकोडा व कवी राम कदम फाउंडेशन यांच्या संयुक्त विद्यमाने आयोजित या संमेलनासोबतच इयत्ता १०वी व १२वी च्या गुणवंत विद्यार्थ्यांचा सत्कार आणि मोफत मोतीबिंदू तपासणी व शस्त्रक्रिया शिबिरही पार पडले.</div>",
       headline_en: "46th Ankur Marathi Literary Conference held at Kurha Kakoda",
@@ -305,6 +315,13 @@ if seed_author
       # the seed-run date otherwise (see the comment above this array).
       article.update!(status: :published, published_at: real_published_at)
       article.update!(headline_en: headline_en, body_en: body_en)
+    elsif real_published_at.present? && article.published_at != real_published_at
+      # A date arriving AFTER the article's first seed run (as happened
+      # for the ४६ वे अंकुर साहित्य संमेलन story once
+      # docs/content/reference/marathi-wikipedia-2026-08-06.md supplied
+      # one) -- corrects the already-created row rather than only taking
+      # effect on a fresh database.
+      article.update!(published_at: real_published_at)
     end
 
     person_names.each do |person_name|
