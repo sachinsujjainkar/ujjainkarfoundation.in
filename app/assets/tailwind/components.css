@@ -203,6 +203,21 @@
     @apply text-brand-700;
   }
 
+  /* ---- Rich copy (sanitize()'d HTML from a plain-text field -- Person#bio,
+     and Action Text's own output on Article#body, whose articles/show.html.erb
+     usage as .prose-article referenced this class with no definition until
+     now -- caught by grepping for it while building the founder bio's
+     premium rewrite) ---- */
+  .rich-copy p, .prose-article p {
+    @apply mb-4 last:mb-0;
+  }
+  .rich-copy strong, .prose-article strong {
+    @apply font-semibold text-ink;
+  }
+  .rich-copy blockquote, .prose-article blockquote {
+    @apply mt-6 border-l-4 border-brand-700 pl-6 text-body-lg italic text-ink;
+  }
+
   /* ---- Accordion (native <details>/<summary>, no JS) ---- */
   .accordion-summary {
     @apply flex cursor-pointer items-center justify-between text-h3 font-display text-ink;

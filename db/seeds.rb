@@ -43,22 +43,31 @@ site_setting.update!(
   stat_2_value: "८००+",
   stat_3_label_mr: "वर्षांचा अखंड सामाजिक कार्याचा वारसा",
   stat_3_label_en: "Years of Continuous Service",
-  stat_3_value: "२५+"
-  # Everything else (phones, email, social, map, donation details, 12A/80G)
-  # is still unconfirmed -- left as the column default (nil/false).
+  stat_3_value: "२५+",
+  # Confirmed by Sachin, 2026-08-06. No twitter_url given, so that column
+  # stays nil -- the footer (app/views/layouts/_footer.html.erb) only
+  # renders whichever social links are actually present.
+  facebook_url: "https://www.facebook.com/ujjainkarfoundation",
+  instagram_url: "https://www.instagram.com/ujjainkarfoundation",
+  youtube_url: "https://www.youtube.com/@ujjainkarfoundation"
+  # Everything else (phones, email, map, donation details, 12A/80G) is
+  # still unconfirmed -- left as the column default (nil/false).
 )
 
-# संस्थापक -- prompts/phase-05-static-pages.md: "founder section with
-# portrait and 150-200 words." Content is docs/content/founder/biography.md's
-# "Homepage teaser" section (the file's own header comment notes that
-# section is sized 150-200 words for exactly this use; the "Full
-# biography" sections further down are longer than the phase spec calls
-# for here and aren't used by any page yet). Photo intentionally not
-# attached -- that file's own "Notes for implementation" says a founder
-# photo is still needed. The closing "पंख पिसारा" sentence in bio_mr/bio_en
-# below is the one addition beyond that teaser -- per
-# docs/content/reference/marathi-wikipedia-2026-08-06.md's "प्रकाशित
-# साहित्य" list, confirmed by Sachin, 2026-08-06.
+# संस्थापक -- premium literary rewrite supplied by Sachin, 2026-08-06,
+# replacing the earlier docs/content/founder/biography.md teaser (kept in
+# that file for the record, but no longer what's seeded here). Facts are
+# unchanged from that original source; only the framing/voice and the
+# markup (real <strong>/<blockquote>, not plain paragraphs) are new --
+# rendered via sanitize() on the About page, not simple_format, so this
+# HTML shows as real formatting (see app/views/pages/about.html.erb).
+# bio_en intentionally NOT rewritten to match -- only a Marathi version of
+# this literary pass was supplied, and mr/en are independent tellings on
+# this page (docs/00-project-brief.md's editorial policy), not
+# translations of each other, so the existing English teaser stays as its
+# own telling rather than a fabricated English equivalent of prose I
+# wasn't given. Photo intentionally not attached -- still needed, per
+# biography.md's own "Notes for implementation".
 FOUNDER_NAME_MR = "शिवचरण मधुकर उज्जैनकर"
 # name_mr is Mobility-translated, not a real column -- find_or_initialize_by
 # can't query it directly. Same plain-Ruby-scan pattern as the person
@@ -68,10 +77,17 @@ founder.update!(
   honorific_mr: "डॉ.", honorific_en: "Dr.",
   name_en: "Shivcharan Madhukar Ujjainkar",
   city: "मुक्ताईनगर",
-  bio_mr: "ज्याला स्वतःचे शिक्षण पूर्ण करण्यासाठी दुसऱ्यांच्या मदतीची वाट पाहावी लागली, तोच आज हजारो विद्यार्थी आणि साहित्यिकांच्या यशाची वाट मोकळी करत आहे.\n\n" \
-    "डॉ. शिवचरण मधुकर उज्जैनकर यांचा जन्म १७ नोव्हेंबर १९६९ रोजी घाटपुरी, खामगाव येथे झाला. वडील मधुकरराव शिवणकाम करत, आई अनुसयाबाई शेतमजुरी करत घर चालवत. या परिस्थितीतही स्व. डॉ. के. एस. सावरकर आणि सौ. रत्नप्रभा सावरकर यांच्या पाठबळावर त्यांनी बी.ए., एम.ए. (इंग्रजी) आणि बी.एड. पूर्ण केले.\n\n" \
-    "१९९७ पासून नवीन माध्यमिक विद्यालय, परंबी येथे शिक्षक म्हणून सेवा देत असतानाच त्यांनी अंकुर साहित्य संघ, महर्षी वाल्मिकी मंडळ आणि कवी राम कदम फाउंडेशन (२००९) या संस्था उभारल्या. २०१६ मध्ये या साऱ्या प्रयत्नांचे रूपांतर शिवचरण उज्जैनकर फाउंडेशन मध्ये झाले — जे आज शिक्षण, साहित्य, आरोग्य आणि सामाजिक कार्याचे व्यासपीठ आहे.\n\n" \
-    "त्यांचे 'पंख पिसारा' (व्यक्तिचित्र संग्रह) हे पुस्तक प्रकाशित झाले आहे.",
+  # His own channel -- confirmed by Sachin, 2026-08-06. Distinct from
+  # SiteSetting#youtube_url (the foundation's channel, also confirmed the
+  # same day).
+  youtube_url: "https://www.youtube.com/@shivcharanujjainkar",
+  bio_mr: "<p><strong>\"ज्यांनी स्वतःच्या शिक्षणासाठी आधार शोधला, त्यांनीच पुढे हजारो विद्यार्थ्यांना, साहित्यिकांना आणि समाजाला आधार देणारे जीवन घडवले.\"</strong></p>" \
+    "<p>संघर्षातून उभ्या राहिलेल्या व्यक्तिमत्त्वाची खरी ओळख त्याच्या यशात नसते, तर त्या यशातून इतरांचे आयुष्य उजळवण्याच्या ध्यासात असते. डॉ. शिवचरण मधुकर उज्जैनकर यांचा जीवनप्रवास ही अशाच प्रेरणेची सजीव कहाणी आहे.</p>" \
+    "<p>१७ नोव्हेंबर १९६९ रोजी बुलढाणा जिल्ह्यातील घाटपुरी (ता. खामगाव) येथे त्यांचा जन्म झाला. वडील श्री. मधुकरराव उज्जैनकर शिवणकाम करून, तर आई सौ. अनुसयाबाई उज्जैनकर शेतमजुरी करून कुटुंबाचा उदरनिर्वाह करत होत्या. आर्थिक अडचणींच्या काळात स्व. डॉ. के. एस. सावरकर आणि सौ. रत्नप्रभा सावरकर यांनी दिलेल्या मोलाच्या आधारामुळे त्यांनी बी.ए., एम.ए. (इंग्रजी) आणि बी.एड. हे शिक्षण पूर्ण केले.</p>" \
+    "<p>सन १९९७ पासून नवीन माध्यमिक विद्यालय, परंबी येथे शिक्षक म्हणून कार्यरत असताना त्यांनी शिक्षणासोबत साहित्य, संस्कृती आणि समाजसेवेचा अखंड ध्यास घेतला. या ध्यासातून <strong>अंकुर साहित्य संघ</strong>, <strong>महर्षी वाल्मिकी मंडळ</strong> आणि <strong>कवी राम कदम फाउंडेशन (२००९)</strong> यांसारख्या संस्थांची स्थापना झाली.</p>" \
+    "<p>या सर्व सामाजिक उपक्रमांना अधिक व्यापक स्वरूप देत <strong>२०१६ मध्ये \"शिवचरण उज्जैनकर फाउंडेशन\"ची स्थापना</strong> झाली. आज हे फाउंडेशन शिक्षण, साहित्य, आरोग्य, पर्यावरण, सामाजिक न्याय आणि समाजविकासाच्या विविध क्षेत्रांत कार्यरत राहून हजारो लोकांच्या जीवनात सकारात्मक परिवर्तन घडवत आहे.</p>" \
+    "<p>लेखनाची आवड जपत त्यांनी <strong>'पंख पिसारा'</strong> हा व्यक्तिचित्र संग्रह प्रकाशित केला आहे. शिक्षक, साहित्यिक, समाजसेवक आणि प्रेरणादायी नेतृत्व अशा विविध भूमिका समर्थपणे निभावत त्यांनी समाजसेवा हीच जीवनाची खरी साधना मानली आहे.</p>" \
+    "<blockquote><p><strong>\"स्वतःसाठी जगणे ही गरज असते; पण इतरांसाठी जगणे हेच खरे जीवन असते.\"</strong> — हीच त्यांची जीवनदृष्टी आणि फाउंडेशनच्या प्रत्येक उपक्रमामागील प्रेरणाशक्ती आहे.</p></blockquote>",
   bio_en: "A man who once relied on others' generosity to complete his own education now clears the path for thousands of students and writers to reach theirs.\n\n" \
     "Dr. Shivcharan Madhukar Ujjainkar was born on 17 November 1969 in Ghatpuri, Khamgaon, to a family of modest means — his father took up tailoring work, his mother worked as a farm labourer. Higher education seemed out of reach until Dr. K. S. Savarkar and Smt. Ratnaprabha Savarkar stepped in, enabling him to complete his B.A., M.A. (English), and B.Ed.\n\n" \
     "Since 1997 he has taught at Navin Madhyamik Vidyalaya, Parambi, while building, alongside his teaching, the Ankur Sahitya Sangh, Maharshi Valmiki Mandal, and the Ram Kadam Foundation (2009). In 2016, these efforts became the Shivcharan Ujjainkar Foundation — now a leading platform for education, literature, health, and community welfare across Maharashtra.\n\n" \

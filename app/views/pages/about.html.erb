@@ -19,27 +19,47 @@
     </div>
   </section>
 
-  <section class="flex flex-col items-start gap-6 sm:flex-row">
-    <%# No named variants on Person#photo (see app/models/person.rb's own
-        comment) and no real photo attached yet either -- docs/content/founder/biography.md's
-        own "Notes for implementation" flags a founder photo as still
-        needed. Flat placeholder block, not a stock/AI image, until one
-        arrives. %>
-    <% if @founder&.photo&.attached? %>
-      <%= image_tag @founder.photo, alt: "", class: "aspect-square w-40 shrink-0 rounded-card object-cover" %>
-    <% else %>
-      <div class="aspect-square w-40 shrink-0 rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
-        400×400
-      </div>
-    <% end %>
-    <div class="flex flex-col gap-2">
-      <h2 class="text-h3 font-display"><%= t("common.founder") %></h2>
-      <% if @founder&.bio.present? %>
-        <p class="text-body font-semibold text-ink"><%= [@founder.honorific, @founder.name].compact_blank.join(" ") %></p>
-        <div class="measure text-body text-ink-muted"><%= simple_format(@founder.bio) %></div>
+  <section class="flex flex-col gap-6">
+    <h2 class="text-h2 font-display"><%= t("common.founder") %></h2>
+    <div class="flex flex-col items-start gap-6 sm:flex-row">
+      <%# No named variants on Person#photo (see app/models/person.rb's own
+          comment) and no real photo attached yet either -- docs/content/founder/biography.md's
+          own "Notes for implementation" flags a founder photo as still
+          needed. Flat placeholder block, not a stock/AI image, until one
+          arrives. %>
+      <% if @founder&.photo&.attached? %>
+        <%= image_tag @founder.photo, alt: "", class: "aspect-square w-40 shrink-0 rounded-card object-cover" %>
       <% else %>
-        <p class="measure text-body text-ink-muted"><%= t("about.founder_pending") %></p>
+        <div class="aspect-square w-40 shrink-0 rounded-card border border-line bg-brand-100 flex items-center justify-center text-small text-ink-muted">
+          400×400
+        </div>
       <% end %>
+      <div class="flex flex-1 flex-col gap-4">
+        <% if @founder&.bio.present? %>
+          <div class="flex flex-wrap items-center gap-3">
+            <p class="text-h3 font-display text-ink"><%= [@founder.honorific, @founder.name].compact_blank.join(" ") %></p>
+            <%# Founder's own channel -- distinct from SiteSetting.youtube_url
+                (the foundation's channel, footer) -- see
+                db/migrate/*_add_youtube_url_to_people.rb. %>
+            <% if @founder.youtube_url.present? %>
+              <%= link_to @founder.youtube_url, class: "text-ink-muted hover:text-brand-700", target: "_blank", rel: "noopener", "aria-label": "YouTube" do %>
+                <%= render "layouts/social_icon", platform: :youtube %>
+              <% end %>
+            <% end %>
+          </div>
+          <%# bio is admin-authored (seeded from docs/content/founder/biography.md,
+              or edited via Avo), not visitor input -- sanitize() rather than
+              simple_format so the <strong>/<blockquote> markup in the
+              premium rewrite renders as real formatting, not escaped
+              literal tags. Allowed-tag list matches exactly what .rich-copy
+              (app/assets/tailwind/components.css) styles, nothing wider. %>
+          <div class="measure rich-copy text-body-lg text-ink">
+            <%= sanitize(@founder.bio, tags: %w[p strong blockquote br]) %>
+          </div>
+        <% else %>
+          <p class="measure text-body text-ink-muted"><%= t("about.founder_pending") %></p>
+        <% end %>
+      </div>
     </div>
   </section>
 </div>
