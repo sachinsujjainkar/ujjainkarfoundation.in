@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_05_191404) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_05_200610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -41,6 +41,30 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_05_191404) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "icon_key"
+    t.integer "position"
+    t.boolean "published"
+    t.string "slug"
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_activities_on_slug", unique: true
+  end
+
+  create_table "activity_translations", force: :cascade do |t|
+    t.bigint "activity_id", null: false
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.string "locale", null: false
+    t.text "meta_description"
+    t.string "name"
+    t.string "seo_title"
+    t.string "tagline"
+    t.datetime "updated_at", null: false
+    t.index ["activity_id", "locale"], name: "index_activity_translations_on_activity_id_and_locale", unique: true
+    t.index ["locale"], name: "index_activity_translations_on_locale"
   end
 
   create_table "committee_translations", force: :cascade do |t|
@@ -184,6 +208,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_05_191404) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "activity_translations", "activities"
   add_foreign_key "committee_translations", "committees"
   add_foreign_key "membership_translations", "memberships"
   add_foreign_key "memberships", "committees"

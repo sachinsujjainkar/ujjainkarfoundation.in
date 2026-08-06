@@ -1,0 +1,37 @@
+<% content_for :title, @activity.name %>
+<% content_for :meta_description, @activity.meta_description.presence || @activity.tagline.presence %>
+
+<%= render "components/page_header", title: @activity.name,
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.activities"), localized_path(:activities)], [@activity.name, request.path]] %>
+
+<div class="container mx-auto flex flex-col gap-10 px-5 py-16">
+  <% if @activity.hero_image.attached? %>
+    <%# No named variants on Activity#hero_image (unlike Photoable/SiteSetting's
+        hero) -- nothing yet specifies a size matrix for this, and inventing
+        one ahead of real usage isn't the point. Original at natural size,
+        cropped to a fixed box via CSS. %>
+    <div class="aspect-[21/9] w-full overflow-hidden rounded-card bg-brand-100">
+      <%= image_tag @activity.hero_image, alt: "", class: "size-full object-cover", loading: "eager" %>
+    </div>
+  <% end %>
+
+  <% if @activity.tagline.present? %>
+    <p class="measure text-body-lg text-ink-muted"><%= @activity.tagline %></p>
+  <% end %>
+
+  <% if @activity.description.present? %>
+    <div class="measure text-body text-ink"><%= @activity.description %></div>
+  <% end %>
+
+  <%# Empty states light up automatically once Article/Event (Phase 09/10)
+      exist and can be scoped by activity_id -- see docs/03-data-model.md. %>
+  <section class="flex flex-col gap-4 border-t border-line pt-10">
+    <h2 class="text-h2 font-display"><%= t("activities.related_articles_heading") %></h2>
+    <%= render "components/empty_state", message: t("activities.related_articles_empty") %>
+  </section>
+
+  <section class="flex flex-col gap-4 border-t border-line pt-10">
+    <h2 class="text-h2 font-display"><%= t("activities.related_events_heading") %></h2>
+    <%= render "components/empty_state", message: t("activities.related_events_empty") %>
+  </section>
+</div>

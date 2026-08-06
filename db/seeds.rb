@@ -47,3 +47,67 @@ site_setting.update!(
   # Everything else (phones, email, social, map, donation details, 12A/80G)
   # is still unconfirmed -- left as the column default (nil/false).
 )
+
+# The six confirmed कार्यक्षेत्रे -- slugs and order locked in
+# prompts/phase-08-activities.md. Content transcribed from
+# docs/content/programmes/*.md (Sachin, 2026-08-05). Real, not placeholder,
+# so published: true from the start -- this is exactly the content those
+# files were collected for.
+ACTIVITIES = [
+  {
+    slug: "sahitya-sammelan", icon_key: "book",
+    name_mr: "साहित्य संमेलन", name_en: "Literary Conference",
+    tagline_mr: "राज्यस्तरीय व अखिल भारतीय मराठी साहित्य संमेलनांचे नियमित आयोजन.",
+    tagline_en: "Regular state-level and All-India Marathi literary conferences.",
+    description_mr: "राज्यस्तरीय व अखिल भारतीय मराठी साहित्य संमेलनांचे नियमित आयोजन.",
+    description_en: "Regular state-level and All-India Marathi literary conferences."
+  },
+  {
+    slug: "puraskar", icon_key: "award",
+    name_mr: "पुरस्कार", name_en: "Award",
+    tagline_mr: "तापी-पूर्णा राज्यस्तरीय पुरस्काराने साहित्यिक, शिक्षक व समाजसेवकांचा सन्मान.",
+    tagline_en: "Honouring writers, teachers, and social workers through the Tapi-Purna state award.",
+    description_mr: "तापी-पूर्णा राज्यस्तरीय पुरस्काराने साहित्यिक, शिक्षक व समाजसेवकांचा सन्मान.",
+    description_en: "Honouring writers, teachers, and social workers through the Tapi-Purna state award."
+  },
+  {
+    slug: "vidyarthi-satkar", icon_key: "graduation_cap",
+    name_mr: "विद्यार्थी सत्कार", name_en: "Student Felicitation",
+    tagline_mr: "गुणवंत विद्यार्थ्यांचा तालुकास्तरीय गौरव सोहळा, दरवर्षी.",
+    tagline_en: "Annual taluka-level recognition of meritorious students.",
+    description_mr: "गुणवंत विद्यार्थ्यांचा तालुकास्तरीय गौरव सोहळा, दरवर्षी.",
+    description_en: "Annual taluka-level recognition of meritorious students."
+  },
+  {
+    slug: "vyakhyanmala", icon_key: "podium",
+    name_mr: "व्याख्यानमाला", name_en: "Lecture Series",
+    tagline_mr: "नामवंत वक्त्यांची व्याख्याने — प्रत्यक्ष व ऑनलाइन दोन्ही स्वरूपात.",
+    tagline_en: "Lectures by noted speakers, held both in person and online.",
+    description_mr: "नामवंत वक्त्यांची व्याख्याने — प्रत्यक्ष व ऑनलाइन दोन्ही स्वरूपात.",
+    description_en: "Lectures by noted speakers, held both in person and online."
+  },
+  {
+    slug: "prakashan", icon_key: "document",
+    name_mr: "प्रकाशन", name_en: "Publication",
+    tagline_mr: "संमेलन विशेषांक व साहित्यिक पुस्तकांचे प्रकाशन.",
+    tagline_en: "Publishing the annual संमेलन विशेषांक and literary books.",
+    description_mr: "संमेलन विशेषांक व साहित्यिक पुस्तकांचे प्रकाशन.",
+    description_en: "Publishing the annual संमेलन विशेषांक and literary books."
+  },
+  {
+    # Locked slug from prompts/phase-08-activities.md -- docs/content's
+    # source document used "aarogya-samajik" instead; see
+    # docs/content/programmes/arogya-va-samajik-upakram.md's header note.
+    slug: "arogya-va-samajik-upakram", icon_key: "heart",
+    name_mr: "आरोग्य व सामाजिक उपक्रम", name_en: "Health & Social Initiatives",
+    tagline_mr: "मोफत नेत्र तपासणी, रक्तदान व सामुदायिक आरोग्य शिबिरे.",
+    tagline_en: "Free eye camps, blood donation, and community health drives.",
+    description_mr: "मोफत नेत्र तपासणी, रक्तदान व सामुदायिक आरोग्य शिबिरे.",
+    description_en: "Free eye camps, blood donation, and community health drives."
+  }
+].freeze
+
+ACTIVITIES.each_with_index do |attrs, index|
+  activity = Activity.find_or_initialize_by(slug: attrs.fetch(:slug))
+  activity.update!(attrs.merge(position: index + 1, published: true))
+end

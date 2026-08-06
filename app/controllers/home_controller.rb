@@ -1,7 +1,6 @@
-# No Activity/Article/Event models yet (Phases 08/09/10) -- placeholder
-# structs here, per prompts/phase-04-home-page.md, "hardcode structs in the
-# controller." Names/text for the six कार्यक्षेत्रे come from real locale
-# keys (config/locales/{mr,en}/activities.yml).
+# Article/Event models don't exist yet (Phases 09/10) -- their placeholder
+# structs remain below. Activity is real as of Phase 08: @activities comes
+# straight from the database now, not a struct.
 #
 # NEWS_ITEMS is real, not generic: three candidate stories from
 # docs/content/events.md (Sachin, 2026-08-05), written up as short news
@@ -16,18 +15,8 @@
 # rather than a fake day/month here). See docs/00-project-brief.md,
 # "Nothing invented ships."
 class HomeController < ApplicationController
-  Activity = Struct.new(:slug, :icon, keyword_init: true)
   NewsItem = Struct.new(:headline, :dateline, :excerpt, :tag, keyword_init: true)
   EventItem = Struct.new(:day, :month, :title, :venue, :status, keyword_init: true)
-
-  ACTIVITIES = [
-    Activity.new(slug: "sahitya_sammelan", icon: :book),
-    Activity.new(slug: "puraskar", icon: :award),
-    Activity.new(slug: "vidyarthi_satkar", icon: :graduation_cap),
-    Activity.new(slug: "vyakhyanmala", icon: :podium),
-    Activity.new(slug: "prakashan", icon: :document),
-    Activity.new(slug: "arogya_va_samajik_upakram", icon: :heart)
-  ].freeze
 
   NEWS_ITEMS = {
     mr: [
@@ -84,7 +73,7 @@ class HomeController < ApplicationController
   }.freeze
 
   def index
-    @activities = ACTIVITIES
+    @activities = Activity.published
     @news_items = NEWS_ITEMS.fetch(I18n.locale)
     @events = EVENTS.fetch(I18n.locale)
   end

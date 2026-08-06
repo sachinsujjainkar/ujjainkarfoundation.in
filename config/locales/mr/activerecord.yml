@@ -10,6 +10,8 @@ mr:
       # attribute name ("नाव आवश्यक आहे"), just not as tailored as a
       # dedicated message.
       blank: "आवश्यक आहे."
+      taken: "आधीच वापरले गेले आहे."
+      inclusion: "अवैध पर्याय आहे."
       # Photoable (app/models/concerns/photoable.rb) -- shared by every
       # photo-attaching model, so these live at the generic errors.messages
       # level rather than per-model.

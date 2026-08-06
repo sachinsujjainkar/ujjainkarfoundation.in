@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  slug: chachani-ek
+  icon_key: book
+  position: 1
+  published: true
+
+two:
+  slug: chachani-don
+  icon_key: award
+  position: 2
+  published: false

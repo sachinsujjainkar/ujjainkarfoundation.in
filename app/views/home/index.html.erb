@@ -87,11 +87,11 @@
           # CTA above is this page's one accent use; docs/02-design-system.md
           # is explicit that accent doesn't also go on a set of icons.
         %>
-        <%= link_to nav_path(:activities), class: "card flex flex-col items-center gap-3 p-6 text-center hover:border-brand-700" do %>
+        <%= link_to localized_detail_path(:activities, activity.slug), class: "card flex flex-col items-center gap-3 p-6 text-center hover:border-brand-700" do %>
           <span class="text-brand-700">
-            <%= render "home/activity_icon", icon: activity.icon %>
+            <%= render "home/activity_icon", icon: activity.icon_key&.to_sym %>
           </span>
-          <span class="text-body font-semibold text-ink"><%= t("activities.#{activity.slug}") %></span>
+          <span class="text-body font-semibold text-ink"><%= activity.name %></span>
         <% end %>
       <% end %>
     </div>

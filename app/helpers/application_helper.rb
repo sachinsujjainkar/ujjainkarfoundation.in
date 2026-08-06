@@ -39,6 +39,14 @@ module ApplicationHelper
     send("#{I18n.locale}_#{name}_path")
   end
 
+  # Same idea as localized_path, for a detail page's slug -- e.g.
+  # localized_detail_path(:activities, activity.slug).
+  def localized_detail_path(name, slug)
+    raise ArgumentError, "unknown detail page #{name.inspect}" unless LocalizedPages::DETAIL_TARGETS.key?(name.to_sym)
+
+    send("#{I18n.locale}_#{name}_detail_path", slug)
+  end
+
   # Primary nav items, in the fixed order from docs/prompts/phase-03-layout-shell.md.
   def nav_items
     %i[home about activities events articles gallery contact]

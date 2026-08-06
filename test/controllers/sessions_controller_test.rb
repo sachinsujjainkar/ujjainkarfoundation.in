@@ -8,10 +8,10 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "create with valid credentials" do
+  test "create with valid credentials lands on the admin panel, not the public site" do
     post session_path, params: { email_address: @user.email_address, password: "password" }
 
-    assert_redirected_to root_path
+    assert_redirected_to "/admin"
     assert cookies[:session_id]
   end
 

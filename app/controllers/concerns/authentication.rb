@@ -34,8 +34,13 @@ module Authentication
       redirect_to new_session_path
     end
 
+    # Rails' generator defaults this to root_url -- fine for an app where
+    # the homepage IS the app, wrong here: this login exists purely for
+    # staff, and root_url is the public marketing site. Land on the admin
+    # panel unless there's a specific page they were bounced here from
+    # (e.g. hit an /admin/... URL directly while signed out).
     def after_authentication_url
-      session.delete(:return_to_after_authenticating) || root_url
+      session.delete(:return_to_after_authenticating) || "#{request.base_url}/admin"
     end
 
     def start_new_session_for(user)

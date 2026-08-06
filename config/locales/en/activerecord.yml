@@ -2,6 +2,8 @@ en:
   errors:
     messages:
       blank: "can't be blank"
+      taken: "has already been taken"
+      inclusion: "is not included in the list"
       too_large: "The photo is larger than 10MB. Please upload a smaller photo."
       invalid_content_type: "Please upload a JPEG, PNG, or WebP photo."
   activerecord:

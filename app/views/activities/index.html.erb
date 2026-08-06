@@ -1,1 +1,23 @@
-<%= render "shared/placeholder_page", title_key: "navigation.activities" %>
+<% content_for :title, t("navigation.activities") %>
+<%= render "components/page_header", title: t("navigation.activities"),
+      breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.activities"), request.path]] %>
+
+<div class="container mx-auto px-5 py-16">
+  <% if @activities.any? %>
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <% @activities.each do |activity| %>
+        <%= link_to localized_detail_path(:activities, activity.slug), class: "card flex flex-col gap-3 p-6 hover:border-brand-700" do %>
+          <span class="text-brand-700">
+            <%= render "home/activity_icon", icon: activity.icon_key&.to_sym %>
+          </span>
+          <h2 class="text-h3 font-display text-ink"><%= activity.name %></h2>
+          <% if activity.tagline.present? %>
+            <p class="text-body text-ink-muted"><%= activity.tagline %></p>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  <% else %>
+    <%= render "components/empty_state", message: t("activities.index_empty") %>
+  <% end %>
+</div>

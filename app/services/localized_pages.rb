@@ -40,4 +40,14 @@ module LocalizedPages
     privacy: "pages#privacy",
     terms: "pages#terms"
   }.freeze
+
+  # Detail routes: SEGMENTS' path + "/:slug", for entities with their own
+  # locked, Latin-transliterated slug (docs/01-glossary.md, "Slug policy")
+  # rather than a second literal translated word. Only entries that need
+  # one belong here -- most of SEGMENTS is index/static pages with no
+  # detail view. Article detail (`/mr/batmya/:id-:slug`) doesn't fit this
+  # shape (id-slug, not slug alone) and gets its own route in Phase 09.
+  DETAIL_TARGETS = {
+    activities: "activities#show"
+  }.freeze
 end

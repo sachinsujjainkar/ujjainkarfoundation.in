@@ -47,6 +47,20 @@ Rails.application.routes.draw do
     end
   end
 
+  # Detail pages: index segment + "/:slug" -- see LocalizedPages::DETAIL_TARGETS.
+  # Same locale_page default as the index routes above (ApplicationHelper's
+  # alternate_locale_url reads it) -- distinguishing index vs. detail happens
+  # there by checking for a :slug param, not by a different locale_page value.
+  LocalizedPages::DETAIL_TARGETS.each do |name, target|
+    segments = LocalizedPages::SEGMENTS.fetch(name)
+    %i[mr en].each do |locale|
+      scope "/#{locale}", locale: locale.to_s, as: locale do
+        get "#{segments.fetch(locale)}/:slug", to: target, as: "#{name}_detail",
+          defaults: { locale_page: name }
+      end
+    end
+  end
+
   # Form submissions POST to the same path their GET page lives at
   # (contact_messages#new / volunteers#new above) -- no separate named
   # route needed, forms just target nav_path(:contact) / nav_path(:volunteer)
