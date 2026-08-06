@@ -57,11 +57,13 @@ class Avo::Resources::Article < Avo::BaseResource
       help: "संपादकांना प्रलंबित अनुवादांची यादी दाखवण्यासाठी वापरले जाते"
     field :view_count, as: :number, name: "पाहिले गेले", readonly: true
 
-    field :heading_media, as: :heading, label: "छायाचित्रे व कागदपत्रे"
+    field :heading_media, as: :heading, label: "छायाचित्रे, कागदपत्रे व चित्रफीत"
     field :featured_image, as: :file, name: "मुख्य छायाचित्र"
     field :notice_pdf, as: :file, name: "अधिसूचना (PDF)"
     field :article_photos, as: :has_many, name: "छायाचित्र दालन",
       help: "प्रत्येक छायाचित्राचा क्रम त्याच्या स्वतःच्या संपादन पानावरील 'क्रम' फील्डमधून ठरवा"
+    field :youtube_id, as: :text, name: "यूट्यूब व्हिडिओ आयडी",
+      help: "यूट्यूब लिंकमधील शेवटचा भाग -- उदा. youtube.com/watch?v=dQw4w9WgXcQ मधील dQw4w9WgXcQ"
 
     field :heading_people, as: :heading, label: "उल्लेखित व्यक्ती"
     field :mentions, as: :has_many, name: "उल्लेख नोंदी", help: "व्यक्ती जोडण्यासाठी 'Attach' वापरा -- नवीन व्यक्ती आधी व्यक्ती विभागात तयार करा"

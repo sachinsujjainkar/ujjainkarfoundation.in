@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_08_06_154306) do
+ActiveRecord::Schema[8.1].define(version: 2026_08_06_155749) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -124,6 +124,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_08_06_154306) do
     t.integer "status", default: 0, null: false
     t.datetime "updated_at", null: false
     t.integer "view_count", default: 0, null: false
+    t.string "youtube_id"
     t.index ["activity_id"], name: "index_articles_on_activity_id"
     t.index ["author_id"], name: "index_articles_on_author_id"
     t.index ["event_id"], name: "index_articles_on_event_id"

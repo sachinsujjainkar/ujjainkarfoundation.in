@@ -39,6 +39,10 @@
 
       <div class="measure prose-article text-body text-ink"><%= @article.body %></div>
 
+      <% if @article.youtube_id.present? %>
+        <%= render "components/youtube_embed", youtube_id: @article.youtube_id, title: @article.headline %>
+      <% end %>
+
       <% @article.article_photos.each do |photo| %>
         <figure class="photo-figure">
           <%= responsive_image_tag photo, sizes: "(min-width: 1024px) 66vw, 100vw" %>
