@@ -2,6 +2,8 @@
     example headlines, blank stat values) until real photos/records exist.
     See docs/prompts/phase-04-home-page.md. %>
 
+<% content_for :meta_description, t("home.hero_supporting") %>
+
 <%# ============================================================ Hero %>
 <section class="relative flex min-h-[560px] items-end overflow-hidden bg-brand-100 sm:min-h-[640px]">
   <% if site_setting.hero_image.attached? %>
@@ -182,3 +184,38 @@
     </div>
   </div>
 </section>
+
+<%# NGO structured data -- docs/04-routes.md's SEO requirements: "NGO /
+    Organization structured data on the homepage, including registration
+    number once confirmed." Every field here is a real SiteSetting column
+    -- still-unconfirmed ones (phone, email, most social) come through as
+    nil and get dropped by compact/compact_blank, never a placeholder
+    value. %>
+<% content_for :head do %>
+  <%= tag.script type: "application/ld+json" do %>
+    <%
+      address = {
+        "@type" => "PostalAddress",
+        "streetAddress" => [ site_setting.address_line1, site_setting.address_line2 ].compact_blank.join(", ").presence,
+        "addressLocality" => site_setting.city,
+        "addressRegion" => site_setting.state,
+        "postalCode" => site_setting.pincode,
+        "addressCountry" => "IN"
+      }.compact_blank
+      same_as = [ site_setting.facebook_url, site_setting.instagram_url, site_setting.youtube_url, site_setting.twitter_url ].compact_blank
+    %>
+    <%= {
+      "@context" => "https://schema.org",
+      "@type" => "NGO",
+      "name" => site_name,
+      "url" => locale_root_url,
+      "logo" => asset_url("logo-mark.png"),
+      "description" => t("home.hero_supporting"),
+      "address" => (address if address.any?),
+      "sameAs" => (same_as if same_as.any?),
+      "identifier" => (if site_setting.registration_number.present?
+        { "@type" => "PropertyValue", "name" => "Trust Registration Number", "value" => site_setting.registration_number }
+      end)
+    }.compact.to_json.html_safe %>
+  <% end %>
+<% end %>

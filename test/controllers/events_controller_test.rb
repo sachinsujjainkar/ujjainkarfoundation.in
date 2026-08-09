@@ -48,4 +48,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     get "/mr/karyakram/no-such-event"
     assert_response :not_found
   end
+
+  # docs/04-routes.md's SEO requirements: "Event structured data on event pages."
+  test "show carries valid Event structured data with the real start date" do
+    get "/mr/karyakram/#{events(:one).slug}"
+
+    json_ld = css_select("script[type='application/ld+json']").map { |node| JSON.parse(node.text) }
+    event_schema = json_ld.find { |entry| entry["@type"] == "Event" }
+
+    assert event_schema, "expected an Event JSON-LD block on the event page"
+    assert_equal "आगामी चाचणी कार्यक्रम", event_schema["name"]
+    assert_equal events(:one).starts_at.iso8601, event_schema["startDate"]
+  end
 end

@@ -1,4 +1,5 @@
 <% content_for :title, t("navigation.committee") %>
+<% content_for :meta_description, t("committee.meta_description") %>
 <%= render "components/page_header", title: t("navigation.committee"),
       breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.committee"), request.path]] %>
 

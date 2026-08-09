@@ -13,6 +13,7 @@ en:
     related_articles: "Related News"
     download_notice: "Download Notice"
     index_empty: "No news has been published yet."
+    index_meta_description: "The latest news and updates from Shivcharan Ujjainkar Foundation's programmes."
     english_missing_notice: "An English translation of this article isn't available yet -- the Marathi text is shown below."
     search_placeholder: "Search news..."
     search_results_heading: "Search results for \"%{query}\""

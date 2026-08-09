@@ -1,4 +1,5 @@
 <% content_for :title, t("navigation.gallery") %>
+<% content_for :meta_description, t("gallery.meta_description") %>
 <%= render "components/page_header", title: t("navigation.gallery"),
       breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.gallery"), request.path]] %>
 

@@ -52,4 +52,16 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_select "nav.lang-switch a[lang=en][href=?]", "/en"
     assert_select "nav.lang-switch a[lang=mr][aria-current=true]"
   end
+
+  # docs/04-routes.md's SEO requirements: "NGO / Organization structured
+  # data on the homepage, including registration number once confirmed."
+  test "the homepage carries valid NGO structured data with the real registration number" do
+    get locale_root_path(locale: "mr")
+
+    json_ld = css_select("script[type='application/ld+json']").map { |node| JSON.parse(node.text) }
+    ngo = json_ld.find { |entry| entry["@type"] == "NGO" }
+
+    assert ngo, "expected an NGO JSON-LD block on the homepage"
+    assert_equal SiteSetting.instance.registration_number, ngo.dig("identifier", "value")
+  end
 end

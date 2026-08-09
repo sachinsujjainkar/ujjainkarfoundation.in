@@ -15,6 +15,7 @@ mr:
     related_articles: "संबंधित बातम्या"
     download_notice: "अधिसूचना डाउनलोड करा"
     index_empty: "अद्याप कोणतीही बातमी प्रकाशित झालेली नाही."
+    index_meta_description: "शिवचरण उज्जैनकर फाउंडेशनच्या उपक्रमांच्या ताज्या बातम्या व घडामोडी."
     english_missing_notice: "या बातमीचा इंग्रजी अनुवाद अद्याप उपलब्ध नाही -- मराठी मजकूर खाली दिला आहे."
     search_placeholder: "बातम्या शोधा..."
     search_results_heading: "\"%{query}\" साठी शोध निकाल"

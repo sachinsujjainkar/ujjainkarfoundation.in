@@ -1,4 +1,5 @@
 <% content_for :title, t("navigation.about") %>
+<% content_for :meta_description, t("about.history_body") %>
 <%= render "components/page_header", title: t("navigation.about"),
       breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.about"), request.path]] %>
 

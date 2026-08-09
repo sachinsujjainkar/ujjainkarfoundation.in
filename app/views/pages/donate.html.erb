@@ -1,4 +1,5 @@
 <% content_for :title, t("navigation.donate") %>
+<% content_for :meta_description, t("donate.intro") %>
 <%= render "components/page_header", title: t("navigation.donate"),
       breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.donate"), request.path]] %>
 

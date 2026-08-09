@@ -1,4 +1,5 @@
 <% content_for :title, t("navigation.events") %>
+<% content_for :meta_description, t("events.index_meta_description") %>
 <%= render "components/page_header", title: t("navigation.events"),
       breadcrumbs: [[t("navigation.home"), locale_root_path], [t("navigation.events"), request.path]] %>
 

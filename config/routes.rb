@@ -109,6 +109,12 @@ Rails.application.routes.draw do
         as: "gallery_year", constraints: { year: /\d{4}/ }
     end
   end
+
+  # Phase 12 (SEO) -- one sitemap covering both locales, not locale-scoped
+  # (same shape as feed.mr.xml/feed.en.xml above), since every entry
+  # carries its OWN mr/en pair via hreflang rather than living under a
+  # single locale.
+  get "sitemap.xml", to: "sitemap#index", as: :sitemap
 end
 
 if defined? ::Avo

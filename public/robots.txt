@@ -1,1 +1,10 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
+# prompts/phase-12-seo-launch.md: "allow all public, disallow /admin,
+# point at the sitemap." A static file -- robots.txt only matters to real
+# crawlers hitting the real production domain, so a hardcoded production
+# URL here (rather than a dynamic per-environment one) is the right
+# amount of engineering for it.
+User-agent: *
+Disallow: /admin
+Allow: /
+
+Sitemap: https://ujjainkarfoundation.in/sitemap.xml

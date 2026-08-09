@@ -86,3 +86,32 @@
     </aside>
   </div>
 </div>
+
+<%# Event structured data -- docs/04-routes.md's SEO requirements: "Event
+    structured data on event pages." No `offers` -- these are free
+    community events, not ticketed, so there's nothing honest to put
+    there; schema.org doesn't require it. %>
+<% content_for :head do %>
+  <%= tag.script type: "application/ld+json" do %>
+    <%
+      location = {
+        "@type" => "Place",
+        "name" => @event.venue_name,
+        "address" => @event.venue_address
+      }.compact_blank
+    %>
+    <%= {
+      "@context" => "https://schema.org",
+      "@type" => "Event",
+      "name" => @event.title,
+      "startDate" => @event.starts_at&.iso8601,
+      "endDate" => @event.ends_at&.iso8601,
+      "eventStatus" => "https://schema.org/EventScheduled",
+      "eventAttendanceMode" => "https://schema.org/OfflineEventAttendanceMode",
+      "description" => @event.description.presence,
+      "location" => (location if location.any?),
+      "image" => (@event.hero_image.attached? ? [ url_for(@event.hero_image) ] : nil),
+      "organizer" => { "@type" => "NGO", "name" => site_name, "url" => locale_root_url }
+    }.compact.to_json.html_safe %>
+  <% end %>
+<% end %>

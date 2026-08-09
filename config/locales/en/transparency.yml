@@ -1,5 +1,6 @@
 en:
   transparency:
+    meta_description: "Registration information, certifications, and tax status for Shivcharan Ujjainkar Foundation."
     registration_heading: "Registration information"
     registration_type_label: "Registration type"
     registration_number_label: "Registration number"

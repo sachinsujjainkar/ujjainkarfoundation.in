@@ -1,0 +1,6 @@
+# कार्यकारणी page. Committee names/roster themselves render straight from
+# the Committee/Membership models -- this is just the page's own chrome
+# (currently only a meta description; the page has no other static copy).
+mr:
+  committee:
+    meta_description: "शिवचरण उज्जैनकर फाउंडेशनच्या कार्यकारणी व समित्यांची यादी."
