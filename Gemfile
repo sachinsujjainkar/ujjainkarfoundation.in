@@ -48,7 +48,7 @@ gem "mobility"
 # Admin dashboard [https://avohq.io]
 gem "avo", "~> 3.0"
 # Avo 3.x's pagination assumes Pagy's pre-9.0 API (Pagy::Backend); pin below that
-gem "pagy", "< 9.0"
+gem "pagy", "< 44.0"
 
 # S3-compatible client, used against Cloudflare R2
 gem "aws-sdk-s3", require: false
