@@ -46,7 +46,7 @@ gem "image_processing", "~> 1.2"
 gem "mobility"
 
 # Admin dashboard [https://avohq.io]
-gem "avo", "~> 3.0"
+gem "avo", "~> 3.32"
 # Avo 3.x's pagination assumes Pagy's pre-9.0 API (Pagy::Backend); pin below that
 gem "pagy", "< 9.0"
 
